@@ -10,6 +10,10 @@ All notable changes to codecraft are documented here. The format follows
 - Test suite (`node --test`) covering the flag persistence and the toggle
   parser, plus a GitHub Actions CI workflow that runs it on push and pull
   request, and a CI badge in the README.
+- Black-box tests for the hooks themselves: the SessionStart injection
+  (default-on, frontmatter stripping, off short-circuit, and the inline fallback
+  when SKILL.md is missing) and the UserPromptSubmit runtime path (reminder
+  emitted when active, suppressed when off, toggled by `/codecraft on|off`).
 
 ### Changed
 - Isolated the mode tracker's stdin handling behind a `require.main` guard and
