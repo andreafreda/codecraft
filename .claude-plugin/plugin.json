@@ -1,0 +1,34 @@
+{
+  "name": "codecraft",
+  "version": "1.0.0",
+  "description": "Always-on readability lens: makes code read as if a thoughtful human engineer wrote it. Active by default when the plugin is enabled; toggle with /codecraft on|off.",
+  "author": {
+    "name": "Andrea Freda"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/codecraft-activate.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading codecraft mode..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/codecraft-mode-tracker.js\"",
+            "timeout": 5,
+            "statusMessage": "Tracking codecraft mode..."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "af-codecraft",
+  "owner": { "name": "Andrea Freda" },
+  "description": "Andrea Freda's codecraft plugin: an always-on readability lens for Claude Code.",
+  "plugins": [
+    { "name": "codecraft", "source": "./" }
+  ]
+}
