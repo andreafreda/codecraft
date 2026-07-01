@@ -1,12 +1,13 @@
 ---
 name: codecraft
 description: >-
-  Readability lens: make code read as if a thoughtful human wrote it, obvious
-  over clever. Use when writing, refactoring, or reviewing code, or when the
-  user mentions readability, simplicity, "clean code", maintainability, or
-  invokes /codecraft. Co-applies with language and framework skills. Skip
-  trivial edits, hot paths, urgent hotfixes, and security review, where
-  readability is a later pass.
+  Readability lens that makes code read as if a thoughtful human wrote it,
+  obvious over clever. This is a mode, not an automatic pass: activate it only
+  when the user invokes /codecraft, explicitly asks for readability, simplicity,
+  "clean code", or maintainability, or when codecraft mode is already active. Do
+  not activate it on your own for ordinary code writing. When active, apply it to
+  code you write or review, and co-apply it with language and framework skills;
+  skip trivial edits, hot paths, urgent hotfixes, and security review.
 ---
 
 # codecraft

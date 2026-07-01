@@ -19,6 +19,11 @@ All notable changes to codecraft are documented here. The format follows
   former size). The full principles already arrive via the SessionStart hook at
   startup and after each compaction, so the per-turn note no longer restates
   them, which keeps its accumulated context cost small over long sessions.
+- Made the skill intent-gated instead of task-gated: it no longer auto-activates
+  on ordinary code writing, only on `/codecraft`, an explicit readability
+  request, or when codecraft mode is already active. This makes `/codecraft off`
+  behave like a real off (the skill stays dormant) and clearly separates the
+  plain-skill install (explicit) from the plugin install (always-on via hooks).
 
 ## [1.0.2] - 2026-07-01
 

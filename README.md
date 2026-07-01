@@ -34,10 +34,10 @@ npx skills add andreafreda/codecraft -y -g
 npx skills add andreafreda/codecraft -y
 ```
 
-Triggers explicitly with `/codecraft`, or automatically when you're writing or
-refactoring code, or whenever readability and simplicity come up in what you
-ask for. No hooks, no persistent state; the skill description alone decides
-whether it fires on a given turn.
+Activates when you invoke `/codecraft` or explicitly ask for readability,
+simplicity, or cleaner code. It deliberately does not fire on its own for
+ordinary code writing; the always-on, apply-by-default behavior is the plugin
+path below. No hooks, no persistent state.
 
 ### As a plugin (always-on)
 
