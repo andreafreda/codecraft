@@ -7,8 +7,16 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const VALID_MODES = ['off', 'on'];
+
+// Location of the flag file, honoring CLAUDE_CONFIG_DIR so both hooks agree on
+// where the state lives.
+function getFlagPath() {
+  const claudeDir = process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude');
+  return path.join(claudeDir, '.codecraft-active');
+}
 
 function writeFlag(flagPath, mode) {
   try {
@@ -28,4 +36,4 @@ function readFlag(flagPath) {
   }
 }
 
-module.exports = { VALID_MODES, writeFlag, readFlag };
+module.exports = { VALID_MODES, getFlagPath, writeFlag, readFlag };

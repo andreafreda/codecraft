@@ -8,11 +8,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
-const { writeFlag, readFlag } = require('./codecraft-state');
+const { getFlagPath, writeFlag, readFlag } = require('./codecraft-state');
 
-const claudeDir = process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude');
-const flagPath = path.join(claudeDir, '.codecraft-active');
+const flagPath = getFlagPath();
 
 if (readFlag(flagPath) === 'off') {
   process.stdout.write('OK');
@@ -29,6 +27,7 @@ try {
   const skill = fs.readFileSync(
     path.join(__dirname, '..', 'skills', 'codecraft', 'SKILL.md'), 'utf8'
   );
+  // Drop the YAML frontmatter; only the guidance body is useful as context.
   body = skill.replace(/^---[\s\S]*?---\s*/, '');
 } catch (e) {
   body =
