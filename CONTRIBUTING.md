@@ -1,7 +1,7 @@
 # Contributing
 
-Thanks for improving these skills. This guide is mostly about `codecraft`, whose
-examples follow a fixed shape so the corpus stays consistent as it grows.
+Thanks for improving `codecraft`. Its examples follow a fixed shape so the
+corpus stays consistent as it grows.
 
 ## Repo layout
 
@@ -42,8 +42,8 @@ Keep examples short and `before:` / `after:` framed. They illustrate; they are n
 expected to compile as-is (`/* ... */` bodies are fine). Use the language's real
 idioms (its type system, its error model, its doc-comment convention).
 
-Then add a row to the index table in `SKILL.md` and to the file list in the
-`README.md`.
+Then add a row to the index table in `SKILL.md`, and add the language to the
+`## Layout` section in `README.md`.
 
 ## Extension files
 
