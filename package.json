@@ -1,0 +1,10 @@
+{
+  "name": "codecraft",
+  "version": "1.0.2",
+  "private": true,
+  "description": "Always-on readability lens for Claude Code.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  }
+}

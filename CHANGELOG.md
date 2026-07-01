@@ -4,6 +4,18 @@ All notable changes to codecraft are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Test suite (`node --test`) covering the flag persistence and the toggle
+  parser, plus a GitHub Actions CI workflow that runs it on push and pull
+  request, and a CI badge in the README.
+
+### Changed
+- Isolated the mode tracker's stdin handling behind a `require.main` guard and
+  exported `requestedMode`, so the parser can be unit-tested without triggering
+  the hook's side effects.
+
 ## [1.0.2] - 2026-07-01
 
 ### Changed

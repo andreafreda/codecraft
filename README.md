@@ -1,5 +1,7 @@
 # codecraft
 
+[![CI](https://github.com/andreafreda/codecraft/actions/workflows/ci.yml/badge.svg)](https://github.com/andreafreda/codecraft/actions/workflows/ci.yml)
+
 **Make Claude write code like a thoughtful human, not a machine.**
 
 Out of the box, AI tends to produce code that *works* but reads like it was

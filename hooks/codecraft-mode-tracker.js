@@ -5,8 +5,6 @@
 
 const { getFlagPath, writeFlag, readFlag } = require('./codecraft-state');
 
-const flagPath = getFlagPath();
-
 const REMINDER =
   'CODECRAFT MODE ACTIVE. When writing, implementing, or refactoring code, or ' +
   'reviewing a diff: obvious over clever, name things fully, guard clauses, no ' +
@@ -16,7 +14,7 @@ const REMINDER =
 
 // Maps a prompt to the mode it explicitly requests, or null if it asks for
 // neither. Covers the "/codecraft [on|off]" command and natural language such
-// as "turn off codecraft".
+// as "turn off codecraft". The prompt is expected already trimmed and lowercased.
 function requestedMode(prompt) {
   if (prompt.startsWith('/codecraft')) {
     const arg = prompt.split(/\s+/)[1] || 'on';
@@ -31,28 +29,38 @@ function requestedMode(prompt) {
   return null;
 }
 
-let input = '';
-process.stdin.on('data', chunk => { input += chunk; });
-process.stdin.on('end', () => {
-  try {
-    const data = JSON.parse(input);
-    const prompt = (data.prompt || '').trim().toLowerCase();
+// Read the prompt from stdin, apply any toggle it requests, and reinforce the
+// lens for the turn unless the user has turned it off.
+function main() {
+  const flagPath = getFlagPath();
+  let input = '';
+  process.stdin.on('data', chunk => { input += chunk; });
+  process.stdin.on('end', () => {
+    try {
+      const data = JSON.parse(input);
+      const prompt = (data.prompt || '').trim().toLowerCase();
 
-    const mode = requestedMode(prompt);
-    if (mode) {
-      writeFlag(flagPath, mode);
-    }
+      const mode = requestedMode(prompt);
+      if (mode) {
+        writeFlag(flagPath, mode);
+      }
 
-    // Reinforce every turn unless the user has turned it off.
-    if (readFlag(flagPath) !== 'off') {
-      process.stdout.write(JSON.stringify({
-        hookSpecificOutput: {
-          hookEventName: 'UserPromptSubmit',
-          additionalContext: REMINDER
-        }
-      }));
+      if (readFlag(flagPath) !== 'off') {
+        process.stdout.write(JSON.stringify({
+          hookSpecificOutput: {
+            hookEventName: 'UserPromptSubmit',
+            additionalContext: REMINDER
+          }
+        }));
+      }
+    } catch (e) {
+      // Silent fail — a dropped reminder is harmless.
     }
-  } catch (e) {
-    // Silent fail — a dropped reminder is harmless.
-  }
-});
+  });
+}
+
+if (require.main === module) {
+  main();
+}
+
+module.exports = { requestedMode };
