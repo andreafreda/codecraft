@@ -1,6 +1,6 @@
 {
   "name": "codecraft",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Always-on readability lens: makes code read as if a thoughtful human engineer wrote it. Active by default when the plugin is enabled; toggle with /codecraft on|off.",
   "author": {
     "name": "Andrea Freda"

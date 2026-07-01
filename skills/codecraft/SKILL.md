@@ -1,17 +1,12 @@
 ---
 name: codecraft
 description: >-
-  Make code read as if a thoughtful human engineer wrote it: plain, obvious, easy
-  to follow, never machine-dense or over-abstracted. Apply this as a cross-cutting
-  lens whenever writing, implementing, or refactoring a function, class, module,
-  or component, and when reviewing a diff for readability, in any language. It
-  co-applies with framework or language skills rather than replacing them, so use
-  it even when another skill (React, Angular, etc.) is already engaged. Also use
-  it when the user mentions readability, simplicity, "clean code", maintainability,
-  "as if written by hand", or invokes /codecraft. Skip it for trivial or
-  mechanical edits (a one-line tweak, a version bump, a print statement), and as
-  the primary lens when the task's main goal is a performance hot path, an urgent
-  hotfix, or a security review; there readability is a later pass.
+  Readability lens: make code read as if a thoughtful human wrote it, obvious
+  over clever. Use when writing, refactoring, or reviewing code, or when the
+  user mentions readability, simplicity, "clean code", maintainability, or
+  invokes /codecraft. Co-applies with language and framework skills. Skip
+  trivial edits, hot paths, urgent hotfixes, and security review, where
+  readability is a later pass.
 ---
 
 # codecraft
@@ -29,6 +24,12 @@ decisions; those come first and have their own focus. The SOLID and seam notes
 below are secondary lenses to keep a readability change honest, not an invitation
 to redesign the system. Reach for codecraft when the goal is making code clear
 and maintainable.
+
+**Restraint: leave clear code alone.** The lens improves code you are already
+writing or changing. It is not a mandate to rewrite working code that already
+reads well. If a change would only trade one clear form for another, don't start
+it on your own: the churn costs more than the marginal gain. When the user asks
+for the change explicitly, that's their call: do it.
 
 ## The one rule, and how to break ties
 
