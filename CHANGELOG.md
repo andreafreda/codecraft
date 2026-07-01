@@ -15,6 +15,10 @@ All notable changes to codecraft are documented here. The format follows
 - Isolated the mode tracker's stdin handling behind a `require.main` guard and
   exported `requestedMode`, so the parser can be unit-tested without triggering
   the hook's side effects.
+- Slimmed the per-turn reminder to a salience-only note (about a quarter of its
+  former size). The full principles already arrive via the SessionStart hook at
+  startup and after each compaction, so the per-turn note no longer restates
+  them, which keeps its accumulated context cost small over long sessions.
 
 ## [1.0.2] - 2026-07-01
 

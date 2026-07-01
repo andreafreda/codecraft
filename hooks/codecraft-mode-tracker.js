@@ -1,16 +1,17 @@
 #!/usr/bin/env node
-// codecraft — UserPromptSubmit hook. Handles the on/off toggle and re-injects a
-// short reminder each turn so the lens survives long sessions and context
-// compaction instead of drifting away mid-conversation.
+// codecraft — UserPromptSubmit hook. Handles the on/off toggle and keeps the
+// lens salient each turn with a minimal reminder.
+//
+// The full principles are injected once by the SessionStart hook, and again
+// after each compaction (SessionStart fires with source "compact"). So this
+// per-turn note only has to carry salience, not restate the content, which
+// keeps its accumulated context cost small over a long session.
 
 const { getFlagPath, writeFlag, readFlag } = require('./codecraft-state');
 
 const REMINDER =
-  'CODECRAFT MODE ACTIVE. When writing, implementing, or refactoring code, or ' +
-  'reviewing a diff: obvious over clever, name things fully, guard clauses, no ' +
-  'premature abstraction, document public contracts, handle errors honestly, ' +
-  'keep side effects at the edges. Skip for trivial edits, hot-path perf, urgent ' +
-  'hotfixes, and security review.';
+  'CODECRAFT MODE ACTIVE — apply the codecraft readability lens to any code you ' +
+  'write or review this turn.';
 
 // Maps a prompt to the mode it explicitly requests, or null if it asks for
 // neither. Covers the "/codecraft [on|off]" command and natural language such
