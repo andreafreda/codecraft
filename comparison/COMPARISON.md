@@ -115,7 +115,7 @@ numbers: readability, tokens, and an independent static-analysis cross-check.
 
 ```mermaid
 flowchart TD
-    P["Task prompts<br/>6 tasks · 6 languages<br/>(HumanEval + MultiPL-E)"]
+    P["Task prompts<br/>suites · targets<br/>(languages and frameworks)"]
     P --> A["Baseline<br/>write, 1 pass"]
     P --> B["codecraft<br/>lens on, 1 pass"]
     P --> C["code-simplifier<br/>write then refine, 2 passes"]
@@ -168,6 +168,10 @@ trade-off.
 ```
 comparison/
   COMPARISON.md   # this document
-  tasks/          # the task prompts and hidden tests, per language (present)
+  tasks/          # prompts + hidden tests, as tasks/<suite>/<task>/<target>/ (present)
   results/        # per-run solutions and the score, token, and issue tables
 ```
+
+Targets are languages or frameworks, so the same layout extends from the current
+algorithmic suite to future language and framework suites without changing shape.
+See `tasks/README.md` for the live coverage.

@@ -1,0 +1,6 @@
+{
+  "name": "humaneval",
+  "title": "HumanEval and MultiPL-E",
+  "kind": "algorithmic, self-contained function tasks",
+  "provenance": "Python from the original HumanEval (Chen et al., 2021; https://github.com/openai/human-eval, MIT). Other languages from MultiPL-E (Cassano et al., IEEE TSE 2023; https://github.com/nuprl/MultiPL-E), which mechanically translates HumanEval. Retrieved 2026-07-02 via the Hugging Face datasets-server."
+}

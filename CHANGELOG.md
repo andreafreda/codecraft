@@ -57,10 +57,14 @@ All notable changes to codecraft are documented here. The format follows
   plus a "from prompt to score" benchmark workflow (a Mermaid diagram and stage
   breakdown): three arms, a correctness gate, a deterministic readability
   composite, token counts, and a final SonarQube issue-count cross-check.
-- Stored the first benchmark task set under `comparison/tasks/`: six HumanEval
-  problems (1, 33, 36, 126, 129, 154), each with prompt and hidden tests in
-  Python, TypeScript, JavaScript, Java, Go, and C#, sourced from HumanEval and
-  MultiPL-E. Per-task and index READMEs cite the sources and licenses.
+- Stored the first benchmark task set under `comparison/tasks/`, in an extensible
+  `tasks/<suite>/<task>/<target>/` layout where a target is a language or a
+  framework. The first suite (HumanEval and MultiPL-E) carries six problems with
+  prompts and hidden tests across Python, TypeScript, JavaScript, Java, Go, and
+  C#. Coverage is generated from the folder tree (a data-driven index and
+  `manifest.json`), so adding a language, framework, or benchmark source is a
+  drop-in with no fixed count to update. Per-task READMEs cite sources and
+  licenses.
 
 ## [1.0.2] - 2026-07-01
 
