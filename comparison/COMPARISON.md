@@ -107,34 +107,67 @@ codecraft covers the "what", how to resolve conflicts, and per-language examples
 in depth, and shapes the code beforehand. Different categories: a cleanup agent
 versus a readability standard and lens.
 
-## Next step: empirical benchmark (planned)
+## The benchmark: from prompt to score
 
 The tables above are a static analysis of the two definitions, not measured
-results. The follow-up phase measures them on concrete tasks, on both quality
-and token cost.
+results. This section defines the empirical benchmark that produces real
+numbers: readability, tokens, and an independent static-analysis cross-check.
 
-Design:
+```mermaid
+flowchart TD
+    P["Task prompts<br/>6 tasks · 6 languages<br/>(HumanEval + MultiPL-E)"]
+    P --> A["Baseline<br/>write, 1 pass"]
+    P --> B["codecraft<br/>lens on, 1 pass"]
+    P --> C["code-simplifier<br/>write then refine, 2 passes"]
+    A --> G{"Correctness gate<br/>run hidden tests"}
+    B --> G
+    C --> G
+    G -->|correct only| R["Readability score<br/>0.00 to 10.00 · static metrics"]
+    G -->|correct only| T["Tokens<br/>total per arm"]
+    G -->|correct only| S["Sonar issues<br/>final scan · count"]
+    R --> AG["Aggregate + compare<br/>results tables"]
+    T --> AG
+    S --> AG
+```
 
-- A set of small, concrete coding tasks (for example: implement function X,
-  build component Y).
-- Three arms, each run by a fresh agent with no prior context:
-  1. **Baseline**: writes the code with no readability tooling. The control.
-  2. **codecraft**: writes the code with the codecraft lens active. One pass.
-  3. **code-simplifier**: writes the code normally, then runs the code-simplifier
+### Stages
+
+1. **Generation.** Three arms, each run by a fresh agent with no prior context,
+   solving the same task in the same language. Token usage is recorded per arm.
+   - **Baseline**: writes the code with no readability tooling. The control.
+   - **codecraft**: writes the code with the codecraft lens active. One pass.
+   - **code-simplifier**: writes the code normally, then runs the code-simplifier
      agent to refine it. Two passes.
-- Metrics:
-  - **Quality**: readability of the final code, scored against a rubric and by a
-    blind reviewer agent.
-  - **Tokens**: total tokens to reach the final code. codecraft pays for context
-    injection; code-simplifier pays for the initial write plus a full refactor
-    pass.
-- Output: a per-task results table and an aggregate.
+2. **Correctness gate.** The hidden tests run against each solution. Only passing
+   solutions go on to readability scoring; failures are recorded separately,
+   since it is not fair to compare the readability of code that does not work.
+3. **Scoring.** Three independent numbers per correct solution:
+   - **Readability (0.00 to 10.00)**: a deterministic composite of static
+     metrics (cyclomatic complexity, maximum nesting depth, longest function,
+     average line length, magic-number count, single-character-name ratio),
+     each normalized to a documented band and combined with documented weights.
+     The raw metrics are reported alongside the composite, so the score is not a
+     black box. This is the core readability number, not an LLM judgement.
+   - **Tokens**: total tokens to reach the final code. codecraft pays for context
+     injection; code-simplifier pays for the initial write plus a full refactor
+     pass.
+   - **Sonar issues**: at the very end, one SonarQube scan (official Docker
+     image, pinned) over all solutions, counting issues by severity. SonarQube
+     conformance is not the same as readability, so this is an independent
+     cross-check in its own column, not a driver of the composite.
+4. **Aggregate.** Per-task, per-language, and per-arm tables, plus the pass rate
+   of the correctness gate.
 
-Planned folder layout for this phase:
+The question the benchmark answers: does codecraft's shaping during writing (one
+pass) reach readability comparable to code-simplifier's after-the-fact cleanup
+(two passes), at a lower token cost? Any outcome is reported honestly as a
+trade-off.
+
+### Folder layout
 
 ```
 comparison/
   COMPARISON.md   # this document
-  tasks/          # the concrete task prompts
-  results/        # per-run outputs and the quality and token tables
+  tasks/          # the task prompts and hidden tests, per language (present)
+  results/        # per-run solutions and the score, token, and issue tables
 ```

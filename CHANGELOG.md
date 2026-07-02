@@ -48,7 +48,9 @@ All notable changes to codecraft are documented here. The format follows
 - Added `comparison/COMPARISON.md`: a topic-by-topic comparison against
   Anthropic's official `code-simplifier` plugin (shaping during writing vs a
   post-hoc cleanup pass), based on reading the full code-simplifier definition,
-  plus the design for a planned empirical benchmark (quality and token cost).
+  plus a "from prompt to score" benchmark workflow (a Mermaid diagram and stage
+  breakdown): three arms, a correctness gate, a deterministic readability
+  composite, token counts, and a final SonarQube issue-count cross-check.
 - Stored the first benchmark task set under `comparison/tasks/`: six HumanEval
   problems (1, 33, 36, 126, 129, 154), each with prompt and hidden tests in
   Python, TypeScript, JavaScript, Java, Go, and C#, sourced from HumanEval and
