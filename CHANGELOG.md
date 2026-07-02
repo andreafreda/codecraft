@@ -45,6 +45,10 @@ All notable changes to codecraft are documented here. The format follows
   the SessionStart injection (full principles, re-injected after compaction),
   the slim per-turn UserPromptSubmit reminder, the flag, and why the intent-gated
   skill makes `/codecraft off` a real off.
+- Added `comparison/COMPARISON.md`: a topic-by-topic comparison against
+  Anthropic's official `code-simplifier` plugin (shaping during writing vs a
+  post-hoc cleanup pass), based on reading the full code-simplifier definition,
+  plus the design for a planned empirical benchmark (quality and token cost).
 
 ## [1.0.2] - 2026-07-01
 
