@@ -30,12 +30,11 @@ try {
   // Drop the YAML frontmatter; only the guidance body is useful as context.
   body = skill.replace(/^---[\s\S]*?---\s*/, '');
 } catch (e) {
-  body =
-    'Make code read as if a thoughtful human engineer wrote it: plain, obvious, ' +
-    'easy to follow. Obvious over clever. Name things fully. Guard clauses for ' +
-    'edge cases. No premature abstraction. Document public contracts. Handle ' +
-    'errors honestly. Keep side effects at the edges. Skip for trivial edits, ' +
-    'hot-path perf, urgent hotfixes, and security review.';
+  // Deliberately terse: a longer copy of the principles here would be a second
+  // place to keep in sync with SKILL.md. This only runs if SKILL.md is missing.
+  body = 'Apply the codecraft readability lens: make code read as if a thoughtful '
+    + 'human wrote it, obvious over clever. (Full principles unavailable: SKILL.md '
+    + 'was not found next to this hook.)';
 }
 
 process.stdout.write('CODECRAFT MODE ACTIVE\n\n' + body);

@@ -20,10 +20,19 @@ const cases = [
   ['please enable codecraft for this', 'on'],
   ['stop codecraft now', 'off'],
   ['can you disable codecraft', 'off'],
+  // "codecraft off/on" and "codecraft mode on/off" phrasings.
+  ['codecraft off', 'off'],
+  ['codecraft mode on', 'on'],
   // No clear request.
   ['codecraft is a nice idea', null],
   ['write a function', null],
   ['turn off dark mode', null],
+  // Ambiguous mentions: an intent word and "codecraft" both appear, but not in
+  // a directive relationship, so the toggle must not flip.
+  ['stop, codecraft is fine but change the naming', null],
+  ['i like codecraft, but turn off the dark theme', null],
+  ['codecraft, stop overthinking this function', null],
+  ['should i enable telemetry? codecraft can wait', null],
 ];
 
 for (const [prompt, expected] of cases) {

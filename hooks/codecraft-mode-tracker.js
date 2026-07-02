@@ -16,6 +16,11 @@ const REMINDER =
 // Maps a prompt to the mode it explicitly requests, or null if it asks for
 // neither. Covers the "/codecraft [on|off]" command and natural language such
 // as "turn off codecraft". The prompt is expected already trimmed and lowercased.
+//
+// The natural-language patterns require the intent word to sit right next to
+// "codecraft" (as a verb before it, or "codecraft [mode] on|off" after it), so
+// a passing mention like "stop, codecraft is fine but..." does not flip the
+// toggle.
 function requestedMode(prompt) {
   if (prompt.startsWith('/codecraft')) {
     const arg = prompt.split(/\s+/)[1] || 'on';
@@ -23,10 +28,11 @@ function requestedMode(prompt) {
     if (arg === 'on') return 'on';
     return null;
   }
-  if (/\bcodecraft\b/.test(prompt)) {
-    if (/\b(stop|disable|deactivate|turn off)\b/.test(prompt)) return 'off';
-    if (/\b(activate|enable|turn on|start)\b/.test(prompt)) return 'on';
-  }
+
+  const off = /\b(turn off|stop|disable|deactivate)\s+(the\s+)?codecraft\b|\bcodecraft(\s+mode)?\s+(off|stop|disabled?)\b/;
+  const on = /\b(turn on|enable|activate|start)\s+(the\s+)?codecraft\b|\bcodecraft(\s+mode)?\s+(on|enabled?)\b/;
+  if (off.test(prompt)) return 'off';
+  if (on.test(prompt)) return 'on';
   return null;
 }
 

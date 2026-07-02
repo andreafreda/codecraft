@@ -59,6 +59,12 @@ refactor without needing you to ask for readability explicitly. Turn it off
 with `/codecraft off` or "stop codecraft"; back on with `/codecraft` or
 "codecraft mode". The choice persists until you change it.
 
+> **Known limitation:** the on/off state is global. It lives in a single file
+> (`~/.claude/.codecraft-active`, or `$CLAUDE_CONFIG_DIR/.codecraft-active`),
+> shared across every project and session. Turning codecraft off in one project
+> turns it off everywhere until you turn it back on. There is no per-project
+> state today.
+
 ## Layout
 
 ```

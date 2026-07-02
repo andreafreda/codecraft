@@ -29,6 +29,19 @@ All notable changes to codecraft are documented here. The format follows
   behave like a real off (the skill stays dormant) and clearly separates the
   plain-skill install (explicit) from the plugin install (always-on via hooks).
 
+### Fixed
+- Tightened the natural-language toggle: an intent word now only flips the mode
+  when it sits right next to "codecraft" (for example "stop codecraft" or
+  "codecraft off"). A passing mention like "stop, codecraft is fine but..." no
+  longer triggers a false off. Added tests for these ambiguous phrasings.
+- Shortened the SessionStart inline fallback (used only when SKILL.md is
+  missing) to a one-line pointer, removing a hand-maintained copy of the
+  principles that could drift from SKILL.md.
+
+### Docs
+- Documented the on/off state as a known limitation: it is global (one flag
+  under ~/.claude), not per-project.
+
 ## [1.0.2] - 2026-07-01
 
 ### Changed
