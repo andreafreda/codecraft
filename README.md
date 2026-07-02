@@ -52,12 +52,31 @@ or, for a quick local test without touching your global config:
 claude --plugin-dir /path/to/codecraft
 ```
 
-This registers a `SessionStart` hook that activates codecraft by default the
-moment the plugin is enabled, and a `UserPromptSubmit` hook that reinforces it
-every turn. It applies to every function, class, module, or diff you write or
-refactor without needing you to ask for readability explicitly. Turn it off
+This applies codecraft to every function, class, module, or diff you write or
+refactor, without needing you to ask for readability explicitly. Turn it off
 with `/codecraft off` or "stop codecraft"; back on with `/codecraft` or
 "codecraft mode". The choice persists until you change it.
+
+#### How the always-on plugin works
+
+Two hooks and a flag, each with a distinct job:
+
+- **`SessionStart`** injects the full principles, read live from `SKILL.md`, at
+  the start of the session. It also fires again after a compaction (SessionStart
+  runs with `source: "compact"`), so a long session that compacts the original
+  injection away still gets the principles back.
+- **`UserPromptSubmit`** re-emits a short, salience-only reminder each turn so
+  the lens does not fade as the conversation grows. It is intentionally tiny:
+  the full principles already arrive from `SessionStart`, so the per-turn note
+  only keeps them front of mind rather than restating them (which would pile up
+  in the context every turn).
+- **The flag** (`~/.claude/.codecraft-active`) records on/off. Both hooks read
+  it, so `/codecraft off` stops all injection until you turn it back on.
+
+The bundled skill is intent-gated: on its own it does not auto-fire on ordinary
+code writing. With the plugin, the hooks are the activation path, so
+`/codecraft off` genuinely turns codecraft off rather than leaving the skill to
+trigger on its own.
 
 > **Known limitation:** the on/off state is global. It lives in a single file
 > (`~/.claude/.codecraft-active`, or `$CLAUDE_CONFIG_DIR/.codecraft-active`),

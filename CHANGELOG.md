@@ -41,6 +41,10 @@ All notable changes to codecraft are documented here. The format follows
 ### Docs
 - Documented the on/off state as a known limitation: it is global (one flag
   under ~/.claude), not per-project.
+- Expanded the README with a "How the always-on plugin works" section covering
+  the SessionStart injection (full principles, re-injected after compaction),
+  the slim per-turn UserPromptSubmit reminder, the flag, and why the intent-gated
+  skill makes `/codecraft off` a real off.
 
 ## [1.0.2] - 2026-07-01
 
