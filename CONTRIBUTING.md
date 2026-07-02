@@ -49,9 +49,10 @@ Then add a row to the index table in `SKILL.md`, and add the language to the
 
 Some files are not Core files:
 
-- `reference/react.md` covers only React-specific shapes and points back to the
-  JavaScript and TypeScript Core instead of repeating it. Model a framework file
-  the same way: cover only what the framework adds, link to the base language.
+- `reference/react.md` and `reference/angular.md` cover only framework-specific
+  shapes and point back to the JavaScript and TypeScript Core instead of
+  repeating it. Model a framework file the same way: cover only what the
+  framework adds, link to the base language.
 - `reference/style-and-smells.md` holds the judgement principles (1, 3, 5, 6, 7,
   11) and the smells, once for all languages.
 - `reference/general.md` states the Core in language-agnostic pseudocode for

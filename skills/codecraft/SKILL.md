@@ -116,6 +116,7 @@ principles in that language's own idioms.
 | TypeScript | `reference/typescript.md` | Writing or reviewing TypeScript. |
 | JavaScript | `reference/javascript.md` | Writing or reviewing plain (frontend) JavaScript, no framework. |
 | React | `reference/react.md` | Writing or reviewing React components. Extension file; builds on the JavaScript and TypeScript files. |
+| Angular | `reference/angular.md` | Writing or reviewing Angular components. Extension file; builds on the TypeScript file. |
 | Go | `reference/go.md` | Writing or reviewing Go. |
 | Java | `reference/java.md` | Writing or reviewing Java. |
 | C# | `reference/csharp.md` | Writing or reviewing C#. |
@@ -124,10 +125,10 @@ principles in that language's own idioms.
 
 The language files carry the same eight-example Core in the same order; the Core
 is identical across them, but each file's optional language-specific extras
-differ. `reference/react.md` and `reference/style-and-smells.md` are not Core
-files:
-`react.md` covers React-specific shapes and points back to the JavaScript and
-TypeScript Core; `style-and-smells.md` covers the principles that are about
+differ. `reference/react.md`, `reference/angular.md` and
+`reference/style-and-smells.md` are not Core files:
+`react.md` and `angular.md` cover framework-specific shapes and point back to the
+JavaScript and TypeScript Core; `style-and-smells.md` covers the principles that are about
 judgement rather than a code shape, once for all languages.
 
 The reference files only add worked examples; they do not hold any rule of their

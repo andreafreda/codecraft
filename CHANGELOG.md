@@ -7,6 +7,12 @@ All notable changes to codecraft are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- `reference/angular.md`: an Angular extension reference, modeled on
+  `reference/react.md`. It applies the Core principles to Angular-specific shapes
+  (signal inputs, `@if`/`@else` control flow, `computed()` over `effect()`,
+  `inject()` and focused services) using current idioms (standalone components,
+  signals, Angular 17+), and points back to the TypeScript Core. Registered in
+  the `SKILL.md` index, the README layout, and CONTRIBUTING.
 - Test suite (`node --test`) covering the flag persistence and the toggle
   parser, plus a GitHub Actions CI workflow that runs it on push and pull
   request, and a CI badge in the README.

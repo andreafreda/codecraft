@@ -98,9 +98,9 @@ commands/codecraft.toml           # /codecraft slash command
 is loaded for the whole session when active, so anything universal must live
 there, never only in a reference file. The `reference/` files hold worked
 examples and are opened on demand, one at a time: one file per language
-(`python`, `typescript`, `javascript`, `go`, `java`, `csharp`) plus a
-frontend-oriented `react` extension, a shared `style-and-smells` file for the
-judgement principles, and a language-agnostic `general.md`. See
+(`python`, `typescript`, `javascript`, `go`, `java`, `csharp`) plus
+frontend-framework extensions (`react`, `angular`), a shared `style-and-smells`
+file for the judgement principles, and a language-agnostic `general.md`. See
 `CONTRIBUTING.md` for the pattern to follow when adding a language.
 
 The `hooks/`, `commands/`, and `.claude-plugin/` pieces only matter for the
