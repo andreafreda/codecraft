@@ -49,6 +49,10 @@ All notable changes to codecraft are documented here. The format follows
   Anthropic's official `code-simplifier` plugin (shaping during writing vs a
   post-hoc cleanup pass), based on reading the full code-simplifier definition,
   plus the design for a planned empirical benchmark (quality and token cost).
+- Stored the first benchmark task set under `comparison/tasks/`: six HumanEval
+  problems (1, 33, 36, 126, 129, 154), each with prompt and hidden tests in
+  Python, TypeScript, JavaScript, Java, Go, and C#, sourced from HumanEval and
+  MultiPL-E. Per-task and index READMEs cite the sources and licenses.
 
 ## [1.0.2] - 2026-07-01
 
