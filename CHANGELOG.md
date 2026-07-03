@@ -7,6 +7,13 @@ All notable changes to codecraft are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- `comparison/harness/`: the run harness (`run-cell.mjs` plus `arms.json`).
+  Generation goes through `claude -p` (headless, subscription auth, no API key)
+  in an isolated `CLAUDE_CONFIG_DIR` that holds only the credentials, so ambient
+  plugins and hooks cannot leak into a run; the only per-arm difference is the
+  appended system prompt. A cell writes its solution and `metrics.json` under
+  `comparison/results/`, scores it, runs the Python correctness gate, and ticks
+  and annotates its checkbox in `PLAN.md`. v0, not yet run.
 - `comparison/PLAN.md`: a task-oriented run plan, one checkbox per run cell (a
   single task x language x arm), generated from the task manifest and the arm
   list. It carries the per-cell procedure (generate, gate, score, record), the

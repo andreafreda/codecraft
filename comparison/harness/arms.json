@@ -1,0 +1,11 @@
+{
+  "model": "claude-sonnet-4-5",
+  "note": "Each arm's system prompt is the only difference between runs. baseline has none; codecraft reads the local skill; ponytail and code-simplifier are fetched from their own repositories at run time (not redistributed here). code-simplifier is two-pass: write, then refine.",
+  "arms": {
+    "baseline": { "system": "" },
+    "codecraft": { "systemFile": "skills/codecraft/SKILL.md", "stripFrontmatter": true },
+    "ponytail": { "systemUrl": "https://raw.githubusercontent.com/DietrichGebert/ponytail/main/skills/ponytail/SKILL.md", "stripFrontmatter": true },
+    "code-simplifier": { "systemUrl": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/code-simplifier/agents/code-simplifier.md", "stripFrontmatter": true, "twoPass": true }
+  },
+  "ext": { "python": "py", "typescript": "ts", "javascript": "js", "java": "java", "go": "go", "csharp": "cs" }
+}
