@@ -2,7 +2,7 @@
   "cell": "humaneval/HumanEval_1/java/baseline",
   "arm": "baseline",
   "model": "claude-haiku-4-5-20251001",
-  "tokens_in": 30351,
-  "tokens_out": 892,
-  "pass": "no"
+  "tokens_in": 31089,
+  "tokens_out": 1268,
+  "pass": "yes"
 }

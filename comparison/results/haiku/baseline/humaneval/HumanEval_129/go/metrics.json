@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_129/go/baseline",
+  "arm": "baseline",
+  "model": "claude-haiku-4-5-20251001",
+  "tokens_in": 31366,
+  "tokens_out": 6231,
+  "pass": "yes"
+}

@@ -1,23 +1,30 @@
-public static long fizzBuzz(long n) {
-    long count = 0;
-    for (long i = 1; i < n; i++) {
-        if (isDivisibleBy11Or13(i) && containsDigit7(i)) {
-            count++;
-        }
-    }
-    return count;
-}
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
 
-private static boolean isDivisibleBy11Or13(long num) {
-    return num % 11 == 0 || num % 13 == 0;
-}
-
-private static boolean containsDigit7(long num) {
-    while (num > 0) {
-        if (num % 10 == 7) {
-            return true;
+class Problem {
+    // Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.
+    // >>> fizzBuzz((50l))
+    // (0l)
+    // >>> fizzBuzz((78l))
+    // (2l)
+    // >>> fizzBuzz((79l))
+    // (3l)
+    public static long fizzBuzz(long n) {
+        long count = 0;
+        for (long i = 0; i < n; i++) {
+            if (i % 11 == 0 || i % 13 == 0) {
+                count += countSevens(i);
+            }
         }
-        num /= 10;
+        return count;
     }
-    return false;
+
+    private static long countSevens(long num) {
+        return String.valueOf(num).chars().filter(c -> c == '7').count();
+    }
 }

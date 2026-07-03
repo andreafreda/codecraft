@@ -8,8 +8,9 @@ import java.util.stream.*;
 class Problem {
     public static ArrayList<Long> minPath(ArrayList<ArrayList<Long>> grid, long k) {
         int n = grid.size();
+        ArrayList<Long> result = new ArrayList<>();
         
-        // Find the position of 1 (the minimum value)
+        // Find position of 1
         int row = -1, col = -1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -22,35 +23,36 @@ class Problem {
             if (row != -1) break;
         }
         
-        // Build the path greedily: always move to the neighbor with minimum value
-        ArrayList<Long> path = new ArrayList<>();
-        path.add(1L);
-        
+        // Build path greedily by always moving to the smallest valued neighbor
         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         
-        for (long step = 1; step < k; step++) {
-            long minVal = Long.MAX_VALUE;
-            int nextRow = -1, nextCol = -1;
+        for (long i = 0; i < k; i++) {
+            result.add(grid.get(row).get(col));
             
-            for (int[] dir : directions) {
-                int newRow = row + dir[0];
-                int newCol = col + dir[1];
+            if (i < k - 1) {
+                // Find neighbor with smallest value
+                long minVal = Long.MAX_VALUE;
+                int nextRow = row, nextCol = col;
                 
-                if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < n) {
-                    long val = grid.get(newRow).get(newCol);
-                    if (val < minVal) {
-                        minVal = val;
-                        nextRow = newRow;
-                        nextCol = newCol;
+                for (int[] dir : directions) {
+                    int newRow = row + dir[0];
+                    int newCol = col + dir[1];
+                    
+                    if (newRow >= 0 && newRow < n && newCol >= 0 && newCol < n) {
+                        long val = grid.get(newRow).get(newCol);
+                        if (val < minVal) {
+                            minVal = val;
+                            nextRow = newRow;
+                            nextCol = newCol;
+                        }
                     }
                 }
+                
+                row = nextRow;
+                col = nextCol;
             }
-            
-            path.add(minVal);
-            row = nextRow;
-            col = nextCol;
         }
         
-        return path;
+        return result;
     }
 }

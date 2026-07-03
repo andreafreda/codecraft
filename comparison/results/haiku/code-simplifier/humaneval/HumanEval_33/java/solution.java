@@ -1,19 +1,15 @@
 public static ArrayList<Long> sortThird(ArrayList<Long> l) {
-    List<Long> elementsToSort = new ArrayList<>();
+    List<Long> thirdElements = new ArrayList<>();
     for (int i = 0; i < l.size(); i += 3) {
-        elementsToSort.add(l.get(i));
+        thirdElements.add(l.get(i));
     }
     
-    Collections.sort(elementsToSort);
+    Collections.sort(thirdElements);
     
-    ArrayList<Long> result = new ArrayList<>();
+    ArrayList<Long> result = new ArrayList<>(l);
     int sortedIndex = 0;
-    for (int i = 0; i < l.size(); i++) {
-        if (i % 3 == 0) {
-            result.add(elementsToSort.get(sortedIndex++));
-        } else {
-            result.add(l.get(i));
-        }
+    for (int i = 0; i < result.size(); i += 3) {
+        result.set(i, thirdElements.get(sortedIndex++));
     }
     
     return result;

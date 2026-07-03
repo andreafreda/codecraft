@@ -104,7 +104,7 @@ const main = async () => {
   const label = modelLabel(model);
   const system = await armSystem();
   const { dir: configDir, temp } = resolveConfigDir();
-  const ask = `Complete the following ${target} code. Keep the exact function/method name and signature given in the prompt; complete only the body. Output only the complete code, no prose.\n\n${prompt}`;
+  const ask = `Complete the following ${target} code. Keep the exact function/method name and signature given in the prompt, and keep the surrounding class and imports if the prompt shows them. Output only the complete code, no prose.\n\n${prompt}`;
 
   let gen = claudeRun(ask, system, configDir, model);
   let tokensIn = gen.tokensIn, tokensOut = gen.tokensOut;
@@ -112,7 +112,7 @@ const main = async () => {
 
   if (armCfg.twoPass) {
     // Second pass: refine the just-written code with the arm's system prompt.
-    const refineAsk = `Refine this ${target} code for readability without changing behavior. Keep the same public function/method name and signature. Output only the code.\n\n${code}`;
+    const refineAsk = `Refine this ${target} code for readability without changing behavior. Keep the same public function/method name and signature, and keep any class and imports. Output only the code.\n\n${code}`;
     const refined = claudeRun(refineAsk, system, configDir, model);
     tokensIn += refined.tokensIn; tokensOut += refined.tokensOut;
     code = extractCode(refined.text);

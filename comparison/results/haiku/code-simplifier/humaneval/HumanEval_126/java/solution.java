@@ -1,19 +1,29 @@
-public static boolean isSorted(ArrayList<Long> lst) {
-    Map<Long, Integer> elementCount = new HashMap<>();
-    
-    for (int i = 0; i < lst.size(); i++) {
-        Long element = lst.get(i);
+import java.util.*;
+import java.lang.reflect.*;
+import org.javatuples.*;
+import java.security.*;
+import java.math.*;
+import java.io.*;
+import java.util.stream.*;
+class Problem {
+    public static boolean isSorted(ArrayList<Long> lst) {
+        Map<Long, Integer> counts = new HashMap<>();
+        Long previous = null;
         
-        int count = elementCount.getOrDefault(element, 0) + 1;
-        if (count > 2) {
-            return false;
+        for (Long current : lst) {
+            if (previous != null && previous > current) {
+                return false;
+            }
+            
+            int count = counts.getOrDefault(current, 0) + 1;
+            if (count > 2) {
+                return false;
+            }
+            counts.put(current, count);
+            
+            previous = current;
         }
-        elementCount.put(element, count);
         
-        if (i > 0 && element < lst.get(i - 1)) {
-            return false;
-        }
+        return true;
     }
-    
-    return true;
 }
