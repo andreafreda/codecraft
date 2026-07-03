@@ -1,0 +1,16 @@
+{
+  "cell": "humaneval/HumanEval_129/python/baseline",
+  "arm": "baseline",
+  "model": "claude-haiku-4-5-20251001",
+  "tokens_in": 30553,
+  "tokens_out": 6078,
+  "pass": "yes",
+  "composite": 7.07,
+  "raw": {
+    "avg_line_length": 41.52,
+    "max_nesting": 1,
+    "cyclomatic_density": 2.86,
+    "magic_number_density": 0,
+    "single_char_ident_ratio": 0.321
+  }
+}
