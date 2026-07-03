@@ -33,9 +33,11 @@ The model is pinned in `arms.json` so every arm runs on the same model.
 
 ## Runtimes
 
-The correctness gate is wired for Python. Other languages need their runtime
-mounted at run time (see `PLAN.md`); until then those cells record tokens with
-`pass: skipped`.
+The correctness gate (`gate.mjs`) is wired for **python, javascript, typescript,
+and java** (java bundles the `org.javatuples` jar in `lib/`). **go** needs a `go`
+runtime; **csharp** is blocked by fixtures that compare with reference-equality
+`List<T>.Equals`. Those targets record tokens with `pass: skipped`. See
+`PLAN.md` for the details.
 
 ## Status
 

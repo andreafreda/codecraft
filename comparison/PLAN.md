@@ -27,12 +27,19 @@ CLAUDE_CONFIG_DIR="C:/cc-bench-account" node comparison/harness/run-cell.mjs <su
 ### Gates
 
 Gates wired in `harness/gate.mjs`: **python** (`python`), **javascript**
-(`node`), **typescript** (`node --experimental-strip-types`). Each assembles the
-model's solution with the hidden tests into one runnable program and checks the
-exit code. Still `pass: skipped`: **go** (no `go` runtime installed), **java**
-(needs the `org.javatuples` jar on the classpath and `-ea`), **csharp** (needs a
-`Debug.Assert` listener that throws and a throwaway project). Those record tokens
-with `pass: skipped` until wired.
+(`node`), **typescript** (`node --experimental-strip-types`), **java** (inject
+the test `main` into the class, `javac`/`java -ea`, with the bundled
+`org.javatuples` jar in `harness/lib`). Each assembles the model's solution with
+the hidden tests into one runnable program and checks the exit code.
+
+Still `pass: skipped`:
+- **go** — no `go` runtime installed on this machine.
+- **csharp** — the MultiPL-E fixtures compare with `List<T>.Equals`, which is
+  reference equality in .NET, so even a correct solution fails. `dotnet` runs and
+  `Debug.Assert` aborts with a non-zero exit fine; the blocker is the fixture
+  comparison. Wiring csharp needs the tests rewritten to value comparison
+  (e.g. `Enumerable.SequenceEqual`) for the collection-returning tasks only,
+  without breaking the scalar-returning ones.
 
 This benchmark **generates and saves code**; it does not judge its quality. The
 only recorded signals are objective: tokens (cost) and the correctness gate
