@@ -26,10 +26,13 @@ CLAUDE_CONFIG_DIR="C:/cc-bench-account" node comparison/harness/run-cell.mjs <su
 
 ### Gates
 
-Only the Python correctness gate is implemented. js/ts/java/go/cs need their
-runtime mounted and a gate that assembles `prompt + completion + tests.<ext>`
-(MultiPL-E format: the tests file is a full program; run it and check the exit
-code). Until then, non-Python cells record tokens with `pass: skipped`.
+Gates wired in `harness/gate.mjs`: **python** (`python`), **javascript**
+(`node`), **typescript** (`node --experimental-strip-types`). Each assembles the
+model's solution with the hidden tests into one runnable program and checks the
+exit code. Still `pass: skipped`: **go** (no `go` runtime installed), **java**
+(needs the `org.javatuples` jar on the classpath and `-ea`), **csharp** (needs a
+`Debug.Assert` listener that throws and a throwaway project). Those record tokens
+with `pass: skipped` until wired.
 
 This benchmark **generates and saves code**; it does not judge its quality. The
 only recorded signals are objective: tokens (cost) and the correctness gate

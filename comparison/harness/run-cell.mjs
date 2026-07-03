@@ -15,6 +15,7 @@ import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execFileSync } from 'child_process';
+import { runGate } from './gate.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '..', '..');
@@ -122,17 +123,10 @@ const main = async () => {
   const solutionPath = path.join(outDir, `solution.${ext}`);
   fs.writeFileSync(solutionPath, code);
 
-  // Correctness gate: implemented for Python; other runtimes are mounted per run.
-  let pass = 'skipped';
-  if (target === 'python') {
-    const testsSrc = fs.readFileSync(testsPath, 'utf8');
-    const entry = (testsSrc.match(/entry_point:\s*(\w+)/) || [])[1] || 'candidate';
-    const runner = path.join(outDir, '_gate.py');
-    fs.writeFileSync(runner, `${code}\n\n${testsSrc}\n\ncheck(${entry})\n`);
-    try { execFileSync('python', [runner], { encoding: 'utf8' }); pass = 'yes'; }
-    catch (e) { pass = 'no'; }
-    fs.rmSync(runner, { force: true });
-  }
+  // Correctness gate: python/js/ts are wired (see gate.mjs); other targets need
+  // their runtime and return 'skipped' until mounted.
+  const testsSrc = fs.readFileSync(testsPath, 'utf8');
+  const pass = runGate(target, code, testsSrc);
 
   const metrics = {
     cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut, pass,
