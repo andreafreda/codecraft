@@ -209,7 +209,7 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_154/java/baseline` (Java) — [haiku] pass: no, tokens: 33070
 - [x] `humaneval/HumanEval_154/java/codecraft` (Java) — [haiku] pass: no, tokens: 35690
 - [x] `humaneval/HumanEval_154/java/ponytail` (Java) — [haiku] pass: no, tokens: 34505
-- [x] `humaneval/HumanEval_154/java/code-simplifier` (Java) — [haiku] pass: no, tokens: 67603
+- [x] `humaneval/HumanEval_154/java/code-simplifier` (Java) — [haiku] pass: no, tokens: 69616
 - [x] `humaneval/HumanEval_154/javascript/baseline` (JavaScript) — [haiku] pass: yes, tokens: 32917
 - [x] `humaneval/HumanEval_154/javascript/codecraft` (JavaScript) — [haiku] pass: yes, tokens: 37192
 - [x] `humaneval/HumanEval_154/javascript/ponytail` (JavaScript) — [haiku] pass: yes, tokens: 33919
