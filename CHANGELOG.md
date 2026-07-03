@@ -55,8 +55,11 @@ All notable changes to codecraft are documented here. The format follows
   Anthropic's official `code-simplifier` plugin (shaping during writing vs a
   post-hoc cleanup pass), based on reading the full code-simplifier definition,
   plus a "from prompt to score" benchmark workflow (a Mermaid diagram and stage
-  breakdown): three arms, a correctness gate, a deterministic readability
-  composite, token counts, and a final SonarQube issue-count cross-check.
+  breakdown): four arms, a correctness gate, a deterministic readability
+  composite, token counts, and a final SonarQube issue-count cross-check. The
+  fourth arm is `ponytail`, a popular least-code skill that uses the same
+  always-on hook mechanism as codecraft but optimizes for brevity, making it a
+  clarity-versus-brevity foil in the same comparison.
 - Stored the first benchmark task set under `comparison/tasks/`, in an extensible
   `tasks/<suite>/<task>/<target>/` layout where a target is a language or a
   framework. The first suite (HumanEval and MultiPL-E) carries six problems with

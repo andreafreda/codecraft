@@ -117,10 +117,12 @@ numbers: readability, tokens, and an independent static-analysis cross-check.
 flowchart TD
     P["Task prompts<br/>suites · targets<br/>(languages and frameworks)"]
     P --> A["Baseline<br/>write, 1 pass"]
-    P --> B["codecraft<br/>lens on, 1 pass"]
+    P --> B["codecraft<br/>clarity, 1 pass"]
+    P --> D["ponytail<br/>least code, 1 pass"]
     P --> C["code-simplifier<br/>write then refine, 2 passes"]
     A --> G{"Correctness gate<br/>run hidden tests"}
     B --> G
+    D --> G
     C --> G
     G -->|correct only| R["Readability score<br/>0.00 to 10.00 · static metrics"]
     G -->|correct only| T["Tokens<br/>total per arm"]
@@ -132,10 +134,14 @@ flowchart TD
 
 ### Stages
 
-1. **Generation.** Three arms, each run by a fresh agent with no prior context,
+1. **Generation.** Four arms, each run by a fresh agent with no prior context,
    solving the same task in the same language. Token usage is recorded per arm.
    - **Baseline**: writes the code with no readability tooling. The control.
-   - **codecraft**: writes the code with the codecraft lens active. One pass.
+   - **codecraft**: writes the code with the codecraft lens active (clarity first,
+     "clarity beats brevity"). One pass.
+   - **ponytail**: writes the code with the ponytail skill active (least code
+     first, "one line before fifty"). One pass. A brevity-first foil to
+     codecraft's clarity-first lens, using the same always-on hook mechanism.
    - **code-simplifier**: writes the code normally, then runs the code-simplifier
      agent to refine it. Two passes.
 2. **Correctness gate.** The hidden tests run against each solution. Only passing
@@ -158,10 +164,13 @@ flowchart TD
 4. **Aggregate.** Per-task, per-language, and per-arm tables, plus the pass rate
    of the correctness gate.
 
-The question the benchmark answers: does codecraft's shaping during writing (one
-pass) reach readability comparable to code-simplifier's after-the-fact cleanup
-(two passes), at a lower token cost? Any outcome is reported honestly as a
-trade-off.
+The question the benchmark answers: on the same tasks, how do these approaches
+trade off readability against token cost? codecraft optimizes for clarity,
+ponytail for the least code, and code-simplifier cleans up after the fact in a
+second pass. A plausible and interesting result is that ponytail wins on tokens
+while its terser code scores lower on readability, and codecraft the reverse.
+The numbers decide it. Any outcome is reported honestly as a trade-off, not as a
+win for codecraft.
 
 ### Folder layout
 
