@@ -33,11 +33,14 @@ The model is pinned in `arms.json` so every arm runs on the same model.
 
 ## Runtimes
 
-The correctness gate (`gate.mjs`) is wired for **python, javascript, typescript,
-and java** (java bundles the `org.javatuples` jar in `lib/`). **go** needs a `go`
-runtime; **csharp** is blocked by fixtures that compare with reference-equality
-`List<T>.Equals`. Those targets record tokens with `pass: skipped`. See
-`PLAN.md` for the details.
+The correctness gate (`gate.mjs`) is wired for all six targets: **python**
+(`python`), **javascript** (`node`), **typescript** (`node
+--experimental-strip-types`), **java** (`javac`/`java -ea`, bundled
+`org.javatuples` jar in `lib/`), **go** (`go test`), and **csharp** (`dotnet run`,
+with the fixtures' reference-equality `.Equals` rewritten to a JSON value
+compare). go and csharp fall back to `pass: skipped` if their toolchain is not
+on `PATH` (override with `CCBENCH_GO` / `CCBENCH_DOTNET`). See `PLAN.md` for how
+each target assembles.
 
 ## Status
 

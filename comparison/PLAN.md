@@ -26,20 +26,23 @@ CLAUDE_CONFIG_DIR="C:/cc-bench-account" node comparison/harness/run-cell.mjs <su
 
 ### Gates
 
-Gates wired in `harness/gate.mjs`: **python** (`python`), **javascript**
-(`node`), **typescript** (`node --experimental-strip-types`), **java** (inject
-the test `main` into the class, `javac`/`java -ea`, with the bundled
-`org.javatuples` jar in `harness/lib`). Each assembles the model's solution with
-the hidden tests into one runnable program and checks the exit code.
+All six targets are wired in `harness/gate.mjs`. Each assembles the model's
+solution with the hidden tests into one runnable program and checks the exit
+code (non-zero = a failed assertion or a crash = `pass: no`).
 
-Still `pass: skipped`:
-- **go** — no `go` runtime installed on this machine.
-- **csharp** — the MultiPL-E fixtures compare with `List<T>.Equals`, which is
-  reference equality in .NET, so even a correct solution fails. `dotnet` runs and
-  `Debug.Assert` aborts with a non-zero exit fine; the blocker is the fixture
-  comparison. Wiring csharp needs the tests rewritten to value comparison
-  (e.g. `Enumerable.SequenceEqual`) for the collection-returning tasks only,
-  without breaking the scalar-returning ones.
+| Target | Runtime | How it assembles |
+| --- | --- | --- |
+| python | `python` | append `check(<entry_point>)` |
+| javascript | `node` | concat solution + tests (standalone driver) |
+| typescript | `node --experimental-strip-types` | concat solution + tests |
+| java | `javac` / `java -ea` | inject the test `main` into the class; bundled `org.javatuples` jar in `harness/lib` |
+| go | `go test` | concat into one `_test.go` in a throwaway module |
+| csharp | `dotnet run -c Debug` | inject `main`; rewrite `x.Equals(y)` to a JSON value compare (fixtures use reference-equality `List<T>.Equals`) |
+
+Runtime requirements: java needs a JDK, go needs a `go` toolchain (override the
+binary with `CCBENCH_GO`, else it must be on `PATH`; absent -> `pass: skipped`),
+csharp needs the .NET SDK (`CCBENCH_DOTNET` override). Where a runtime is missing
+the gate returns `skipped`, never a false `no`.
 
 This benchmark **generates and saves code**; it does not judge its quality. The
 only recorded signals are objective: tokens (cost) and the correctness gate

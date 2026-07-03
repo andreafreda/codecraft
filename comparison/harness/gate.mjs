@@ -49,6 +49,90 @@ function injectMain(solution, tests) {
   return `${solution.slice(0, solution.lastIndexOf('}'))}\n${mainBlock}\n}\n`;
 }
 
+// Go: the prompt is a `_test` package with the function; the tests file adds a
+// `TestX` that calls it and `t.Errorf`s on mismatch. Concatenate into one
+// `_test.go` in a throwaway module and run `go test`. The `go` binary is taken
+// from PATH (override with CCBENCH_GO), so this returns 'skipped' if go is absent.
+function runGo(code, tests) {
+  const go = process.env.CCBENCH_GO || 'go';
+  const dir = tmpDir();
+  fs.writeFileSync(path.join(dir, 'go.mod'), 'module gate\n\ngo 1.21\n');
+  fs.writeFileSync(path.join(dir, 'sol_test.go'), `${code}\n${tests}\n`);
+  try {
+    execFileSync(go, ['test', './...'], { cwd: dir, stdio: 'ignore' });
+    return 'yes';
+  } catch (e) {
+    // Distinguish "go not installed" (skip) from "tests failed" (no).
+    if (e.code === 'ENOENT') return 'skipped';
+    return 'no';
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+// C#: the fixtures compare returned values with `List<T>.Equals`, which is
+// reference equality in .NET, so a correct collection-returning solution would
+// fail. Rewrite each `<A>.Equals(<B>)` into `VEq(<A>, <B>)` (a JSON value
+// compare injected below), walking balanced parens to split receiver A from
+// argument B. Scalars serialize to themselves, so this stays correct for the
+// non-collection tasks too.
+function valueEqualize(tests) {
+  let out = '', i = 0;
+  const NEEDLE = '.Equals(';
+  while (i < tests.length) {
+    const idx = tests.indexOf(NEEDLE, i);
+    if (idx === -1) { out += tests.slice(i); break; }
+    let j = idx - 1, depth = 0, start = idx;
+    while (j >= 0) {
+      const c = tests[j];
+      if (c === ')') depth++;
+      else if (c === '(') { if (depth === 0) break; depth--; }
+      else if (depth === 0 && !/[A-Za-z0-9_.\[\]<>]/.test(c)) break;
+      j--; start = j + 1;
+    }
+    const A = tests.slice(start, idx);
+    let k = idx + NEEDLE.length, d = 1;
+    const bStart = k;
+    while (k < tests.length && d > 0) {
+      if (tests[k] === '(') d++;
+      else if (tests[k] === ')') { d--; if (d === 0) break; }
+      k++;
+    }
+    const B = tests.slice(bStart, k);
+    out += `${tests.slice(i, start)}VEq(${A}, ${B})`;
+    i = k + 1;
+  }
+  return out;
+}
+
+const CSPROJ = '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
+  + '<OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>'
+  + '<Nullable>disable</Nullable><ImplicitUsings>disable</ImplicitUsings>'
+  + '<DefineConstants>DEBUG</DefineConstants></PropertyGroup></Project>';
+
+const VEQ = 'static bool VEq(object a, object b){ return '
+  + 'System.Text.Json.JsonSerializer.Serialize(a)=='
+  + 'System.Text.Json.JsonSerializer.Serialize(b); }';
+
+function runCs(code, tests) {
+  const dotnet = process.env.CCBENCH_DOTNET || 'dotnet';
+  const transformed = valueEqualize(tests);
+  const mainBlock = transformed.slice(transformed.indexOf('}') + 1, transformed.lastIndexOf('}'));
+  const program = `${code.slice(0, code.lastIndexOf('}'))}\n${mainBlock}\n${VEQ}\n}\n`;
+  const dir = tmpDir();
+  fs.writeFileSync(path.join(dir, 'proj.csproj'), CSPROJ);
+  fs.writeFileSync(path.join(dir, 'Program.cs'), program);
+  try {
+    execFileSync(dotnet, ['run', '-c', 'Debug'], { cwd: dir, stdio: 'ignore' });
+    return 'yes';
+  } catch (e) {
+    if (e.code === 'ENOENT') return 'skipped';
+    return 'no';
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 function runJava(code, tests) {
   const dir = tmpDir();
   const src = path.join(dir, 'Problem.java');
@@ -80,6 +164,12 @@ const GATES = {
   },
   java(code, tests) {
     return runJava(code, tests);
+  },
+  go(code, tests) {
+    return runGo(code, tests);
+  },
+  csharp(code, tests) {
+    return runCs(code, tests);
   },
 };
 
