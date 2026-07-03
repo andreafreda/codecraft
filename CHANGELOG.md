@@ -7,6 +7,13 @@ All notable changes to codecraft are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- `comparison/scoring/`: a deterministic readability scorer (`score.mjs`) driven
+  by a transparent `rubric.json`. It turns a solution file into a 0.00 to 10.00
+  composite from five language-agnostic static metrics (average line length, max
+  nesting, cyclomatic density, magic-number density, single-character-name
+  ratio) and reports the raw metrics alongside the score. Dependency-free v0
+  heuristics (a dense one-liner scores about 2.4, a clean version about 8.7);
+  a tree-sitter version can replace them later.
 - `reference/angular.md`: an Angular extension reference, modeled on
   `reference/react.md`. It applies the Core principles to Angular-specific shapes
   (signal inputs, `@if`/`@else` control flow, `computed()` over `effect()`,

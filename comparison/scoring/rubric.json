@@ -1,0 +1,12 @@
+{
+  "version": "v0-heuristic",
+  "note": "Deterministic, dependency-free readability rubric. Metrics are computed with light comment/string stripping and language-agnostic heuristics, not a full parser, so treat the numbers as an approximation. A tree-sitter version (v1) will replace the heuristics with AST-based metrics and add per-function length. Every metric here is 'lower is better': the sub-score is 10 at or below 'good', 0 at or above 'bad', and linear between.",
+  "weights_note": "Equal weights in v0. They live here so they can be tuned later against human-scored corpora (Scalabrino, CoReEval) rather than by taste.",
+  "metrics": {
+    "avg_line_length":         { "good": 60,   "bad": 120,  "weight": 1 },
+    "max_nesting":             { "good": 2,    "bad": 6,    "weight": 1 },
+    "cyclomatic_density":      { "good": 1,    "bad": 5,    "weight": 1 },
+    "magic_number_density":    { "good": 0,    "bad": 3,    "weight": 1 },
+    "single_char_ident_ratio": { "good": 0.02, "bad": 0.25, "weight": 1 }
+  }
+}
