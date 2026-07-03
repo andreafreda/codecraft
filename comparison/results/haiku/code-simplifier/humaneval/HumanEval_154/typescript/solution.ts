@@ -1,7 +1,7 @@
 function cycpattern_check(a: string, b: string): boolean {
+  const doubled = b + b;
   for (let i = 0; i < b.length; i++) {
-    const rotation = b.slice(i) + b.slice(0, i);
-    if (a.includes(rotation)) {
+    if (a.includes(doubled.substring(i, i + b.length))) {
       return true;
     }
   }
