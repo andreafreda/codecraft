@@ -5,7 +5,14 @@
   "tokens_in": 30405,
   "tokens_out": 4145,
   "pass": "yes",
-  "composite": 8.83,
+  "composite": 8.84,
+  "sub": {
+    "avg_line_length": 10,
+    "max_nesting": 10,
+    "cyclomatic_density": 4.18,
+    "magic_number_density": 10,
+    "single_char_ident_ratio": 10
+  },
   "raw": {
     "avg_line_length": 36,
     "max_nesting": 2,

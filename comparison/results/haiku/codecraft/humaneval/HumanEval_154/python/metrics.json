@@ -6,6 +6,13 @@
   "tokens_out": 2177,
   "pass": "yes",
   "composite": 6.34,
+  "sub": {
+    "avg_line_length": 10,
+    "max_nesting": 7.5,
+    "cyclomatic_density": 4.18,
+    "magic_number_density": 10,
+    "single_char_ident_ratio": 0
+  },
   "raw": {
     "avg_line_length": 39.5,
     "max_nesting": 3,

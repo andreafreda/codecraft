@@ -96,16 +96,14 @@ function subScore(value, good, bad) {
   return clamp((10 * (bad - value)) / (bad - good));
 }
 
+// One sub-score per category, then the plain unweighted mean. No weights: we do
+// not claim any category matters more than another until human data says so. The
+// sub-scores are returned so a weighted variant can be fitted later.
 const sub = {};
-let weightedSum = 0;
-let weightTotal = 0;
 for (const [name, cfg] of Object.entries(rubric.metrics)) {
-  const s = subScore(raw[name], cfg.good, cfg.bad);
-  sub[name] = round(s);
-  const weight = cfg.weight ?? 1;
-  weightedSum += s * weight;
-  weightTotal += weight;
+  sub[name] = round(subScore(raw[name], cfg.good, cfg.bad));
 }
-const composite = round(weightedSum / weightTotal);
+const subValues = Object.values(sub);
+const composite = round(subValues.reduce((a, b) => a + b, 0) / subValues.length);
 
 console.log(JSON.stringify({ file, raw, sub, composite }, null, 2));

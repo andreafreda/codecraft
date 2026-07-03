@@ -143,7 +143,7 @@ const main = async () => {
 
   const metrics = {
     cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut,
-    pass, composite: score.composite, raw: score.raw,
+    pass, composite: score.composite, sub: score.sub, raw: score.raw,
   };
   fs.writeFileSync(path.join(outDir, 'metrics.json'), JSON.stringify(metrics, null, 2));
   updatePlan(cell, label, pass, score.composite, tokensIn + tokensOut);

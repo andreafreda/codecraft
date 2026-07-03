@@ -5,9 +5,16 @@
   "tokens_in": 30168,
   "tokens_out": 1244,
   "pass": "yes",
-  "composite": 8.32,
+  "composite": 8.33,
+  "sub": {
+    "avg_line_length": 10,
+    "max_nesting": 5,
+    "cyclomatic_density": 6.63,
+    "magic_number_density": 10,
+    "single_char_ident_ratio": 10
+  },
   "raw": {
-    "avg_line_length": 37.54,
+    "avg_line_length": 38.54,
     "max_nesting": 4,
     "cyclomatic_density": 2.35,
     "magic_number_density": 0,
