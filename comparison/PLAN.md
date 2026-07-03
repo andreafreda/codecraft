@@ -223,10 +223,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [ ] `humaneval/HumanEval_33/javascript/codecraft` (JavaScript)
 - [ ] `humaneval/HumanEval_33/javascript/ponytail` (JavaScript)
 - [ ] `humaneval/HumanEval_33/javascript/code-simplifier` (JavaScript)
-- [ ] `humaneval/HumanEval_33/python/baseline` (Python)
-- [ ] `humaneval/HumanEval_33/python/codecraft` (Python)
-- [ ] `humaneval/HumanEval_33/python/ponytail` (Python)
-- [ ] `humaneval/HumanEval_33/python/code-simplifier` (Python)
+- [x] `humaneval/HumanEval_33/python/baseline` (Python) — [haiku] pass: yes, composite: 4.97, tokens: 31743
+- [x] `humaneval/HumanEval_33/python/codecraft` (Python) — [haiku] pass: yes, composite: 4.97, tokens: 35009
+- [x] `humaneval/HumanEval_33/python/ponytail` (Python) — [haiku] pass: yes, composite: 4.3, tokens: 33460
+- [x] `humaneval/HumanEval_33/python/code-simplifier` (Python) — [haiku] pass: yes, composite: 4.84, tokens: 66203
 - [ ] `humaneval/HumanEval_33/typescript/baseline` (TypeScript)
 - [ ] `humaneval/HumanEval_33/typescript/codecraft` (TypeScript)
 - [ ] `humaneval/HumanEval_33/typescript/ponytail` (TypeScript)
@@ -250,9 +250,9 @@ Only the languages a cell touches need their runtime present for that cell.
 - [ ] `humaneval/HumanEval_36/javascript/codecraft` (JavaScript)
 - [ ] `humaneval/HumanEval_36/javascript/ponytail` (JavaScript)
 - [ ] `humaneval/HumanEval_36/javascript/code-simplifier` (JavaScript)
-- [ ] `humaneval/HumanEval_36/python/baseline` (Python)
-- [ ] `humaneval/HumanEval_36/python/codecraft` (Python)
-- [ ] `humaneval/HumanEval_36/python/ponytail` (Python)
+- [x] `humaneval/HumanEval_36/python/baseline` (Python) — [haiku] pass: yes, composite: 4.34, tokens: 31294
+- [x] `humaneval/HumanEval_36/python/codecraft` (Python) — [haiku] pass: yes, composite: 4.34, tokens: 34630
+- [x] `humaneval/HumanEval_36/python/ponytail` (Python) — [haiku] pass: yes, composite: 4.34, tokens: 32800
 - [ ] `humaneval/HumanEval_36/python/code-simplifier` (Python)
 - [ ] `humaneval/HumanEval_36/typescript/baseline` (TypeScript)
 - [ ] `humaneval/HumanEval_36/typescript/codecraft` (TypeScript)

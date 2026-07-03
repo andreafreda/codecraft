@@ -1,0 +1,16 @@
+{
+  "cell": "humaneval/HumanEval_33/python/code-simplifier",
+  "arm": "code-simplifier",
+  "model": "claude-haiku-4-5-20251001",
+  "tokens_in": 61997,
+  "tokens_out": 4206,
+  "pass": "yes",
+  "composite": 4.84,
+  "raw": {
+    "avg_line_length": 42,
+    "max_nesting": 2,
+    "cyclomatic_density": 3.33,
+    "magic_number_density": 3.33,
+    "single_char_ident_ratio": 0.364
+  }
+}
