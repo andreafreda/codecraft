@@ -139,8 +139,8 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_1/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 65073
 - [x] `humaneval/HumanEval_1/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31081
 - [x] `humaneval/HumanEval_1/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34455
-- [ ] `humaneval/HumanEval_1/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_1/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_1/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 32929
+- [x] `humaneval/HumanEval_1/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 67141
 
 #### HumanEval_126
 
@@ -164,10 +164,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_126/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35409
 - [x] `humaneval/HumanEval_126/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33915
 - [x] `humaneval/HumanEval_126/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 67017
-- [ ] `humaneval/HumanEval_126/typescript/baseline` (TypeScript)
-- [ ] `humaneval/HumanEval_126/typescript/codecraft` (TypeScript)
-- [ ] `humaneval/HumanEval_126/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_126/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_126/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31794
+- [x] `humaneval/HumanEval_126/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35307
+- [x] `humaneval/HumanEval_126/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33580
+- [x] `humaneval/HumanEval_126/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 69796
 
 #### HumanEval_129
 
@@ -191,10 +191,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_129/python/codecraft` (Python) — [haiku] pass: yes, tokens: 40414
 - [x] `humaneval/HumanEval_129/python/ponytail` (Python) — [haiku] pass: yes, tokens: 38019
 - [x] `humaneval/HumanEval_129/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 68606
-- [ ] `humaneval/HumanEval_129/typescript/baseline` (TypeScript)
-- [ ] `humaneval/HumanEval_129/typescript/codecraft` (TypeScript)
-- [ ] `humaneval/HumanEval_129/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_129/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_129/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 35690
+- [x] `humaneval/HumanEval_129/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 41483
+- [x] `humaneval/HumanEval_129/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 40486
+- [x] `humaneval/HumanEval_129/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 70967
 
 #### HumanEval_154
 
@@ -218,10 +218,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_154/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35822
 - [x] `humaneval/HumanEval_154/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33210
 - [x] `humaneval/HumanEval_154/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 64243
-- [ ] `humaneval/HumanEval_154/typescript/baseline` (TypeScript)
-- [ ] `humaneval/HumanEval_154/typescript/codecraft` (TypeScript)
-- [ ] `humaneval/HumanEval_154/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_154/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_154/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31929
+- [x] `humaneval/HumanEval_154/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35880
+- [x] `humaneval/HumanEval_154/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 34521
+- [x] `humaneval/HumanEval_154/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 66854
 
 #### HumanEval_33
 
@@ -245,10 +245,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_33/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35009
 - [x] `humaneval/HumanEval_33/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33460
 - [x] `humaneval/HumanEval_33/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 66203
-- [ ] `humaneval/HumanEval_33/typescript/baseline` (TypeScript)
-- [ ] `humaneval/HumanEval_33/typescript/codecraft` (TypeScript)
-- [ ] `humaneval/HumanEval_33/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_33/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_33/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31778
+- [x] `humaneval/HumanEval_33/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34789
+- [x] `humaneval/HumanEval_33/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33191
+- [x] `humaneval/HumanEval_33/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64410
 
 #### HumanEval_36
 
@@ -272,7 +272,7 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_36/python/codecraft` (Python) — [haiku] pass: yes, tokens: 34630
 - [x] `humaneval/HumanEval_36/python/ponytail` (Python) — [haiku] pass: yes, tokens: 32800
 - [x] `humaneval/HumanEval_36/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 63793
-- [ ] `humaneval/HumanEval_36/typescript/baseline` (TypeScript)
-- [ ] `humaneval/HumanEval_36/typescript/codecraft` (TypeScript)
-- [ ] `humaneval/HumanEval_36/typescript/ponytail` (TypeScript)
-- [ ] `humaneval/HumanEval_36/typescript/code-simplifier` (TypeScript)
+- [x] `humaneval/HumanEval_36/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31238
+- [x] `humaneval/HumanEval_36/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34762
+- [x] `humaneval/HumanEval_36/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33328
+- [x] `humaneval/HumanEval_36/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64594
