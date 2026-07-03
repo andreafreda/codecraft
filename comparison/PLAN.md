@@ -196,10 +196,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [ ] `humaneval/HumanEval_154/javascript/codecraft` (JavaScript)
 - [ ] `humaneval/HumanEval_154/javascript/ponytail` (JavaScript)
 - [ ] `humaneval/HumanEval_154/javascript/code-simplifier` (JavaScript)
-- [ ] `humaneval/HumanEval_154/python/baseline` (Python)
-- [ ] `humaneval/HumanEval_154/python/codecraft` (Python)
-- [ ] `humaneval/HumanEval_154/python/ponytail` (Python)
-- [ ] `humaneval/HumanEval_154/python/code-simplifier` (Python)
+- [x] `humaneval/HumanEval_154/python/baseline` (Python) — [haiku] pass: yes, composite: 6.34, tokens: 31840
+- [x] `humaneval/HumanEval_154/python/codecraft` (Python) — [haiku] pass: yes, composite: 6.34, tokens: 35822
+- [x] `humaneval/HumanEval_154/python/ponytail` (Python) — [haiku] pass: yes, composite: 6, tokens: 33210
+- [x] `humaneval/HumanEval_154/python/code-simplifier` (Python) — [haiku] pass: yes, composite: 6.43, tokens: 64243
 - [ ] `humaneval/HumanEval_154/typescript/baseline` (TypeScript)
 - [ ] `humaneval/HumanEval_154/typescript/codecraft` (TypeScript)
 - [ ] `humaneval/HumanEval_154/typescript/ponytail` (TypeScript)
