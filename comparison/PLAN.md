@@ -117,10 +117,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_1
 
-- [x] `humaneval/HumanEval_1/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31402
-- [x] `humaneval/HumanEval_1/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 34836
-- [x] `humaneval/HumanEval_1/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33606
-- [x] `humaneval/HumanEval_1/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 65702
+- [x] `humaneval/HumanEval_1/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31602
+- [x] `humaneval/HumanEval_1/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35788
+- [x] `humaneval/HumanEval_1/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33064
+- [x] `humaneval/HumanEval_1/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 65545
 - [x] `humaneval/HumanEval_1/go/baseline` (Go) — [haiku] pass: no, tokens: 31971
 - [x] `humaneval/HumanEval_1/go/codecraft` (Go) — [haiku] pass: no, tokens: 35090
 - [x] `humaneval/HumanEval_1/go/ponytail` (Go) — [haiku] pass: no, tokens: 38233
@@ -172,9 +172,9 @@ Only the languages a cell touches need their runtime present for that cell.
 #### HumanEval_129
 
 - [x] `humaneval/HumanEval_129/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 40321
-- [ ] `humaneval/HumanEval_129/csharp/codecraft` (C#)
-- [ ] `humaneval/HumanEval_129/csharp/ponytail` (C#)
-- [ ] `humaneval/HumanEval_129/csharp/code-simplifier` (C#)
+- [x] `humaneval/HumanEval_129/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 43317
+- [x] `humaneval/HumanEval_129/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 41126
+- [x] `humaneval/HumanEval_129/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 74262
 - [x] `humaneval/HumanEval_129/go/baseline` (Go) — [haiku] pass: yes, tokens: 37597
 - [x] `humaneval/HumanEval_129/go/codecraft` (Go) — [haiku] pass: yes, tokens: 42233
 - [x] `humaneval/HumanEval_129/go/ponytail` (Go) — [haiku] pass: yes, tokens: 39398
@@ -198,10 +198,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_154
 
-- [ ] `humaneval/HumanEval_154/csharp/baseline` (C#)
-- [ ] `humaneval/HumanEval_154/csharp/codecraft` (C#)
-- [ ] `humaneval/HumanEval_154/csharp/ponytail` (C#)
-- [ ] `humaneval/HumanEval_154/csharp/code-simplifier` (C#)
+- [x] `humaneval/HumanEval_154/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32531
+- [x] `humaneval/HumanEval_154/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37027
+- [x] `humaneval/HumanEval_154/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34628
+- [x] `humaneval/HumanEval_154/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 67262
 - [x] `humaneval/HumanEval_154/go/baseline` (Go) — [haiku] pass: yes, tokens: 33030
 - [x] `humaneval/HumanEval_154/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36815
 - [x] `humaneval/HumanEval_154/go/ponytail` (Go) — [haiku] pass: no, tokens: 41894
@@ -225,10 +225,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_33
 
-- [x] `humaneval/HumanEval_33/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31728
-- [x] `humaneval/HumanEval_33/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 36045
-- [x] `humaneval/HumanEval_33/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33420
-- [x] `humaneval/HumanEval_33/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 68170
+- [x] `humaneval/HumanEval_33/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32210
+- [x] `humaneval/HumanEval_33/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35621
+- [x] `humaneval/HumanEval_33/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34297
+- [x] `humaneval/HumanEval_33/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 69192
 - [x] `humaneval/HumanEval_33/go/baseline` (Go) — [haiku] pass: yes, tokens: 32429
 - [x] `humaneval/HumanEval_33/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36598
 - [x] `humaneval/HumanEval_33/go/ponytail` (Go) — [haiku] pass: yes, tokens: 34388
@@ -252,8 +252,8 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_36
 
-- [x] `humaneval/HumanEval_36/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31674
-- [x] `humaneval/HumanEval_36/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 34970
+- [x] `humaneval/HumanEval_36/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31895
+- [x] `humaneval/HumanEval_36/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37121
 - [x] `humaneval/HumanEval_36/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33124
 - [x] `humaneval/HumanEval_36/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 65079
 - [x] `humaneval/HumanEval_36/go/baseline` (Go) — [haiku] pass: yes, tokens: 32089
