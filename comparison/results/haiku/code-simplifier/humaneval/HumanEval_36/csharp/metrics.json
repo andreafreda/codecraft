@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_36/csharp/code-simplifier",
+  "arm": "code-simplifier",
+  "model": "claude-haiku-4-5-20251001",
+  "tokens_in": 62024,
+  "tokens_out": 2298,
+  "pass": "yes"
+}

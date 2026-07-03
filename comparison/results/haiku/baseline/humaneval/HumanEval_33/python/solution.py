@@ -7,15 +7,20 @@ def sort_third(l: list):
     >>> sort_third([5, 6, 3, 4, 8, 9, 2])
     [2, 6, 3, 4, 8, 9, 5]
     """
-    third_elements = sorted([l[i] for i in range(len(l)) if i % 3 == 0])
+    # Extract values at indices divisible by 3
+    third_values = [l[i] for i in range(len(l)) if i % 3 == 0]
     
-    result = []
+    # Sort them
+    third_values.sort()
+    
+    # Create result
+    result = l.copy()
+    
+    # Place sorted values back at indices divisible by 3
     third_index = 0
-    for i in range(len(l)):
+    for i in range(len(result)):
         if i % 3 == 0:
-            result.append(third_elements[third_index])
+            result[i] = third_values[third_index]
             third_index += 1
-        else:
-            result.append(l[i])
     
     return result

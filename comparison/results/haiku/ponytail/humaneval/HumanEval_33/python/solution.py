@@ -7,11 +7,8 @@ def sort_third(l: list):
     >>> sort_third([5, 6, 3, 4, 8, 9, 2])
     [2, 6, 3, 4, 8, 9, 5]
     """
-    third_values = sorted([l[i] for i in range(len(l)) if i % 3 == 0])
-    result = l[:]
-    sorted_idx = 0
-    for i in range(len(result)):
-        if i % 3 == 0:
-            result[i] = third_values[sorted_idx]
-            sorted_idx += 1
+    third_elements = sorted([l[i] for i in range(0, len(l), 3)])
+    result = l.copy()
+    for i, val in enumerate(third_elements):
+        result[i * 3] = val
     return result

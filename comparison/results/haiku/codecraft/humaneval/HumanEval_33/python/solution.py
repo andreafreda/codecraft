@@ -7,15 +7,14 @@ def sort_third(l: list):
     >>> sort_third([5, 6, 3, 4, 8, 9, 2])
     [2, 6, 3, 4, 8, 9, 5]
     """
-    third_values = sorted([l[i] for i in range(len(l)) if i % 3 == 0])
+    third_elements = [l[i] for i in range(len(l)) if i % 3 == 0]
+    third_elements.sort()
     
-    result = []
+    result = l.copy()
     third_idx = 0
-    for i in range(len(l)):
+    for i in range(len(result)):
         if i % 3 == 0:
-            result.append(third_values[third_idx])
+            result[i] = third_elements[third_idx]
             third_idx += 1
-        else:
-            result.append(l[i])
     
     return result
