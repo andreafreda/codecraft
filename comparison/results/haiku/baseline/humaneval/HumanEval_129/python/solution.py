@@ -30,36 +30,36 @@ def minPath(grid, k):
     """
     n = len(grid)
     
-    # Find the cell with value 1 (lexicographically smallest path must start here)
-    start = None
+    # Find position of cell with value 1
+    pos = {}
     for i in range(n):
         for j in range(n):
-            if grid[i][j] == 1:
-                start = (i, j)
-                break
-        if start:
-            break
+            pos[grid[i][j]] = (i, j)
     
+    start_pos = pos[1]
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     memo = {}
     
-    def dfs(i, j, remaining):
-        if (i, j, remaining) in memo:
-            return memo[(i, j, remaining)]
-        
-        current = grid[i][j]
-        
+    def dfs(x, y, remaining):
         if remaining == 1:
-            result = [current]
-        else:
-            candidates = []
-            for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
-                ni, nj = i + di, j + dj
-                if 0 <= ni < n and 0 <= nj < n:
-                    path = dfs(ni, nj, remaining - 1)
-                    candidates.append([current] + path)
-            result = min(candidates)
+            return [grid[x][y]]
         
-        memo[(i, j, remaining)] = result
-        return result
+        if (x, y, remaining) in memo:
+            return memo[(x, y, remaining)]
+        
+        best_path = None
+        current_value = grid[x][y]
+        
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < n and 0 <= ny < n:
+                path = dfs(nx, ny, remaining - 1)
+                full_path = [current_value] + path
+                
+                if best_path is None or full_path < best_path:
+                    best_path = full_path
+        
+        memo[(x, y, remaining)] = best_path
+        return best_path
     
-    return dfs(start[0], start[1], k)
+    return dfs(start_pos[0], start_pos[1], k)

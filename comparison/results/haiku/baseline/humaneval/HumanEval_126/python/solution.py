@@ -16,8 +16,12 @@ def is_sorted(lst):
     '''
     from collections import Counter
     
-    if lst != sorted(lst):
+    # Check if sorted in ascending order
+    if not all(lst[i] <= lst[i+1] for i in range(len(lst) - 1)):
         return False
     
-    counts = Counter(lst)
-    return all(count <= 2 for count in counts.values())
+    # Check no number appears more than twice
+    if any(count > 2 for count in Counter(lst).values()):
+        return False
+    
+    return True

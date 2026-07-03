@@ -1,49 +1,38 @@
 def minPath(grid, k):
     n = len(grid)
     
-    # Find the cell with value 1 (starting point for lexicographically smallest path)
-    start_i, start_j = None, None
+    # Find position of value 1 (optimal starting point)
+    start_pos = None
     for i in range(n):
         for j in range(n):
             if grid[i][j] == 1:
-                start_i, start_j = i, j
+                start_pos = (i, j)
                 break
-        if start_i is not None:
+        if start_pos:
             break
     
-    memo = {}
+    best_path = None
     
-    def dfs(i, j, remaining):
-        if remaining == 1:
-            return [grid[i][j]]
+    def dfs(i, j, path):
+        nonlocal best_path
         
-        if (i, j, remaining) in memo:
-            return memo[(i, j, remaining)]
+        if len(path) == k:
+            if best_path is None or path < best_path:
+                best_path = path[:]
+            return
         
-        current = grid[i][j]
+        # Pruning: if current path is worse than best path, stop
+        if best_path is not None and path > best_path[:len(path)]:
+            return
         
-        # Get neighbors sorted by their values
-        neighbors = []
+        # Try all 4 neighbors
         for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
             ni, nj = i + di, j + dj
             if 0 <= ni < n and 0 <= nj < n:
-                neighbors.append((grid[ni][nj], ni, nj))
-        
-        neighbors.sort()
-        
-        result = None
-        for val, ni, nj in neighbors:
-            # Early termination: if val > result[1], all remaining neighbors are larger
-            if result and val > result[1]:
-                break
-            
-            path = dfs(ni, nj, remaining - 1)
-            candidate = [current] + path
-            
-            if not result or candidate < result:
-                result = candidate
-        
-        memo[(i, j, remaining)] = result
-        return result
+                path.append(grid[ni][nj])
+                dfs(ni, nj, path)
+                path.pop()
     
-    return dfs(start_i, start_j, k)
+    dfs(start_pos[0], start_pos[1], [1])
+    
+    return best_path

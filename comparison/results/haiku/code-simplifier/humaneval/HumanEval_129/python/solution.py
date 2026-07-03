@@ -29,33 +29,28 @@ def minPath(grid, k):
         Output: [1]
     """
     n = len(grid)
+    DIRECTIONS = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     
-    start_row, start_col = None, None
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == 1:
-                start_row, start_col = i, j
-                break
+    start_row, start_col = next((i, j) for i in range(n) for j in range(n) if grid[i][j] == 1)
     
     memo = {}
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     
-    def dfs(row, col, remaining_steps):
-        if remaining_steps == 0:
-            return [grid[row][col]]
+    def dfs(row, col, remaining):
+        if remaining == 0:
+            return []
         
-        if (row, col, remaining_steps) in memo:
-            return memo[(row, col, remaining_steps)]
+        if (row, col, remaining) in memo:
+            return memo[(row, col, remaining)]
         
-        neighbor_paths = []
-        for dr, dc in directions:
-            new_row, new_col = row + dr, col + dc
-            if 0 <= new_row < n and 0 <= new_col < n:
-                neighbor_paths.append(dfs(new_row, new_col, remaining_steps - 1))
+        paths = []
+        for dr, dc in DIRECTIONS:
+            next_row, next_col = row + dr, col + dc
+            if 0 <= next_row < n and 0 <= next_col < n:
+                next_path = dfs(next_row, next_col, remaining - 1)
+                paths.append([grid[next_row][next_col]] + next_path)
         
-        neighbor_paths.sort()
-        result = [grid[row][col]] + neighbor_paths[0]
-        memo[(row, col, remaining_steps)] = result
+        result = min(paths)
+        memo[(row, col, remaining)] = result
         return result
     
-    return dfs(start_row, start_col, k - 1)
+    return [1] + dfs(start_row, start_col, k - 1)

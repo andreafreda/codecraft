@@ -2,7 +2,7 @@
   "cell": "humaneval/HumanEval_126/python/code-simplifier",
   "arm": "code-simplifier",
   "model": "claude-haiku-4-5-20251001",
-  "tokens_in": 62270,
-  "tokens_out": 4747,
+  "tokens_in": 62585,
+  "tokens_out": 3515,
   "pass": "yes"
 }

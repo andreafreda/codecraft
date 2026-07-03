@@ -14,13 +14,11 @@ def is_sorted(lst):
     is_sorted([1, 2, 2, 3, 3, 4]) ➞ True
     is_sorted([1, 2, 2, 2, 3, 4]) ➞ False
     '''
-    # Check if sorted in ascending order
-    if lst != sorted(lst):
-        return False
+    from collections import Counter
     
     # Check if any number appears more than twice
-    for num in set(lst):
-        if lst.count(num) > 2:
-            return False
+    if any(count > 2 for count in Counter(lst).values()):
+        return False
     
-    return True
+    # Check if list is sorted in ascending order
+    return all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1))

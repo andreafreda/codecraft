@@ -2,7 +2,7 @@
   "cell": "humaneval/HumanEval_129/python/ponytail",
   "arm": "ponytail",
   "model": "claude-haiku-4-5-20251001",
-  "tokens_in": 32141,
-  "tokens_out": 5878,
+  "tokens_in": 32499,
+  "tokens_out": 4396,
   "pass": "yes"
 }

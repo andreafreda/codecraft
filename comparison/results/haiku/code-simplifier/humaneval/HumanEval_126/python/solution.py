@@ -1,3 +1,5 @@
+from collections import Counter
+
 def is_sorted(lst):
     '''
     Given a list of numbers, return whether or not they are sorted
@@ -14,14 +16,7 @@ def is_sorted(lst):
     is_sorted([1, 2, 2, 3, 3, 4]) ➞ True
     is_sorted([1, 2, 2, 2, 3, 4]) ➞ False
     '''
-    counts = {}
+    if not all(a <= b for a, b in zip(lst, lst[1:])):
+        return False
     
-    for i, num in enumerate(lst):
-        if i > 0 and lst[i - 1] > num:
-            return False
-        
-        counts[num] = counts.get(num, 0) + 1
-        if counts[num] > 2:
-            return False
-    
-    return True
+    return all(count <= 2 for count in Counter(lst).values())

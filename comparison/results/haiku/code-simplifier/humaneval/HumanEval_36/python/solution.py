@@ -7,8 +7,4 @@ def fizz_buzz(n: int):
     >>> fizz_buzz(79)
     3
     """
-    return sum(
-        str(i).count('7')
-        for i in range(1, n)
-        if i % 11 == 0 or i % 13 == 0
-    )
+    return sum(str(i).count('7') for i in range(1, n) if i % 11 == 0 or i % 13 == 0)

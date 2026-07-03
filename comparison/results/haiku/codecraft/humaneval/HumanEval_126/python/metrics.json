@@ -2,7 +2,7 @@
   "cell": "humaneval/HumanEval_126/python/codecraft",
   "arm": "codecraft",
   "model": "claude-haiku-4-5-20251001",
-  "tokens_in": 33782,
-  "tokens_out": 1627,
+  "tokens_in": 33876,
+  "tokens_out": 1546,
   "pass": "yes"
 }
