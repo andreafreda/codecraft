@@ -126,7 +126,7 @@ const main = async () => {
   // Correctness gate: python/js/ts are wired (see gate.mjs); other targets need
   // their runtime and return 'skipped' until mounted.
   const testsSrc = fs.readFileSync(testsPath, 'utf8');
-  const pass = runGate(target, code, testsSrc);
+  const pass = runGate(target, code, testsSrc, prompt);
 
   const metrics = {
     cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut, pass,

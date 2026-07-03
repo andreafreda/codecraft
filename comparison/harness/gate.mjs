@@ -53,7 +53,8 @@ function injectMain(solution, tests) {
 // `TestX` that calls it and `t.Errorf`s on mismatch. Concatenate into one
 // `_test.go` in a throwaway module and run `go test`. The `go` binary is taken
 // from PATH (override with CCBENCH_GO), so this returns 'skipped' if go is absent.
-function runGo(code, tests) {
+function runGo(code, tests, prompt) {
+  code = ensureGoScaffold(code, prompt);
   const go = process.env.CCBENCH_GO || 'go';
   const dir = tmpDir();
   fs.writeFileSync(path.join(dir, 'go.mod'), 'module gate\n\ngo 1.21\n');
@@ -114,7 +115,28 @@ const VEQ = 'static bool VEq(object a, object b){ return '
   + 'System.Text.Json.JsonSerializer.Serialize(a)=='
   + 'System.Text.Json.JsonSerializer.Serialize(b); }';
 
-function runCs(code, tests) {
+// The name-constrained prompt sometimes makes the model return only the
+// function/method, dropping the scaffolding the prompt showed (Go's `package`
+// and imports, Java/C#'s class + imports). The prompt always ends with the
+// signature line, so its preamble is the prompt minus that last line. If the
+// solution is missing the scaffold keyword, splice the preamble back on so the
+// program compiles — this is reconstruction, not correction of the logic.
+function promptPreamble(prompt) {
+  const lines = prompt.replace(/\s+$/, '').split('\n');
+  lines.pop();
+  return lines.join('\n');
+}
+
+function ensureGoScaffold(code, prompt) {
+  return /^\s*package\s/m.test(code) ? code : `${promptPreamble(prompt)}\n${code}`;
+}
+
+function ensureClassScaffold(code, prompt) {
+  return /\bclass\s/.test(code) ? code : `${promptPreamble(prompt)}\n${code}\n}\n`;
+}
+
+function runCs(code, tests, prompt) {
+  code = ensureClassScaffold(code, prompt);
   const dotnet = process.env.CCBENCH_DOTNET || 'dotnet';
   const transformed = valueEqualize(tests);
   const mainBlock = transformed.slice(transformed.indexOf('}') + 1, transformed.lastIndexOf('}'));
@@ -133,7 +155,8 @@ function runCs(code, tests) {
   }
 }
 
-function runJava(code, tests) {
+function runJava(code, tests, prompt) {
+  code = ensureClassScaffold(code, prompt);
   const dir = tmpDir();
   const src = path.join(dir, 'Problem.java');
   fs.writeFileSync(src, injectMain(code, tests));
@@ -162,18 +185,18 @@ const GATES = {
   typescript(code, tests) {
     return runProgram(`${code}\n${tests}\n`, 'ts', 'node', ['--experimental-strip-types']);
   },
-  java(code, tests) {
-    return runJava(code, tests);
+  java(code, tests, prompt) {
+    return runJava(code, tests, prompt);
   },
-  go(code, tests) {
-    return runGo(code, tests);
+  go(code, tests, prompt) {
+    return runGo(code, tests, prompt);
   },
-  csharp(code, tests) {
-    return runCs(code, tests);
+  csharp(code, tests, prompt) {
+    return runCs(code, tests, prompt);
   },
 };
 
-export function runGate(target, code, tests) {
+export function runGate(target, code, tests, prompt) {
   const gate = GATES[target];
-  return gate ? gate(code, tests) : 'skipped';
+  return gate ? gate(code, tests, prompt) : 'skipped';
 }
