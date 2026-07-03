@@ -1,8 +1,0 @@
-{
-  "cell": "humaneval/HumanEval_33/csharp/codecraft",
-  "arm": "codecraft",
-  "model": "claude-haiku-4-5-20251001",
-  "tokens_in": 33893,
-  "tokens_out": 2152,
-  "pass": "yes"
-}
