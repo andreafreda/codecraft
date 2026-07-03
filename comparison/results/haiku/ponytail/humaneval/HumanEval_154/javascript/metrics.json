@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_154/javascript/ponytail",
+  "arm": "ponytail",
+  "model": "claude-haiku-4-5-20251001",
+  "tokens_in": 32540,
+  "tokens_out": 1379,
+  "pass": "yes"
+}

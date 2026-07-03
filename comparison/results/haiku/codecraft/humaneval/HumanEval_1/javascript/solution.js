@@ -1,23 +1,22 @@
 function separate_paren_groups(paren_string){
-  const cleaned = paren_string.replace(/\s/g, '');
-  const groups = [];
+  const cleaned = paren_string.replace(/ /g, '');
+  const result = [];
   let current_group = '';
-  let balance = 0;
+  let depth = 0;
   
   for (let char of cleaned) {
-    current_group += char;
-    
     if (char === '(') {
-      balance++;
+      depth++;
+      current_group += char;
     } else if (char === ')') {
-      balance--;
-    }
-    
-    if (balance === 0) {
-      groups.push(current_group);
-      current_group = '';
+      current_group += char;
+      depth--;
+      if (depth === 0) {
+        result.push(current_group);
+        current_group = '';
+      }
     }
   }
   
-  return groups;
+  return result;
 }

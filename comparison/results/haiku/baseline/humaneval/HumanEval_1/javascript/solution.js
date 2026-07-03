@@ -1,21 +1,20 @@
 function separate_paren_groups(paren_string){
-  const cleaned = paren_string.replace(/ /g, '');
+  const cleaned = paren_string.replace(/\s/g, '');
   const result = [];
-  let currentGroup = '';
-  let balance = 0;
+  let count = 0;
+  let current = '';
   
-  for (const char of cleaned) {
-    currentGroup += char;
-    
+  for (let char of cleaned) {
+    current += char;
     if (char === '(') {
-      balance++;
+      count++;
     } else if (char === ')') {
-      balance--;
+      count--;
     }
     
-    if (balance === 0 && currentGroup.length > 0) {
-      result.push(currentGroup);
-      currentGroup = '';
+    if (count === 0 && current.length > 0) {
+      result.push(current);
+      current = '';
     }
   }
   
