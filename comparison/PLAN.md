@@ -1,5 +1,56 @@
 # Benchmark run plan
 
+## Resume: state and how to continue
+
+**Done:** the pilot cell group `HumanEval_1/python` x 4 arms on Haiku (see the
+ticked cells below and `results/haiku/`). The full apparatus is built and proven
+end to end.
+
+**Remaining:** every unchecked cell below, times three models for the full run.
+
+### Run one cell
+
+```
+CLAUDE_CONFIG_DIR="C:/cc-bench-account" node comparison/harness/run-cell.mjs <suite>/<task>/<target>/<arm> [model]
+```
+
+- A separate Claude subscription (RELATECH account) is logged in at
+  `C:/cc-bench-account`, so generation does not spend the main account.
+- Model defaults to Haiku (`comparison/harness/arms.json`). For the three-model
+  run pass a model id: `claude-haiku-4-5-20251001`, `claude-sonnet-5`,
+  `claude-opus-4-8`.
+- The harness writes `results/<model>/<arm>/<suite>/<task>/<target>/`
+  (`solution.<ext>`, `metrics.json`) and ticks the matching cell below with a
+  `[model]` annotation. It is isolated: the config dir has no plugins, so the
+  ambient codecraft and caveman modes do not leak into a run.
+
+### Gates
+
+Only the Python correctness gate is implemented. js/ts/java/go/cs need their
+runtime mounted and a gate that assembles `prompt + completion + tests.<ext>`
+(MultiPL-E format: the tests file is a full program; run it and check the exit
+code). Until then, non-Python cells record score and tokens with `pass: skipped`.
+
+### Notes
+
+- Token counts include Claude Code's base system prompt (~20-30k input) plus
+  cache tokens; compare arms relatively, not absolutely.
+- ponytail tends to emit prose and `ponytail:` comments, which inflates its
+  output tokens.
+- Commit `results/` and this file after each batch.
+- Do NOT blindly regenerate this file: it now holds run results and ticks.
+
+### Batch example (one task, all arms, one language)
+
+```
+for arm in baseline codecraft ponytail code-simplifier; do
+  CLAUDE_CONFIG_DIR="C:/cc-bench-account" node comparison/harness/run-cell.mjs humaneval/HumanEval_1/python/$arm
+done
+```
+
+---
+
+
 One checkbox per **run cell**: a single `task x language x arm`. Execute cells
 one at a time, mount only what that cell needs, record the data, tick the box.
 This file is generated from `tasks/manifest.json` and the arm list; regenerate
