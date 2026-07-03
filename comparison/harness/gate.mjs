@@ -58,7 +58,7 @@ function runGo(code, tests, prompt) {
   const go = process.env.CCBENCH_GO || 'go';
   const dir = tmpDir();
   fs.writeFileSync(path.join(dir, 'go.mod'), 'module gate\n\ngo 1.21\n');
-  fs.writeFileSync(path.join(dir, 'sol_test.go'), `${code}\n${tests}\n`);
+  fs.writeFileSync(path.join(dir, 'sol_test.go'), ensureGoImports(`${code}\n${tests}\n`));
   try {
     execFileSync(go, ['test', './...'], { cwd: dir, stdio: 'ignore' });
     return 'yes';
@@ -129,6 +129,26 @@ function promptPreamble(prompt) {
 
 function ensureGoScaffold(code, prompt) {
   return /^\s*package\s/m.test(code) ? code : `${promptPreamble(prompt)}\n${code}`;
+}
+
+// The go tests always use `testing` and `fmt`, but the model may drop those
+// imports because its own function does not use them and go forbids unused
+// imports. Guarantee they are in the combined program's import block so the
+// tests compile — this fixes the harness's own unfairness, not the logic.
+function ensureGoImports(src) {
+  const need = ['"testing"', '"fmt"'];
+  const block = src.match(/import\s*\(([\s\S]*?)\)/);
+  if (block) {
+    let body = block[1];
+    for (const imp of need) if (!body.includes(imp)) body += `\n\t${imp}`;
+    return src.replace(block[0], `import (${body}\n)`);
+  }
+  const single = src.match(/import\s+("[^"]+")/);
+  if (single) {
+    const all = [single[1], ...need.filter((n) => n !== single[1])];
+    return src.replace(single[0], `import (\n\t${all.join('\n\t')}\n)`);
+  }
+  return src.replace(/^(package[^\n]*\n)/m, `$1import (\n\t${need.join('\n\t')}\n)\n`);
 }
 
 function ensureClassScaffold(code, prompt) {

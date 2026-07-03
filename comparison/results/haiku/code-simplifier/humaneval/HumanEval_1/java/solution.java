@@ -5,6 +5,7 @@ import java.security.*;
 import java.math.*;
 import java.io.*;
 import java.util.stream.*;
+
 class Problem {
     // Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
     // separate those group into separate strings and return the array list of those.
@@ -14,23 +15,22 @@ class Problem {
     // (new ArrayList<String>(Arrays.asList((String)"()", (String)"(())", (String)"(()())")))
     public static ArrayList<String> separateParenGroups(String paren_string) {
         ArrayList<String> result = new ArrayList<>();
+        String cleaned = paren_string.replace(" ", "");
         
-        String cleaned = paren_string.replace(' ', "");
-        
-        int balance = 0;
-        StringBuilder current = new StringBuilder();
+        int depth = 0;
+        StringBuilder group = new StringBuilder();
         
         for (char c : cleaned.toCharArray()) {
-            current.append(c);
-            
+            group.append(c);
             if (c == '(') {
-                balance++;
+                depth++;
             } else if (c == ')') {
-                balance--;
-                if (balance == 0) {
-                    result.add(current.toString());
-                    current = new StringBuilder();
-                }
+                depth--;
+            }
+            
+            if (depth == 0 && group.length() > 0) {
+                result.add(group.toString());
+                group = new StringBuilder();
             }
         }
         
