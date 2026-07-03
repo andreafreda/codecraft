@@ -4,20 +4,5 @@
   "model": "claude-haiku-4-5-20251001",
   "tokens_in": 32141,
   "tokens_out": 5878,
-  "pass": "yes",
-  "composite": 6.88,
-  "sub": {
-    "avg_line_length": 10,
-    "max_nesting": 10,
-    "cyclomatic_density": 4.4,
-    "magic_number_density": 10,
-    "single_char_ident_ratio": 0
-  },
-  "raw": {
-    "avg_line_length": 35.22,
-    "max_nesting": 1,
-    "cyclomatic_density": 3.24,
-    "magic_number_density": 0,
-    "single_char_ident_ratio": 0.262
-  }
+  "pass": "yes"
 }

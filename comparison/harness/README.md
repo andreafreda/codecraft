@@ -26,16 +26,16 @@ The model is pinned in `arms.json` so every arm runs on the same model.
 ## What a cell produces
 
 - `comparison/results/<arm>/<suite>/<task>/<target>/solution.<ext>` and
-  `metrics.json` (tokens in/out, correctness pass, readability composite, raw
-  metrics).
+  `metrics.json` (tokens in/out, correctness pass/fail). No quality score is
+  computed — judgement is left to external tools run over the saved solutions.
 - The matching checkbox in `comparison/PLAN.md` is ticked and annotated with the
   result.
 
 ## Runtimes
 
 The correctness gate is wired for Python. Other languages need their runtime
-mounted at run time (see `PLAN.md`); until then those cells record the score and
-tokens with `pass: skipped`.
+mounted at run time (see `PLAN.md`); until then those cells record tokens with
+`pass: skipped`.
 
 ## Status
 

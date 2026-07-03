@@ -87,15 +87,10 @@ function extractCode(text) {
   return (fence ? fence[1] : text).trim() + '\n';
 }
 
-function scoreSolution(file) {
-  const out = execFileSync('node', [path.join(REPO, 'comparison/scoring/score.mjs'), file], { encoding: 'utf8' });
-  return JSON.parse(out);
-}
-
-function updatePlan(cellId, label, pass, composite, tokens) {
+function updatePlan(cellId, label, pass, tokens) {
   const planPath = path.join(REPO, 'comparison/PLAN.md');
   const marker = '`' + cellId + '`';
-  const seg = ` — [${label}] pass: ${pass}, composite: ${composite}, tokens: ${tokens}`;
+  const seg = ` — [${label}] pass: ${pass}, tokens: ${tokens}`;
   const lines = fs.readFileSync(planPath, 'utf8').split('\n').map((line) => {
     if (!line.includes(marker)) return line;
     return line.replace('- [ ]', '- [x]').replace(new RegExp(` — \\[${label}\\][^—]*`), '') + seg;
@@ -127,8 +122,6 @@ const main = async () => {
   const solutionPath = path.join(outDir, `solution.${ext}`);
   fs.writeFileSync(solutionPath, code);
 
-  const score = scoreSolution(solutionPath);
-
   // Correctness gate: implemented for Python; other runtimes are mounted per run.
   let pass = 'skipped';
   if (target === 'python') {
@@ -142,11 +135,10 @@ const main = async () => {
   }
 
   const metrics = {
-    cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut,
-    pass, composite: score.composite, sub: score.sub, raw: score.raw,
+    cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut, pass,
   };
   fs.writeFileSync(path.join(outDir, 'metrics.json'), JSON.stringify(metrics, null, 2));
-  updatePlan(cell, label, pass, score.composite, tokensIn + tokensOut);
+  updatePlan(cell, label, pass, tokensIn + tokensOut);
   if (temp) fs.rmSync(configDir, { recursive: true, force: true });
 
   console.log(JSON.stringify(metrics, null, 2));

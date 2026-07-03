@@ -107,11 +107,17 @@ codecraft covers the "what", how to resolve conflicts, and per-language examples
 in depth, and shapes the code beforehand. Different categories: a cleanup agent
 versus a readability standard and lens.
 
-## The benchmark: from prompt to score
+## The benchmark: generate, save, let others judge
 
 The tables above are a static analysis of the two definitions, not measured
-results. This section defines the empirical benchmark that produces real
-numbers: readability, tokens, and an independent static-analysis cross-check.
+results. This section defines the empirical benchmark. Its scope is deliberately
+narrow: **it generates code under each mode and saves it, recording only
+objective signals — tokens and correctness.** It does not score quality,
+readability, or simplicity. Judging those is a solved problem with established
+tools (SonarQube, lizard, radon, and research readability models); rolling our
+own metric would only add an unvalidated number of our own taste. So we produce
+the artifacts and leave the judgement to those tools, run later over the saved
+solutions.
 
 ```mermaid
 flowchart TD
@@ -124,12 +130,8 @@ flowchart TD
     B --> G
     D --> G
     C --> G
-    G -->|correct only| R["Readability score<br/>0.00 to 10.00 · static metrics"]
-    G -->|correct only| T["Tokens<br/>total per arm"]
-    G -->|correct only| S["Sonar issues<br/>final scan · count"]
-    R --> AG["Aggregate + compare<br/>results tables"]
-    T --> AG
-    S --> AG
+    G --> SV["Save solution<br/>+ tokens + pass/fail"]
+    SV --> EXT["External judgement (later)<br/>SonarQube · lizard · radon"]
 ```
 
 ### Stages
@@ -144,33 +146,22 @@ flowchart TD
      codecraft's clarity-first lens, using the same always-on hook mechanism.
    - **code-simplifier**: writes the code normally, then runs the code-simplifier
      agent to refine it. Two passes.
-2. **Correctness gate.** The hidden tests run against each solution. Only passing
-   solutions go on to readability scoring; failures are recorded separately,
-   since it is not fair to compare the readability of code that does not work.
-3. **Scoring.** Three independent numbers per correct solution:
-   - **Readability (0.00 to 10.00)**: a deterministic composite of static
-     metrics (cyclomatic complexity, maximum nesting depth, longest function,
-     average line length, magic-number count, single-character-name ratio),
-     each normalized to a documented band and combined with documented weights.
-     The raw metrics are reported alongside the composite, so the score is not a
-     black box. This is the core readability number, not an LLM judgement.
-   - **Tokens**: total tokens to reach the final code. codecraft pays for context
-     injection; code-simplifier pays for the initial write plus a full refactor
-     pass.
-   - **Sonar issues**: at the very end, one SonarQube scan (official Docker
-     image, pinned) over all solutions, counting issues by severity. SonarQube
-     conformance is not the same as readability, so this is an independent
-     cross-check in its own column, not a driver of the composite.
-4. **Aggregate.** Per-task, per-language, and per-arm tables, plus the pass rate
-   of the correctness gate.
+2. **Correctness gate.** The hidden tests run against each solution, recording
+   pass or fail. This is objective execution, not a quality opinion: it only
+   says whether the code produces the right outputs.
+3. **Save.** The solution and a `metrics.json` (tokens in/out, pass/fail) are
+   written under the output path. Nothing about quality is computed here.
+4. **External judgement (later, out of scope for the harness).** Whoever wants a
+   quality read runs established tools over the saved solutions — SonarQube
+   (cognitive complexity, code smells, issue counts), lizard (cyclomatic
+   complexity and function length across languages), radon (maintainability
+   index for Python). These are recognized, documented metrics, so the judgement
+   is theirs, not ours.
 
-The question the benchmark answers: on the same tasks, how do these approaches
-trade off readability against token cost? codecraft optimizes for clarity,
-ponytail for the least code, and code-simplifier cleans up after the fact in a
-second pass. A plausible and interesting result is that ponytail wins on tokens
-while its terser code scores lower on readability, and codecraft the reverse.
-The numbers decide it. Any outcome is reported honestly as a trade-off, not as a
-win for codecraft.
+The harness answers only: on the same tasks, at what token cost does each mode
+reach working code? Whether codecraft's clarity or ponytail's brevity is
+"better" is not ours to score — the saved solutions are the evidence, and the
+external tools (or a human) render that verdict.
 
 ### Folder layout
 
@@ -178,7 +169,7 @@ win for codecraft.
 comparison/
   COMPARISON.md   # this document
   tasks/          # prompts + hidden tests, as tasks/<suite>/<task>/<target>/ (present)
-  results/        # per-run solutions and the score, token, and issue tables
+  results/        # per-run solutions + metrics.json (tokens, pass/fail)
 ```
 
 Targets are languages or frameworks, so the same layout extends from the current
