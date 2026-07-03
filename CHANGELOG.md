@@ -7,6 +7,11 @@ All notable changes to codecraft are documented here. The format follows
 ## [Unreleased]
 
 ### Added
+- `comparison/PLAN.md`: a task-oriented run plan, one checkbox per run cell (a
+  single task x language x arm), generated from the task manifest and the arm
+  list. It carries the per-cell procedure (generate, gate, score, record), the
+  per-language runtimes to mount at execution time, and the results output
+  layout, so cells can be executed one at a time with only what each needs.
 - `comparison/scoring/`: a deterministic readability scorer (`score.mjs`) driven
   by a transparent `rubric.json`. It turns a solution file into a 0.00 to 10.00
   composite from five language-agnostic static metrics (average line length, max
