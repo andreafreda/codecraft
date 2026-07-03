@@ -46,16 +46,28 @@ async function armSystem() {
   return armCfg.system || '';
 }
 
-// Isolated config dir: only the credentials, so no plugins/hooks/settings load.
-function isolatedConfigDir() {
+// Use CLAUDE_CONFIG_DIR directly when it is a dedicated, plugin-free dir (it is
+// already isolated). Otherwise copy only the credentials into a temp dir.
+function resolveConfigDir() {
+  const provided = process.env.CLAUDE_CONFIG_DIR;
+  if (provided && fs.existsSync(path.join(provided, '.credentials.json'))) {
+    return { dir: provided, temp: false };
+  }
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cc-harness-'));
-  const creds = path.join(process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude'), '.credentials.json');
+  const creds = path.join(os.homedir(), '.claude', '.credentials.json');
   if (fs.existsSync(creds)) fs.copyFileSync(creds, path.join(dir, '.credentials.json'));
-  return dir;
+  return { dir, temp: true };
 }
 
-function claudeRun(userPrompt, systemPrompt, configDir) {
-  const args = ['-p', userPrompt, '--output-format', 'json', '--model', cfg.model];
+function modelLabel(model) {
+  if (model.includes('haiku')) return 'haiku';
+  if (model.includes('sonnet')) return 'sonnet';
+  if (model.includes('opus')) return 'opus';
+  return model;
+}
+
+function claudeRun(userPrompt, systemPrompt, configDir, model) {
+  const args = ['-p', userPrompt, '--output-format', 'json', '--model', model];
   if (systemPrompt) args.push('--append-system-prompt', systemPrompt);
   const out = execFileSync('claude', args, {
     env: { ...process.env, CLAUDE_CONFIG_DIR: configDir },
@@ -80,35 +92,37 @@ function scoreSolution(file) {
   return JSON.parse(out);
 }
 
-function updatePlan(cellId, pass, composite, tokens) {
+function updatePlan(cellId, label, pass, composite, tokens) {
   const planPath = path.join(REPO, 'comparison/PLAN.md');
   const marker = '`' + cellId + '`';
-  const result = ` — pass: ${pass}, composite: ${composite}, tokens: ${tokens}`;
+  const seg = ` — [${label}] pass: ${pass}, composite: ${composite}, tokens: ${tokens}`;
   const lines = fs.readFileSync(planPath, 'utf8').split('\n').map((line) => {
     if (!line.includes(marker)) return line;
-    return line.replace('- [ ]', '- [x]').replace(/ — pass:.*$/, '') + result;
+    return line.replace('- [ ]', '- [x]').replace(new RegExp(` — \\[${label}\\][^—]*`), '') + seg;
   });
   fs.writeFileSync(planPath, lines.join('\n'));
 }
 
 const main = async () => {
+  const model = process.argv[3] || cfg.model;
+  const label = modelLabel(model);
   const system = await armSystem();
-  const configDir = isolatedConfigDir();
+  const { dir: configDir, temp } = resolveConfigDir();
   const ask = `Complete the following ${target} code. Output only the complete code, no prose.\n\n${prompt}`;
 
-  let gen = claudeRun(ask, system, configDir);
+  let gen = claudeRun(ask, system, configDir, model);
   let tokensIn = gen.tokensIn, tokensOut = gen.tokensOut;
   let code = extractCode(gen.text);
 
   if (armCfg.twoPass) {
     // Second pass: refine the just-written code with the arm's system prompt.
     const refineAsk = `Refine this ${target} code for readability without changing behavior. Output only the code.\n\n${code}`;
-    const refined = claudeRun(refineAsk, system, configDir);
+    const refined = claudeRun(refineAsk, system, configDir, model);
     tokensIn += refined.tokensIn; tokensOut += refined.tokensOut;
     code = extractCode(refined.text);
   }
 
-  const outDir = path.join(REPO, 'comparison/results', arm, suite, task, target);
+  const outDir = path.join(REPO, 'comparison/results', label, arm, suite, task, target);
   fs.mkdirSync(outDir, { recursive: true });
   const solutionPath = path.join(outDir, `solution.${ext}`);
   fs.writeFileSync(solutionPath, code);
@@ -118,20 +132,22 @@ const main = async () => {
   // Correctness gate: implemented for Python; other runtimes are mounted per run.
   let pass = 'skipped';
   if (target === 'python') {
+    const testsSrc = fs.readFileSync(testsPath, 'utf8');
+    const entry = (testsSrc.match(/entry_point:\s*(\w+)/) || [])[1] || 'candidate';
     const runner = path.join(outDir, '_gate.py');
-    fs.writeFileSync(runner, code + '\n\n' + fs.readFileSync(testsPath, 'utf8') + '\n\ncheck(' + (fs.readFileSync(testsPath, 'utf8').match(/def check\(([^)]*)\)/)?.[1] || 'candidate') + ')\n');
+    fs.writeFileSync(runner, `${code}\n\n${testsSrc}\n\ncheck(${entry})\n`);
     try { execFileSync('python', [runner], { encoding: 'utf8' }); pass = 'yes'; }
     catch (e) { pass = 'no'; }
     fs.rmSync(runner, { force: true });
   }
 
   const metrics = {
-    cell, arm, model: cfg.model, tokens_in: tokensIn, tokens_out: tokensOut,
+    cell, arm, model, tokens_in: tokensIn, tokens_out: tokensOut,
     pass, composite: score.composite, raw: score.raw,
   };
   fs.writeFileSync(path.join(outDir, 'metrics.json'), JSON.stringify(metrics, null, 2));
-  updatePlan(cell, pass, score.composite, tokensIn + tokensOut);
-  fs.rmSync(configDir, { recursive: true, force: true });
+  updatePlan(cell, label, pass, score.composite, tokensIn + tokensOut);
+  if (temp) fs.rmSync(configDir, { recursive: true, force: true });
 
   console.log(JSON.stringify(metrics, null, 2));
 };
