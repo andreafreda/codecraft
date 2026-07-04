@@ -137,10 +137,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_1/python/codecraft` (Python) — [haiku] pass: yes, tokens: 34829 — [sonnet] pass: yes, tokens: 45031 — [opus] pass: yes, tokens: 33129
 - [x] `humaneval/HumanEval_1/python/ponytail` (Python) — [haiku] pass: yes, tokens: 34037 — [sonnet] pass: yes, tokens: 42613 — [opus] pass: yes, tokens: 30682
 - [x] `humaneval/HumanEval_1/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 65036 — [sonnet] pass: yes, tokens: 83127 — [opus] pass: yes, tokens: 90009
-- [x] `humaneval/HumanEval_1/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31081 — [sonnet] pass: yes, tokens: 40392
-- [x] `humaneval/HumanEval_1/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34455 — [sonnet] pass: yes, tokens: 44942
-- [x] `humaneval/HumanEval_1/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 32929 — [sonnet] pass: yes, tokens: 42539
-- [x] `humaneval/HumanEval_1/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 67141 — [sonnet] pass: yes, tokens: 82980
+- [x] `humaneval/HumanEval_1/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31081 — [sonnet] pass: yes, tokens: 40392 — [opus] pass: yes, tokens: 28494
+- [x] `humaneval/HumanEval_1/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34455 — [sonnet] pass: yes, tokens: 44942 — [opus] pass: yes, tokens: 66510
+- [x] `humaneval/HumanEval_1/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 32929 — [sonnet] pass: yes, tokens: 42539 — [opus] pass: yes, tokens: 30594
+- [x] `humaneval/HumanEval_1/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 67141 — [sonnet] pass: yes, tokens: 82980 — [opus] pass: yes, tokens: 58954
 
 #### HumanEval_126
 
@@ -164,10 +164,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_126/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35422 — [sonnet] pass: yes, tokens: 45491 — [opus] pass: yes, tokens: 66535
 - [x] `humaneval/HumanEval_126/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33533 — [sonnet] pass: yes, tokens: 43047 — [opus] pass: yes, tokens: 30945
 - [x] `humaneval/HumanEval_126/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 66100 — [sonnet] pass: yes, tokens: 83799 — [opus] pass: yes, tokens: 59753
-- [x] `humaneval/HumanEval_126/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31794 — [sonnet] pass: yes, tokens: 41004
-- [x] `humaneval/HumanEval_126/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35307 — [sonnet] pass: yes, tokens: 46370
-- [x] `humaneval/HumanEval_126/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33580 — [sonnet] pass: yes, tokens: 43454
-- [x] `humaneval/HumanEval_126/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 69796 — [sonnet] pass: yes, tokens: 84029
+- [x] `humaneval/HumanEval_126/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31794 — [sonnet] pass: yes, tokens: 41004 — [opus] pass: yes, tokens: 29048
+- [x] `humaneval/HumanEval_126/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35307 — [sonnet] pass: yes, tokens: 46370 — [opus] pass: yes, tokens: 33581
+- [x] `humaneval/HumanEval_126/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33580 — [sonnet] pass: yes, tokens: 43454 — [opus] pass: yes, tokens: 31139
+- [x] `humaneval/HumanEval_126/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 69796 — [sonnet] pass: yes, tokens: 84029 — [opus] pass: yes, tokens: 60256
 
 #### HumanEval_129
 
@@ -191,10 +191,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_129/python/codecraft` (Python) — [haiku] pass: yes, tokens: 44973 — [sonnet] pass: yes, tokens: 46178 — [opus] pass: yes, tokens: 34099
 - [x] `humaneval/HumanEval_129/python/ponytail` (Python) — [haiku] pass: yes, tokens: 36895 — [sonnet] pass: yes, tokens: 43500 — [opus] pass: yes, tokens: 31141
 - [x] `humaneval/HumanEval_129/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 71264 — [sonnet] pass: yes, tokens: 85247 — [opus] pass: yes, tokens: 187569
-- [x] `humaneval/HumanEval_129/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 35690 — [sonnet] pass: yes, tokens: 42753
-- [x] `humaneval/HumanEval_129/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 41483 — [sonnet] pass: yes, tokens: 46737
-- [x] `humaneval/HumanEval_129/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 40486 — [sonnet] pass: yes, tokens: 44186
-- [x] `humaneval/HumanEval_129/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 70967 — [sonnet] pass: yes, tokens: 128949
+- [x] `humaneval/HumanEval_129/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 35690 — [sonnet] pass: yes, tokens: 42753 — [opus] pass: yes, tokens: 59270
+- [x] `humaneval/HumanEval_129/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 41483 — [sonnet] pass: yes, tokens: 46737 — [opus] pass: yes, tokens: 68241
+- [x] `humaneval/HumanEval_129/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 40486 — [sonnet] pass: yes, tokens: 44186 — [opus] pass: yes, tokens: 63331
+- [x] `humaneval/HumanEval_129/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 70967 — [sonnet] pass: yes, tokens: 128949 — [opus] pass: yes, tokens: 122608
 
 #### HumanEval_154
 
@@ -218,10 +218,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_154/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35940 — [sonnet] pass: yes, tokens: 44972 — [opus] pass: yes, tokens: 66053
 - [x] `humaneval/HumanEval_154/python/ponytail` (Python) — [haiku] pass: yes, tokens: 39234 — [sonnet] pass: yes, tokens: 42553 — [opus] pass: yes, tokens: 30441
 - [x] `humaneval/HumanEval_154/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 66991 — [sonnet] pass: yes, tokens: 82844 — [opus] pass: yes, tokens: 59007
-- [x] `humaneval/HumanEval_154/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31929 — [sonnet] pass: yes, tokens: 41139
-- [x] `humaneval/HumanEval_154/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35880 — [sonnet] pass: yes, tokens: 45658
-- [x] `humaneval/HumanEval_154/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 34521 — [sonnet] pass: yes, tokens: 43310
-- [x] `humaneval/HumanEval_154/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 65815 — [sonnet] pass: yes, tokens: 84382
+- [x] `humaneval/HumanEval_154/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31929 — [sonnet] pass: yes, tokens: 41139 — [opus] pass: yes, tokens: 59451
+- [x] `humaneval/HumanEval_154/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 35880 — [sonnet] pass: yes, tokens: 45658 — [opus] pass: yes, tokens: 67637
+- [x] `humaneval/HumanEval_154/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 34521 — [sonnet] pass: yes, tokens: 43310 — [opus] pass: yes, tokens: 62635
+- [x] `humaneval/HumanEval_154/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 65815 — [sonnet] pass: yes, tokens: 84382 — [opus] pass: yes, tokens: 90936
 
 #### HumanEval_33
 
@@ -245,10 +245,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_33/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35517 — [sonnet] pass: yes, tokens: 45026 — [opus] pass: yes, tokens: 67125
 - [x] `humaneval/HumanEval_33/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33783 — [sonnet] pass: yes, tokens: 42580 — [opus] pass: yes, tokens: 30635
 - [x] `humaneval/HumanEval_33/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 66283 — [sonnet] pass: yes, tokens: 82988 — [opus] pass: yes, tokens: 59125
-- [x] `humaneval/HumanEval_33/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31778 — [sonnet] pass: yes, tokens: 40543
-- [x] `humaneval/HumanEval_33/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34789 — [sonnet] pass: yes, tokens: 45060
-- [x] `humaneval/HumanEval_33/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33191 — [sonnet] pass: yes, tokens: 42664
-- [x] `humaneval/HumanEval_33/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64410 — [sonnet] pass: yes, tokens: 83235
+- [x] `humaneval/HumanEval_33/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31778 — [sonnet] pass: yes, tokens: 40543 — [opus] pass: yes, tokens: 28583
+- [x] `humaneval/HumanEval_33/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34789 — [sonnet] pass: yes, tokens: 45060 — [opus] pass: yes, tokens: 33288
+- [x] `humaneval/HumanEval_33/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33191 — [sonnet] pass: yes, tokens: 42664 — [opus] pass: yes, tokens: 30698
+- [x] `humaneval/HumanEval_33/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64410 — [sonnet] pass: yes, tokens: 83235 — [opus] pass: yes, tokens: 59154
 
 #### HumanEval_36
 
@@ -272,7 +272,7 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_36/python/codecraft` (Python) — [haiku] pass: yes, tokens: 35302 — [sonnet] pass: yes, tokens: 44858 — [opus] pass: yes, tokens: 66472
 - [x] `humaneval/HumanEval_36/python/ponytail` (Python) — [haiku] pass: yes, tokens: 33866 — [sonnet] pass: yes, tokens: 42425 — [opus] pass: yes, tokens: 30488
 - [x] `humaneval/HumanEval_36/python/code-simplifier` (Python) — [haiku] pass: yes, tokens: 65618 — [sonnet] pass: yes, tokens: 82637 — [opus] pass: yes, tokens: 58832
-- [x] `humaneval/HumanEval_36/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31238 — [sonnet] pass: yes, tokens: 40585
-- [x] `humaneval/HumanEval_36/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34762 — [sonnet] pass: yes, tokens: 45100
-- [x] `humaneval/HumanEval_36/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33328 — [sonnet] pass: yes, tokens: 42718
-- [x] `humaneval/HumanEval_36/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64594 — [sonnet] pass: yes, tokens: 83572
+- [x] `humaneval/HumanEval_36/typescript/baseline` (TypeScript) — [haiku] pass: yes, tokens: 31238 — [sonnet] pass: yes, tokens: 40585 — [opus] pass: yes, tokens: 28653
+- [x] `humaneval/HumanEval_36/typescript/codecraft` (TypeScript) — [haiku] pass: yes, tokens: 34762 — [sonnet] pass: yes, tokens: 45100 — [opus] pass: yes, tokens: 68748
+- [x] `humaneval/HumanEval_36/typescript/ponytail` (TypeScript) — [haiku] pass: yes, tokens: 33328 — [sonnet] pass: yes, tokens: 42718 — [opus] pass: yes, tokens: 30774
+- [x] `humaneval/HumanEval_36/typescript/code-simplifier` (TypeScript) — [haiku] pass: yes, tokens: 64594 — [sonnet] pass: yes, tokens: 83572 — [opus] pass: yes, tokens: 59360
