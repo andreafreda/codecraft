@@ -41,17 +41,17 @@ The centerpiece finding. codecraft vs baseline on S3776 (cognitive complexity),
 
 | Model | codecraft | baseline | codecraft edge |
 | --- | --- | --- | --- |
-| Haiku | 4 | 4 | none |
+| Haiku | 4 | 5 | −1 |
 | Sonnet | 4 | 5 | −1 |
 | Opus | 1 | 4 | −3 |
 
-The lens's effect on cognitive complexity **scales with model capability**. On
-Haiku it could not land (tie); on Opus it nearly eliminates the smell (1 vs 4).
-This is decisive: the Haiku tie was a model limit, not a skill gap, so adding a
-mechanical complexity threshold to the skill would have been the wrong fix (it
-would overfit Sonar's arbitrary cutoff and fight the skill's own
-"don't over-abstract" principle). The existing principles (linear flow, guard
-clauses, "density is not fine") already deliver, more so the more capable the model.
+codecraft sits below baseline on cognitive complexity on **every** model, and the
+edge **widens with model capability**: on Opus it nearly eliminates the smell
+(1 vs 4). This is decisive: adding a mechanical complexity threshold to the skill
+would have been the wrong fix (it would overfit Sonar's arbitrary cutoff and
+fight the skill's own "don't over-abstract" principle). The existing principles
+(linear flow, guard clauses, "density is not fine") already deliver, more so the
+more capable the model.
 
 ## Honest reading
 

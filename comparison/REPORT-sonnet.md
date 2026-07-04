@@ -37,21 +37,20 @@ signature). No arm can fix those without breaking the fixed signature.
 
 ## The cognitive-complexity question
 
-We asked whether codecraft should gain an explicit cognitive-complexity rule,
-after Haiku showed codecraft tied with baseline on S3776 (4 = 4). Sonnet answers
-it with the **unchanged** skill:
+We asked whether codecraft should gain an explicit cognitive-complexity rule.
+Measured across models with the **unchanged** skill:
 
-| Model | codecraft S3776 | baseline S3776 |
-| --- | --- | --- |
-| Haiku | 4 | 4 (tied, no edge) |
-| Sonnet | 4 | 5 (codecraft below) |
+| Model | codecraft S3776 | baseline S3776 | edge |
+| --- | --- | --- | --- |
+| Haiku | 4 | 5 | -1 |
+| Sonnet | 4 | 5 | -1 |
 
-On the stronger model, codecraft applies its existing principles (linear flow,
-guard clauses, "density is not fine") and drops below baseline **with no change
-to the skill**. The Haiku tie was a model-capability limit, not a skill gap. So
-we did **not** add a mechanical complexity threshold: it would risk overfitting
-to Sonar's arbitrary cutoff and conflict with the skill's "don't over-abstract"
-principle, and the data shows the intent already lands when the model can execute it.
+codecraft already sits below baseline on both models via its existing principles
+(linear flow, guard clauses, "density is not fine"), with no change to the skill;
+on Opus the edge widens to -3 (see the opus report). So we did **not** add a
+mechanical complexity threshold: it would risk overfitting to Sonar's arbitrary
+cutoff and conflict with the skill's "don't over-abstract" principle, and the
+data shows the existing intent already lands, more so the more capable the model.
 
 Note codecraft is not the lowest on cognitive complexity: ponytail (3) and
 code-simplifier (2) go lower. That is consistent with codecraft's design, which
