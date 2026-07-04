@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_126/typescript/code-simplifier",
+  "arm": "code-simplifier",
+  "model": "claude-sonnet-5",
+  "tokens_in": 83509,
+  "tokens_out": 520,
+  "pass": "yes"
+}
