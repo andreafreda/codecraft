@@ -176,9 +176,9 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_129/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 41126 — [sonnet] pass: yes, tokens: 45007
 - [x] `humaneval/HumanEval_129/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 74262 — [sonnet] pass: yes, tokens: 134471
 - [x] `humaneval/HumanEval_129/go/baseline` (Go) — [haiku] pass: yes, tokens: 37597 — [sonnet] pass: yes, tokens: 42528 — [opus] pass: yes, tokens: 30361
-- [x] `humaneval/HumanEval_129/go/codecraft` (Go) — [haiku] pass: yes, tokens: 42233 — [sonnet] pass: yes, tokens: 96238
-- [x] `humaneval/HumanEval_129/go/ponytail` (Go) — [haiku] pass: yes, tokens: 39398 — [sonnet] pass: yes, tokens: 89334
-- [x] `humaneval/HumanEval_129/go/code-simplifier` (Go) — [haiku] pass: no, tokens: 70236 — [sonnet] pass: yes, tokens: 131936
+- [x] `humaneval/HumanEval_129/go/codecraft` (Go) — [haiku] pass: yes, tokens: 42233 — [sonnet] pass: yes, tokens: 96238 — [opus] pass: yes, tokens: 34453
+- [x] `humaneval/HumanEval_129/go/ponytail` (Go) — [haiku] pass: yes, tokens: 39398 — [sonnet] pass: yes, tokens: 89334 — [opus] pass: yes, tokens: 63334
+- [x] `humaneval/HumanEval_129/go/code-simplifier` (Go) — [haiku] pass: no, tokens: 70236 — [sonnet] pass: yes, tokens: 131936 — [opus] pass: yes, tokens: 62285
 - [x] `humaneval/HumanEval_129/java/baseline` (Java) — [haiku] pass: yes, tokens: 38266 — [sonnet] pass: yes, tokens: 88675 — [opus] pass: yes, tokens: 61286
 - [x] `humaneval/HumanEval_129/java/codecraft` (Java) — [haiku] pass: yes, tokens: 41029 — [sonnet] pass: yes, tokens: 47652 — [opus] pass: yes, tokens: 35693
 - [x] `humaneval/HumanEval_129/java/ponytail` (Java) — [haiku] pass: yes, tokens: 39238 — [sonnet] pass: yes, tokens: 45185 — [opus] pass: yes, tokens: 65232
@@ -202,10 +202,10 @@ Only the languages a cell touches need their runtime present for that cell.
 - [x] `humaneval/HumanEval_154/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37027 — [sonnet] pass: yes, tokens: 46080
 - [x] `humaneval/HumanEval_154/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34628 — [sonnet] pass: yes, tokens: 43673
 - [x] `humaneval/HumanEval_154/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 67262 — [sonnet] pass: yes, tokens: 85348
-- [x] `humaneval/HumanEval_154/go/baseline` (Go) — [haiku] pass: yes, tokens: 33030 — [sonnet] pass: yes, tokens: 41325
-- [x] `humaneval/HumanEval_154/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36815 — [sonnet] pass: yes, tokens: 45857
-- [x] `humaneval/HumanEval_154/go/ponytail` (Go) — [haiku] pass: no, tokens: 41894 — [sonnet] pass: yes, tokens: 43449
-- [x] `humaneval/HumanEval_154/go/code-simplifier` (Go) — [haiku] pass: yes, tokens: 68872 — [sonnet] pass: yes, tokens: 84781
+- [x] `humaneval/HumanEval_154/go/baseline` (Go) — [haiku] pass: yes, tokens: 33030 — [sonnet] pass: yes, tokens: 41325 — [opus] pass: no, tokens: 28817
+- [x] `humaneval/HumanEval_154/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36815 — [sonnet] pass: yes, tokens: 45857 — [opus] pass: no, tokens: 66874
+- [x] `humaneval/HumanEval_154/go/ponytail` (Go) — [haiku] pass: no, tokens: 41894 — [sonnet] pass: yes, tokens: 43449 — [opus] pass: no, tokens: 61760
+- [x] `humaneval/HumanEval_154/go/code-simplifier` (Go) — [haiku] pass: yes, tokens: 68872 — [sonnet] pass: yes, tokens: 84781 — [opus] pass: yes, tokens: 60444
 - [x] `humaneval/HumanEval_154/java/baseline` (Java) — [haiku] pass: yes, tokens: 33435 — [sonnet] pass: yes, tokens: 41537 — [opus] pass: yes, tokens: 58905
 - [x] `humaneval/HumanEval_154/java/codecraft` (Java) — [haiku] pass: yes, tokens: 36815 — [sonnet] pass: yes, tokens: 46046 — [opus] pass: yes, tokens: 34087
 - [x] `humaneval/HumanEval_154/java/ponytail` (Java) — [haiku] pass: yes, tokens: 34291 — [sonnet] pass: yes, tokens: 43643 — [opus] pass: yes, tokens: 64200

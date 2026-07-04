@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_129/go/codecraft",
+  "arm": "codecraft",
+  "model": "claude-opus-4-8",
+  "tokens_in": 33198,
+  "tokens_out": 1255,
+  "pass": "yes"
+}

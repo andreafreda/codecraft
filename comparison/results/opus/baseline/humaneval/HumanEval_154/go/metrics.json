@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_154/go/baseline",
+  "arm": "baseline",
+  "model": "claude-opus-4-8",
+  "tokens_in": 28466,
+  "tokens_out": 351,
+  "pass": "no"
+}
