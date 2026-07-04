@@ -1,4 +1,4 @@
-# Benchmark report — Opus
+# Benchmark report: Opus
 
 Model: `claude-opus-4-8`. Suite: HumanEval / MultiPL-E, 6 tasks × 6 languages ×
 4 arms = **144 cells**. Same apparatus as the Haiku and Sonnet runs.

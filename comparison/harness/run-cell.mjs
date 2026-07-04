@@ -92,10 +92,10 @@ function extractCode(text) {
 function updatePlan(cellId, label, pass, tokens) {
   const planPath = path.join(REPO, 'comparison/PLAN.md');
   const marker = '`' + cellId + '`';
-  const seg = ` — [${label}] pass: ${pass}, tokens: ${tokens}`;
+  const seg = ` | [${label}] pass: ${pass}, tokens: ${tokens}`;
   const lines = fs.readFileSync(planPath, 'utf8').split('\n').map((line) => {
     if (!line.includes(marker)) return line;
-    return line.replace('- [ ]', '- [x]').replace(new RegExp(` — \\[${label}\\][^—]*`), '') + seg;
+    return line.replace('- [ ]', '- [x]').replace(new RegExp(` \\| \\[${label}\\][^|]*`), '') + seg;
   });
   fs.writeFileSync(planPath, lines.join('\n'));
 }

@@ -1,4 +1,4 @@
-# Benchmark results — three models
+# Benchmark results: three models
 
 Model coverage: `claude-haiku-4-5`, `claude-sonnet-5`, `claude-opus-4-8`. Suite:
 HumanEval / MultiPL-E, 6 tasks × 6 languages × 4 arms per model = **432 cells**,
@@ -6,26 +6,26 @@ all generated in isolation (one plugin-free `claude -p` process each, the arm's
 system prompt the only variable), gated against the benchmark's hidden tests,
 and cross-checked with SonarQube.
 
-## Premise — read this before the numbers
+## Premise: read this before the numbers
 
 **codecraft's job is not what this benchmark measures.** codecraft is not there
 to save tokens, not to reduce SonarQube issues, and not to write shorter code.
 None of those is its goal, and it should never be judged as if they were. Shorter
-is explicitly *not* the aim — *clarity beats brevity* is one of its core
+is explicitly *not* the aim, *clarity beats brevity* is one of its core
 tie-breaks.
 
 codecraft's aim is code that is **more readable, more maintainable, and better
-designed (SOLID)**. Make it read as if a thoughtful human wrote it — obvious over
-clever — so the next person (or the next session) understands it at a glance
+designed (SOLID)**. Make it read as if a thoughtful human wrote it, obvious over
+clever, so the next person (or the next session) understands it at a glance
 (readable); so a change touches one place instead of rippling (maintainable); so
 each unit has one job and depends on abstractions where a real seam exists
 (SOLID). Design is applied **with judgement, never as ceremony**: no interface,
-factory or layer for a single concrete case — clarity beats strict SOLID, and
+factory or layer for a single concrete case, clarity beats strict SOLID, and
 YAGNI wins until a second case appears. It deliberately leaves working,
 already-clear code alone.
 
-That target — "is this clearer, more maintainable, better designed for the next
-human" — is a **judgement**, and this benchmark refuses to fake it with a score
+That target, "is this clearer, more maintainable, better designed for the next
+human", is a **judgement**, and this benchmark refuses to fake it with a score
 of its own (we deleted our home-grown readability metric for exactly that reason). So the tables below measure only
 what can be measured **objectively**: token cost, and an external static-analysis
 tool's issue counts. Both are **proxies**, and neither is codecraft's aim.
@@ -68,7 +68,7 @@ treatment. Covers python, js, ts, go, java; **C# is excluded** (the CLI scanner
 cannot analyze it) and Java runs in reduced no-bytecode mode. "Controllable"
 strips the ~22 issues every arm shares because the benchmark **imposes** them
 (default package, static-only class, python-derived names Go/Java flag, the
-`ArrayList` signature) — no arm can touch those without breaking the fixed
+`ArrayList` signature), no arm can touch those without breaking the fixed
 signature, so they are noise for an arm-to-arm read.
 
 | Model | Arm | Total | Cognitive (S3776) | Controllable |
@@ -86,7 +86,7 @@ signature, so they are noise for an arm-to-arm read.
 | Opus | ponytail | 32 | 1 | 10 |
 | Opus | code-simplifier | 26 | 0 | 4 |
 
-## Cognitive complexity — the one metric near codecraft's domain
+## Cognitive complexity: the one metric near codecraft's domain
 
 Cognitive complexity (SonarSource S3776) measures how hard code is to follow:
 nesting and branching that a reader must hold in their head. That is the closest
@@ -100,10 +100,10 @@ a static tool gets to what codecraft actually optimizes. codecraft vs baseline,
 | Opus | 1 | 4 | −3 |
 
 codecraft reads more clearly by this proxy on **every** model, and the edge
-**widens with model capability** — on Opus it nearly eliminates the smell (1 vs
+**widens with model capability**, on Opus it nearly eliminates the smell (1 vs
 4) while baseline, writing more elaborate code, gets worse (controllable 17). The
 practical read: the more capable the model, the more the lens delivers. This is
-why we did **not** bolt a numeric complexity rule onto the skill — its existing
+why we did **not** bolt a numeric complexity rule onto the skill, its existing
 principles (linear flow, guard clauses, "density is not fine") already produce
 the effect, and a hard threshold would only overfit Sonar's arbitrary cutoff and
 fight codecraft's own "don't over-abstract" tie-break.

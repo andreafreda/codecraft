@@ -1,4 +1,4 @@
-# Benchmark report — Haiku
+# Benchmark report: Haiku
 
 Model: `claude-haiku-4-5-20251001`. Suite: HumanEval / MultiPL-E, 6 tasks ×
 6 languages × 4 arms = **144 cells**. Each cell is one isolated `claude -p`
@@ -27,18 +27,25 @@ same ruleset and same treatment for every arm. C# is **excluded** (the CLI
 scanner cannot analyze C#; it needs SonarScanner for .NET). Java is analyzed in
 reduced mode (`sonar.java.binaries=.`, no bytecode).
 
-| Arm | Total | Code Smell | Bug | Vuln | Minor | Major | Critical |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| baseline | 31 | 31 | 0 | 0 | 16 | 10 | 5 |
-| codecraft | 29 | 29 | 0 | 0 | 16 | 9 | 4 |
-| ponytail | 31 | 31 | 0 | 0 | 18 | 9 | 4 |
-| code-simplifier | 30 | 30 | 0 | 0 | 19 | 11 | 0 |
+| Arm | Total | S3776 | Controllable* | Bug | Vuln | Minor | Major | Critical |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| baseline | 31 | 5 | 11 | 0 | 0 | 16 | 10 | 5 |
+| codecraft | 29 | 4 | 9 | 0 | 0 | 16 | 9 | 4 |
+| ponytail | 31 | 4 | 11 | 0 | 0 | 18 | 9 | 4 |
+| code-simplifier | 30 | 0 | 10 | 0 | 0 | 19 | 11 | 0 |
+
+\*Controllable = total minus the ~20 issues every arm shares because the
+benchmark imposes them (default package, static-only class, python-derived names,
+the `ArrayList` signature); no arm can fix those without breaking the fixed
+signature. S3776 is cognitive complexity (see `RESULTS.md`).
 
 - All issues are maintainability **code smells**; zero bugs or vulnerabilities,
   as expected for small algorithmic snippets.
-- **codecraft has the fewest total issues (29)** and is tied-lowest on critical.
-- **code-simplifier drives critical issues to 0** (its refinement removes the
-  worst smells) but carries the most minor+major, and pays ~2× tokens for it.
+- **codecraft has the fewest total issues (29)**, the fewest controllable (9),
+  and sits below baseline on cognitive complexity (4 vs 5).
+- **code-simplifier drives critical issues and cognitive complexity to 0** (its
+  refinement removes the worst smells) but carries the most minor+major, and
+  pays ~2× tokens for it.
 - baseline carries the most critical (5). Differences are small (29–31 total).
 
 ## Honest reading
@@ -58,7 +65,7 @@ the plain baseline land in between. This is a trade-off table, not a winner.
 - Sonar covers 5 of 6 languages (no C#) and Java in reduced mode. Every arm gets
   identical treatment, so cross-arm comparison stays fair even where coverage is
   partial.
-- The benchmark records only objective signals — tokens, gate pass/fail, and the
+- The benchmark records only objective signals, tokens, gate pass/fail, and the
   external Sonar counts. It does not compute any readability score of its own.
 - Two correctness failures were regenerated once (transparently); two Go failures
   were harness artifacts (dropped test imports) fixed in the gate, not the code.

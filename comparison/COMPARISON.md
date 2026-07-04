@@ -112,7 +112,7 @@ versus a readability standard and lens.
 The tables above are a static analysis of the two definitions, not measured
 results. This section defines the empirical benchmark. Its scope is deliberately
 narrow: **it generates code under each mode and saves it, recording only
-objective signals — tokens and correctness.** It does not score quality,
+objective signals, tokens and correctness.** It does not score quality,
 readability, or simplicity. Judging those is a solved problem with established
 tools (SonarQube, lizard, radon, and research readability models); rolling our
 own metric would only add an unvalidated number of our own taste. So we produce
@@ -152,7 +152,7 @@ flowchart TD
 3. **Save.** The solution and a `metrics.json` (tokens in/out, pass/fail) are
    written under the output path. Nothing about quality is computed here.
 4. **External judgement (later, out of scope for the harness).** Whoever wants a
-   quality read runs established tools over the saved solutions — SonarQube
+   quality read runs established tools over the saved solutions, SonarQube
    (cognitive complexity, code smells, issue counts), lizard (cyclomatic
    complexity and function length across languages), radon (maintainability
    index for Python). These are recognized, documented metrics, so the judgement
@@ -160,7 +160,7 @@ flowchart TD
 
 The harness answers only: on the same tasks, at what token cost does each mode
 reach working code? Whether codecraft's clarity or ponytail's brevity is
-"better" is not ours to score — the saved solutions are the evidence, and the
+"better" is not ours to score, the saved solutions are the evidence, and the
 external tools (or a human) render that verdict.
 
 ### Folder layout

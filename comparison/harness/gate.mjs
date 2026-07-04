@@ -134,7 +134,7 @@ const VEQ = 'static bool VEq(object a, object b){ return '
 // and imports, Java/C#'s class + imports). The prompt always ends with the
 // signature line, so its preamble is the prompt minus that last line. If the
 // solution is missing the scaffold keyword, splice the preamble back on so the
-// program compiles — this is reconstruction, not correction of the logic.
+// program compiles, this is reconstruction, not correction of the logic.
 function promptPreamble(prompt) {
   const lines = prompt.replace(/\s+$/, '').split('\n');
   lines.pop();
@@ -148,7 +148,7 @@ function ensureGoScaffold(code, prompt) {
 // The go tests always use `testing` and `fmt`, but the model may drop those
 // imports because its own function does not use them and go forbids unused
 // imports. Guarantee they are in the combined program's import block so the
-// tests compile — this fixes the harness's own unfairness, not the logic.
+// tests compile, this fixes the harness's own unfairness, not the logic.
 function ensureGoImports(src) {
   // Always needed by the tests; plus any stdlib package the code clearly
   // references but forgot to import (go forbids unused imports, so the model
@@ -247,3 +247,16 @@ export function runGate(target, code, tests, prompt) {
   const gate = GATES[target];
   return gate ? gate(code, tests, prompt) : 'skipped';
 }
+
+// Exported for unit tests: the pure string transforms and helpers, which carry
+// the trickiest assumptions in the gate (see harness.test.js).
+export {
+  gateError,
+  nodeSupportsStripTypes,
+  injectMain,
+  promptPreamble,
+  ensureGoScaffold,
+  ensureClassScaffold,
+  ensureGoImports,
+  valueEqualize,
+};

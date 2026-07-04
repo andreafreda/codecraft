@@ -1,4 +1,4 @@
-# Benchmark report — Sonnet
+# Benchmark report: Sonnet
 
 Model: `claude-sonnet-5`. Suite: HumanEval / MultiPL-E, 6 tasks × 6 languages ×
 4 arms = **144 cells**. Same apparatus as the Haiku run: each cell an isolated
