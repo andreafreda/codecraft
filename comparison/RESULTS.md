@@ -10,18 +10,23 @@ and cross-checked with SonarQube.
 
 **codecraft's job is not what this benchmark measures.** codecraft is not there
 to save tokens, not to reduce SonarQube issues, and not to write shorter code.
-None of those is its goal, and it should never be judged as if they were.
+None of those is its goal, and it should never be judged as if they were. Shorter
+is explicitly *not* the aim — *clarity beats brevity* is one of its core
+tie-breaks.
 
-codecraft is a **readability lens**: make code read as if a thoughtful human
-wrote it — obvious over clever — so the next person (or the next session)
-understands it at a glance. Its explicit tie-breaks are *clarity over brevity*,
-*clarity over DRY*, *clarity over strict SOLID*, *explicit over magic*. It
-optimizes for **human comprehension and maintainability**, and it deliberately
-leaves working, already-clear code alone.
+codecraft's aim is code that is **more readable, more maintainable, and better
+designed (SOLID)**. Make it read as if a thoughtful human wrote it — obvious over
+clever — so the next person (or the next session) understands it at a glance
+(readable); so a change touches one place instead of rippling (maintainable); so
+each unit has one job and depends on abstractions where a real seam exists
+(SOLID). Design is applied **with judgement, never as ceremony**: no interface,
+factory or layer for a single concrete case — clarity beats strict SOLID, and
+YAGNI wins until a second case appears. It deliberately leaves working,
+already-clear code alone.
 
-That target — "does a human read this clearly" — is a **judgement**, and this
-benchmark refuses to fake it with a score of its own (we deleted our home-grown
-readability metric for exactly that reason). So the tables below measure only
+That target — "is this clearer, more maintainable, better designed for the next
+human" — is a **judgement**, and this benchmark refuses to fake it with a score
+of its own (we deleted our home-grown readability metric for exactly that reason). So the tables below measure only
 what can be measured **objectively**: token cost, and an external static-analysis
 tool's issue counts. Both are **proxies**, and neither is codecraft's aim.
 
