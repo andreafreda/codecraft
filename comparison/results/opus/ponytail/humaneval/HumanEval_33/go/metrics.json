@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_33/go/ponytail",
+  "arm": "ponytail",
+  "model": "claude-opus-4-8",
+  "tokens_in": 61334,
+  "tokens_out": 485,
+  "pass": "yes"
+}
