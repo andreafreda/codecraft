@@ -17,6 +17,8 @@ if (readFlag(flagPath) === 'off') {
   process.exit(0);
 }
 
+// Normalize a missing or implicit-on flag to an explicit "on", so later reads
+// (and the toggle) see the same value the user is now getting.
 writeFlag(flagPath, 'on');
 
 // SKILL.md is the single source of truth for the principles. Read it live so
@@ -24,12 +26,12 @@ writeFlag(flagPath, 'on');
 // be found, fall back to a short inline summary.
 let body;
 try {
-  const skill = fs.readFileSync(
+  const skillMarkdown = fs.readFileSync(
     path.join(__dirname, '..', 'skills', 'codecraft', 'SKILL.md'), 'utf8'
   );
   // Drop the YAML frontmatter; only the guidance body is useful as context.
-  body = skill.replace(/^---[\s\S]*?---\s*/, '');
-} catch (e) {
+  body = skillMarkdown.replace(/^---[\s\S]*?---\s*/, '');
+} catch {
   // Deliberately terse: a longer copy of the principles here would be a second
   // place to keep in sync with SKILL.md. This only runs if SKILL.md is missing.
   body = 'Apply the codecraft readability lens: make code read as if a thoughtful '

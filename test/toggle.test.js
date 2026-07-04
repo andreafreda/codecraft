@@ -15,6 +15,9 @@ const cases = [
   ['/codecraft stop', 'off'],
   ['/codecraft disable', 'off'],
   ['/codecraft sideways', null],
+  // The slash command is exact: a longer token is not the /codecraft command.
+  ['/codecraftfoo', null],
+  ['/codecraft-mode on', null],
   // Natural language, only when "codecraft" is named alongside intent.
   ['turn on codecraft', 'on'],
   ['please enable codecraft for this', 'on'],

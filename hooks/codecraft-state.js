@@ -22,7 +22,7 @@ function writeFlag(flagPath, mode) {
   try {
     fs.mkdirSync(path.dirname(flagPath), { recursive: true });
     fs.writeFileSync(flagPath, String(mode), { mode: 0o600 });
-  } catch (e) {
+  } catch {
     // Best-effort: if the write fails, the mode falls back to the default.
   }
 }
@@ -31,7 +31,7 @@ function readFlag(flagPath) {
   try {
     const raw = fs.readFileSync(flagPath, 'utf8').trim().toLowerCase();
     return VALID_MODES.includes(raw) ? raw : null;
-  } catch (e) {
+  } catch {
     return null;
   }
 }

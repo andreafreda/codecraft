@@ -15,7 +15,8 @@ const REMINDER =
 
 // Maps a prompt to the mode it explicitly requests, or null if it asks for
 // neither. Covers the "/codecraft [on|off]" command and natural language such
-// as "turn off codecraft". The prompt is expected already trimmed and lowercased.
+// as "turn off codecraft". An unrecognized "/codecraft" argument is a no-op
+// (null). The prompt is expected already trimmed and lowercased.
 //
 // A toggle flips a persistent, global flag, so the natural-language patterns are
 // deliberately conservative to avoid flipping it on an incidental mention. Three
@@ -26,7 +27,7 @@ const REMINDER =
 function requestedMode(prompt) {
   const text = prompt.trim();
 
-  if (text.startsWith('/codecraft')) {
+  if (text === '/codecraft' || text.startsWith('/codecraft ')) {
     const arg = text.split(/\s+/)[1] || 'on';
     if (arg === 'off' || arg === 'stop' || arg === 'disable') return 'off';
     if (arg === 'on') return 'on';
@@ -66,7 +67,7 @@ function main() {
           }
         }));
       }
-    } catch (e) {
+    } catch {
       // Silent fail: a dropped reminder is harmless.
     }
   });
