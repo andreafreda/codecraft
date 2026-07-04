@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_126/java/codecraft",
+  "arm": "codecraft",
+  "model": "claude-sonnet-5",
+  "tokens_in": 45712,
+  "tokens_out": 982,
+  "pass": "yes"
+}
