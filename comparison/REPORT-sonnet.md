@@ -21,18 +21,21 @@ SonarQube.
   lens is not costing extra output here, only ~+11% input for the lens.
 - code-simplifier still costs ~2× input (the extra refine pass).
 
-## SonarQube issues (5 languages: python, js, ts, go, java; C# excluded)
+## SonarQube issues (all six languages)
+
+Covers python, js, ts and go from source, java in reduced no-bytecode mode, and
+C# through the SonarScanner for .NET.
 
 | Arm | Total | Cognitive complexity (S3776) | Controllable* |
 | --- | --- | --- | --- |
-| baseline | 32 | 5 | 10 |
-| codecraft | 31 | 4 | 9 |
-| ponytail | 29 | 3 | 7 |
-| code-simplifier | 26 | 2 | 4 |
+| baseline | 42 | 6 | 14 |
+| codecraft | 41 | 5 | 13 |
+| ponytail | 39 | 4 | 11 |
+| code-simplifier | 33 | 2 | 5 |
 
-\*Controllable = total minus the ~22 issues every arm shares because the
-benchmark imposes them (default package, static-only class needing a private
-constructor, the python-derived snake_case names Go/Java flag, the `ArrayList`
+\*Controllable = total minus the ~26 issues every arm shares because the
+benchmark imposes them (default package, static-only class needing a constructor
+in Java and C#, the python-derived snake_case names Go/Java flag, the `ArrayList`
 signature). No arm can fix those without breaking the fixed signature.
 
 ## The cognitive-complexity question
@@ -42,12 +45,12 @@ Measured across models with the **unchanged** skill:
 
 | Model | codecraft S3776 | baseline S3776 | edge |
 | --- | --- | --- | --- |
-| Haiku | 4 | 5 | -1 |
-| Sonnet | 4 | 5 | -1 |
+| Haiku | 5 | 6 | -1 |
+| Sonnet | 5 | 6 | -1 |
 
 codecraft already sits below baseline on both models via its existing principles
 (linear flow, guard clauses, "density is not fine"), with no change to the skill;
-on Opus the edge widens to -3 (see the opus report). So we did **not** add a
+on Opus the edge widens to -4 (see the opus report). So we did **not** add a
 mechanical complexity threshold: it would risk overfitting to Sonar's arbitrary
 cutoff and conflict with the skill's "don't over-abstract" principle, and the
 data shows the existing intent already lands, more so the more capable the model.
@@ -69,7 +72,7 @@ a model strong enough not to break correctness in the refine pass.
 
 ## Caveats
 
-Same as the Haiku report: n = 36 per arm, one benchmark; Sonar covers 5 of 6
-languages (no C#) with Java in reduced no-bytecode mode; every arm gets identical
+Same as the Haiku report: n = 36 per arm, one benchmark; Sonar covers all six
+languages (Java reduced, C# via the SonarScanner for .NET); every arm gets identical
 treatment so cross-arm comparison stays fair. The benchmark records only tokens,
 gate pass/fail, and external Sonar counts, no readability score of its own.

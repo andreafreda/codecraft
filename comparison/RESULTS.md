@@ -64,28 +64,31 @@ cost context, not a codecraft scorecard.
 ## SonarQube issues (external cross-check)
 
 SonarQube `26.6` community, one project per model×arm, identical ruleset and
-treatment. Covers python, js, ts, go, java; **C# is excluded** (the CLI scanner
-cannot analyze it) and Java runs in reduced no-bytecode mode. "Controllable"
-strips the issues every arm shares because the benchmark **imposes** them
-(default package, static-only class, python-derived names Go/Java flag, the
-`ArrayList` signature): about 20 on Haiku and 22 on Sonnet and Opus, varying a
-little with the generated code. No arm can touch those without breaking the fixed
-signature, so they are noise for an arm-to-arm read.
+treatment across all **six** languages: python, js, ts and go from source, java
+in reduced no-bytecode mode (`sonar.java.binaries=.`), and C# via the
+SonarScanner for .NET on a throwaway project (each task's solution namespaced
+apart so the classes do not collide, and missing class scaffolding rebuilt from
+the prompt, the same reconstruction the gate uses). "Controllable" strips the
+issues every arm shares because the benchmark **imposes** them (default package,
+static-only class needing a constructor in both Java and C#, python-derived
+names, the `ArrayList` signature): about 26 to 28 per arm, varying a little with
+the generated code. No arm can touch those without breaking the fixed signature,
+so they are noise for an arm-to-arm read.
 
 | Model | Arm | Total | Cognitive (S3776) | Controllable |
 | --- | --- | --- | --- | --- |
-| Haiku | baseline | 31 | 5 | 11 |
-| Haiku | codecraft | 29 | 4 | 9 |
-| Haiku | ponytail | 31 | 4 | 11 |
-| Haiku | code-simplifier | 30 | 0 | 10 |
-| Sonnet | baseline | 32 | 5 | 10 |
-| Sonnet | codecraft | 31 | 4 | 9 |
-| Sonnet | ponytail | 29 | 3 | 7 |
-| Sonnet | code-simplifier | 26 | 2 | 4 |
-| Opus | baseline | 39 | 4 | 17 |
-| Opus | codecraft | 27 | 1 | 5 |
-| Opus | ponytail | 32 | 1 | 10 |
-| Opus | code-simplifier | 26 | 0 | 4 |
+| Haiku | baseline | 43 | 6 | 17 |
+| Haiku | codecraft | 37 | 5 | 11 |
+| Haiku | ponytail | 40 | 5 | 14 |
+| Haiku | code-simplifier | 36 | 0 | 10 |
+| Sonnet | baseline | 42 | 6 | 14 |
+| Sonnet | codecraft | 41 | 5 | 13 |
+| Sonnet | ponytail | 39 | 4 | 11 |
+| Sonnet | code-simplifier | 33 | 2 | 5 |
+| Opus | baseline | 51 | 5 | 23 |
+| Opus | codecraft | 36 | 1 | 8 |
+| Opus | ponytail | 41 | 1 | 13 |
+| Opus | code-simplifier | 33 | 0 | 5 |
 
 ## Cognitive complexity: the one metric near codecraft's domain
 
@@ -96,13 +99,13 @@ a static tool gets to what codecraft actually optimizes. codecraft vs baseline,
 
 | Model | codecraft | baseline | codecraft edge |
 | --- | --- | --- | --- |
-| Haiku | 4 | 5 | −1 |
-| Sonnet | 4 | 5 | −1 |
-| Opus | 1 | 4 | −3 |
+| Haiku | 5 | 6 | −1 |
+| Sonnet | 5 | 6 | −1 |
+| Opus | 1 | 5 | −4 |
 
 codecraft reads more clearly by this proxy on **every** model, and the edge
 **widens with model capability**, on Opus it nearly eliminates the smell (1 vs
-4) while baseline, writing more elaborate code, gets worse (controllable 17). The
+5) while baseline, writing more elaborate code, gets worse (controllable 23). The
 practical read: the more capable the model, the more the lens delivers. This is
 why we did **not** bolt a numeric complexity rule onto the skill, its existing
 principles (linear flow, guard clauses, "density is not fine") already produce
@@ -115,7 +118,7 @@ Treated as a trade-off table, not a leaderboard:
 
 - **codecraft** stays 100% correct, reads more clearly by the cognitive-complexity
   proxy on every model, and gives the best quality-per-token on Opus (baseline's
-  controllable smells 17→5 at ~1.3× input). Its purpose remains human clarity;
+  controllable smells 23 to 8 at ~1.3× input). Its purpose remains human clarity;
   the favourable numbers are a by-product.
 - **code-simplifier** reaches the lowest raw issue counts, but costs ~2× tokens
   and, on the weakest model, its refine pass introduced the run's only genuine
@@ -127,9 +130,10 @@ Treated as a trade-off table, not a leaderboard:
 
 ## Caveats
 
-n = 36 per arm per model, one benchmark. A signal, not a verdict. Sonar covers 5
-of 6 languages with Java reduced; every arm gets identical treatment so the
-arm-to-arm comparison stays fair. The benchmark records only objective signals
+n = 36 per arm per model, one benchmark. A signal, not a verdict. Sonar covers
+all six languages (Java in reduced no-bytecode mode, C# through the SonarScanner
+for .NET); every arm gets identical treatment so the arm-to-arm comparison stays
+fair. The benchmark records only objective signals
 (tokens, gate pass/fail, external Sonar counts) and computes no readability score
 of its own: the judgement codecraft serves is left to humans and to tools built
 for it.

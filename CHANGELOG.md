@@ -26,9 +26,14 @@ All notable changes to codecraft are documented here. The format follows
   (`claude-haiku-4-5`, `claude-sonnet-5`, `claude-opus-4-8`) = 432 cells, all
   passing their correctness gate. Reports in `comparison/RESULTS.md` and
   `REPORT-{haiku,sonnet,opus}.md` cover token cost and a SonarQube issue-count
-  cross-check per arm. The benchmark records only objective signals (tokens and
-  gate pass/fail); it computes no readability score of its own, leaving that
+  cross-check per arm across all six languages (python, js, ts and go from
+  source, java in reduced no-bytecode mode, C# through the SonarScanner for
+  .NET). The benchmark records only objective signals (tokens and gate
+  pass/fail); it computes no readability score of its own, leaving that
   judgement to established external tools.
+- README: a "Measured, not asserted" section surfacing the benchmark's headline
+  numbers and stating plainly that the comparison reports trade-offs, not a
+  winner, and does not claim ponytail or code-simplifier are worse.
 - `reference/angular.md`: an Angular extension reference, modeled on
   `reference/react.md`. It applies the Core principles to Angular-specific shapes
   (signal inputs, `@if`/`@else` control flow, `computed()` over `effect()`,

@@ -88,6 +88,36 @@ leaving the skill to trigger on its own.
 > turns it off everywhere until you turn it back on. There is no per-project
 > state today.
 
+## Measured, not asserted
+
+codecraft ships with an empirical benchmark, not just claims. On HumanEval /
+MultiPL-E (6 tasks across 6 languages), four arms (a plain baseline, codecraft,
+[ponytail](https://github.com/DietrichGebert/ponytail), and Anthropic's
+[code-simplifier](https://github.com/anthropics/claude-plugins-official)) each
+generate the same code in isolation on three models (Haiku, Sonnet, Opus): 432
+runs, every one gated against the benchmark's hidden tests and cross-checked with
+SonarQube across all six languages. Full numbers and method are in
+[`comparison/RESULTS.md`](comparison/RESULTS.md).
+
+The honest short version:
+
+- Every arm reaches 100% correctness, so the comparison is about cost and quality,
+  not whether the code works.
+- codecraft reads more clearly by SonarQube's cognitive-complexity metric than the
+  plain baseline on all three models, and the edge widens with model capability
+  (on Opus it nearly eliminates the smell), at roughly +11% to +30% input tokens.
+- code-simplifier reaches marginally lower issue counts but costs about 2x the
+  tokens, and on the weakest model its second pass introduced the only genuine
+  correctness bugs of the run.
+
+**On the other approaches.** This is not a claim that ponytail or code-simplifier
+are worse. They are good tools that read the same goal differently: ponytail
+optimizes for the least code, code-simplifier cleans up in a second pass after
+the fact, and codecraft shapes for clarity during the first draft. The benchmark
+reports trade-offs, not a winner. See
+[`comparison/COMPARISON.md`](comparison/COMPARISON.md) for the topic-by-topic
+comparison.
+
 ## Layout
 
 ```

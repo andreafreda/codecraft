@@ -20,51 +20,54 @@ scanned by SonarQube.
 - codecraft pays ~+11% input / +31% output over baseline for its lens.
 - code-simplifier costs ~2× everything (it writes, then refines in a second pass).
 
-## SonarQube issues (5 languages: python, js, ts, go, java)
+## SonarQube issues (all six languages)
 
 External quality cross-check. SonarQube `26.6` community, one project per arm,
-same ruleset and same treatment for every arm. C# is **excluded** (the CLI
-scanner cannot analyze C#; it needs SonarScanner for .NET). Java is analyzed in
-reduced mode (`sonar.java.binaries=.`, no bytecode).
+same ruleset and same treatment for every arm. Covers python, js, ts and go from
+source, java in reduced mode (`sonar.java.binaries=.`, no bytecode), and C# via
+the SonarScanner for .NET on a throwaway project (solutions namespaced apart,
+missing class scaffolding rebuilt from the prompt as the gate does).
 
-| Arm | Total | S3776 | Controllable* | Bug | Vuln | Minor | Major | Critical |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| baseline | 31 | 5 | 11 | 0 | 0 | 16 | 10 | 5 |
-| codecraft | 29 | 4 | 9 | 0 | 0 | 16 | 9 | 4 |
-| ponytail | 31 | 4 | 11 | 0 | 0 | 18 | 9 | 4 |
-| code-simplifier | 30 | 0 | 10 | 0 | 0 | 19 | 11 | 0 |
+| Arm | Total | S3776 (cognitive) | Controllable* |
+| --- | --- | --- | --- |
+| baseline | 43 | 6 | 17 |
+| codecraft | 37 | 5 | 11 |
+| ponytail | 40 | 5 | 14 |
+| code-simplifier | 36 | 0 | 10 |
 
-\*Controllable = total minus the ~20 issues every arm shares because the
-benchmark imposes them (default package, static-only class, python-derived names,
-the `ArrayList` signature); no arm can fix those without breaking the fixed
-signature. S3776 is cognitive complexity (see `RESULTS.md`).
+\*Controllable = total minus the ~26 issues every arm shares because the
+benchmark imposes them (default package, static-only class needing a constructor
+in Java and C#, python-derived names, the `ArrayList` signature); no arm can fix
+those without breaking the fixed signature. S3776 is cognitive complexity.
 
 - All issues are maintainability **code smells**; zero bugs or vulnerabilities,
   as expected for small algorithmic snippets.
-- **codecraft has the fewest total issues (29)**, the fewest controllable (9),
-  and sits below baseline on cognitive complexity (4 vs 5).
-- **code-simplifier drives critical issues and cognitive complexity to 0** (its
-  refinement removes the worst smells) but carries the most minor+major, and
+- **codecraft has the fewest total issues (37)**, the fewest controllable (11),
+  and sits below baseline on cognitive complexity (5 vs 6).
+- **code-simplifier drives cognitive complexity to 0** (its refinement removes the
+  worst smells) and reaches the lowest controllable of the two-pass arms, but
   pays ~2× tokens for it.
-- baseline carries the most critical (5). Differences are small (29–31 total).
+- baseline carries the most controllable smells (17). The spread is real but
+  modest on this model.
 
 ## Honest reading
 
 The spread is narrow. On this suite and model, codecraft gives a small
-maintainability edge (fewest total, fewest critical) at a modest token premium,
-while staying 100% correct. code-simplifier trades the most tokens for zero
-critical smells, but its second pass also introduced the only two genuine
-correctness bugs seen in the run (a `replace(char, String)` type error in Java
-and a missing Go import), which had to be regenerated. Brevity (ponytail) and
-the plain baseline land in between. This is a trade-off table, not a winner.
+maintainability edge (fewest total and fewest controllable, one below baseline on
+cognitive complexity) at a modest token premium, while staying 100% correct.
+code-simplifier trades the most tokens for zero cognitive complexity, but its
+second pass also introduced the only two genuine correctness bugs seen in the run
+(a `replace(char, String)` type error in Java and a missing Go import), which had
+to be regenerated. Brevity (ponytail) and the plain baseline land in between.
+This is a trade-off table, not a winner.
 
 ## Caveats
 
 - n = 36 cells per arm, one model (Haiku), one benchmark. Not statistically
   conclusive; a signal, not a verdict.
-- Sonar covers 5 of 6 languages (no C#) and Java in reduced mode. Every arm gets
-  identical treatment, so cross-arm comparison stays fair even where coverage is
-  partial.
+- Sonar covers all six languages (Java in reduced no-bytecode mode, C# through
+  the SonarScanner for .NET). Every arm gets identical treatment, so cross-arm
+  comparison stays fair.
 - The benchmark records only objective signals, tokens, gate pass/fail, and the
   external Sonar counts. It does not compute any readability score of its own.
 - Two correctness failures were regenerated once (transparently); two Go failures
