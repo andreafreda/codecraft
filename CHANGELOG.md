@@ -6,6 +6,8 @@ All notable changes to codecraft are documented here. The format follows
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-04
+
 ### Added
 - `comparison/harness/`: the run harness (`run-cell.mjs` plus `arms.json`).
   Generation goes through `claude -p` (headless, subscription auth, no API key)
@@ -54,15 +56,24 @@ All notable changes to codecraft are documented here. The format follows
   request, or when codecraft mode is already active. This makes `/codecraft off`
   behave like a real off (the skill stays dormant) and clearly separates the
   plain-skill install (explicit) from the plugin install (always-on via hooks).
+- Cleaned up the plugin's own code after a self-review with the codecraft lens
+  and a static-analysis pass: `node:`-prefixed builtin imports, the toggle
+  matcher split into named checks instead of two dense regexes, clearer error
+  handling, and small naming fixes. Behavior is unchanged and the tests stay green.
 
 ### Fixed
-- Tightened the natural-language toggle: an intent word now only flips the mode
-  when it sits right next to "codecraft" (for example "stop codecraft" or
-  "codecraft off"). A passing mention like "stop, codecraft is fine but..." no
-  longer triggers a false off. Added tests for these ambiguous phrasings.
+- Hardened the natural-language toggle so it never flips the global on/off flag
+  on an incidental mention. A negated request ("do not turn off codecraft") is a
+  no-op; "codecraft on|off" only counts with on/off at the end, so "codecraft off
+  switch" and "codecraft on top of the setup" do not match; and a hyphenated
+  compound ("codecraft-style") does not count. The `/codecraft` command match is
+  exact, so "/codecraftfoo" is not treated as it. Tests cover all of these.
 - Shortened the SessionStart inline fallback (used only when SKILL.md is
   missing) to a one-line pointer, removing a hand-maintained copy of the
   principles that could drift from SKILL.md.
+- Made the shipped hooks and the `/codecraft` command honor principle 11 (no dash
+  as a clause connector) in their own comments, prose, and the reminder string
+  injected into the model context, so the plugin follows its own rule.
 
 ### Docs
 - Documented the on/off state as a known limitation: it is global (one flag
