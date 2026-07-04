@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_129/csharp/ponytail",
+  "arm": "ponytail",
+  "model": "claude-sonnet-5",
+  "tokens_in": 43625,
+  "tokens_out": 1382,
+  "pass": "yes"
+}
