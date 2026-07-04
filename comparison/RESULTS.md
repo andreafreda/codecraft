@@ -130,5 +130,11 @@ n = 36 per arm per model, one benchmark. A signal, not a verdict. Sonar covers 5
 of 6 languages with Java reduced; every arm gets identical treatment so the
 arm-to-arm comparison stays fair. The benchmark records only objective signals
 (tokens, gate pass/fail, external Sonar counts) and computes no readability score
-of its own — the judgement codecraft serves is left to humans and to tools built
+of its own: the judgement codecraft serves is left to humans and to tools built
 for it.
+
+The codecraft arm injects `SKILL.md` (frontmatter stripped) as a one-shot system
+prompt. That measures codecraft's guidance **content**, not the shipped plugin's
+delivery mechanism (the SessionStart and per-turn hooks, and re-injection after
+compaction). The numbers reflect the principles as context, not the installed
+plugin end to end.

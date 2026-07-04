@@ -73,10 +73,14 @@ Two hooks and a flag, each with a distinct job:
 - **The flag** (`~/.claude/.codecraft-active`) records on/off. Both hooks read
   it, so `/codecraft off` stops all injection until you turn it back on.
 
-The bundled skill is intent-gated: on its own it does not auto-fire on ordinary
-code writing. With the plugin, the hooks are the activation path, so
-`/codecraft off` genuinely turns codecraft off rather than leaving the skill to
-trigger on its own.
+The bundled skill is intent-gated: `SKILL.md` tells the model to activate only
+when explicitly invoked and not to self-activate on ordinary code writing. That
+line governs the plain-skill install (no hooks), where you opt in per use. The
+plugin deliberately overrides it: the `SessionStart` hook injects the principles
+as context directly, so the "do not self-activate" instruction never runs and
+the lens is on by default. The hooks, not the skill's own gate, are the
+activation path, so `/codecraft off` genuinely turns codecraft off rather than
+leaving the skill to trigger on its own.
 
 > **Known limitation:** the on/off state is global. It lives in a single file
 > (`~/.claude/.codecraft-active`, or `$CLAUDE_CONFIG_DIR/.codecraft-active`),
@@ -115,7 +119,6 @@ the headline ones:
 
 - **Kent Beck's four rules of simple design**, via [Martin Fowler](https://martinfowler.com/bliki/BeckDesignRules.html).
 - **SOLID principles** ([Wikipedia](https://en.wikipedia.org/wiki/SOLID), [Baeldung](https://www.baeldung.com/solid-principles)).
-- **Python caching idioms** ([standard library docs](https://docs.python.org/3/library/functools.html), [Real Python](https://realpython.com/lru-cache-python/)).
 
 ## License
 

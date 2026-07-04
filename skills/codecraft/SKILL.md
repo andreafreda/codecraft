@@ -243,7 +243,3 @@ prior work. For the reader who wants the source:
   https://en.wikipedia.org/wiki/SOLID
 - "A Solid Guide to SOLID Principles", Baeldung:
   https://www.baeldung.com/solid-principles
-- Python caching idioms (`functools.lru_cache`), standard library docs:
-  https://docs.python.org/3/library/functools.html
-- "Caching in Python Using the LRU Cache Strategy", Real Python:
-  https://realpython.com/lru-cache-python/

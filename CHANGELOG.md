@@ -12,20 +12,21 @@ All notable changes to codecraft are documented here. The format follows
   in an isolated `CLAUDE_CONFIG_DIR` that holds only the credentials, so ambient
   plugins and hooks cannot leak into a run; the only per-arm difference is the
   appended system prompt. A cell writes its solution and `metrics.json` under
-  `comparison/results/`, scores it, runs the Python correctness gate, and ticks
-  and annotates its checkbox in `PLAN.md`. v0, not yet run.
+  `comparison/results/`, runs the correctness gate for that language (python,
+  javascript, typescript, java, go, csharp), and ticks and annotates its
+  checkbox in `PLAN.md`.
 - `comparison/PLAN.md`: a task-oriented run plan, one checkbox per run cell (a
   single task x language x arm), generated from the task manifest and the arm
-  list. It carries the per-cell procedure (generate, gate, score, record), the
+  list. It carries the per-cell procedure (generate, gate, record), the
   per-language runtimes to mount at execution time, and the results output
   layout, so cells can be executed one at a time with only what each needs.
-- `comparison/scoring/`: a deterministic readability scorer (`score.mjs`) driven
-  by a transparent `rubric.json`. It turns a solution file into a 0.00 to 10.00
-  composite from five language-agnostic static metrics (average line length, max
-  nesting, cyclomatic density, magic-number density, single-character-name
-  ratio) and reports the raw metrics alongside the score. Dependency-free v0
-  heuristics (a dense one-liner scores about 2.4, a clean version about 8.7);
-  a tree-sitter version can replace them later.
+- Ran the full benchmark: 6 tasks x 6 languages x 4 arms x 3 models
+  (`claude-haiku-4-5`, `claude-sonnet-5`, `claude-opus-4-8`) = 432 cells, all
+  passing their correctness gate. Reports in `comparison/RESULTS.md` and
+  `REPORT-{haiku,sonnet,opus}.md` cover token cost and a SonarQube issue-count
+  cross-check per arm. The benchmark records only objective signals (tokens and
+  gate pass/fail); it computes no readability score of its own, leaving that
+  judgement to established external tools.
 - `reference/angular.md`: an Angular extension reference, modeled on
   `reference/react.md`. It applies the Core principles to Angular-specific shapes
   (signal inputs, `@if`/`@else` control flow, `computed()` over `effect()`,
@@ -73,9 +74,9 @@ All notable changes to codecraft are documented here. The format follows
 - Added `comparison/COMPARISON.md`: a topic-by-topic comparison against
   Anthropic's official `code-simplifier` plugin (shaping during writing vs a
   post-hoc cleanup pass), based on reading the full code-simplifier definition,
-  plus a "from prompt to score" benchmark workflow (a Mermaid diagram and stage
-  breakdown): four arms, a correctness gate, a deterministic readability
-  composite, token counts, and a final SonarQube issue-count cross-check. The
+  plus a "generate, gate, save" benchmark workflow (a Mermaid diagram and stage
+  breakdown): four arms, a correctness gate, token counts, and a final SonarQube
+  issue-count cross-check, with quality judgement left to external tools. The
   fourth arm is `ponytail`, a popular least-code skill that uses the same
   always-on hook mechanism as codecraft but optimizes for brevity, making it a
   clarity-versus-brevity foil in the same comparison.
