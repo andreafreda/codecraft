@@ -33,6 +33,13 @@ const cases = [
   ['i like codecraft, but turn off the dark theme', null],
   ['codecraft, stop overthinking this function', null],
   ['should i enable telemetry? codecraft can wait', null],
+  // Incidental mentions in longer prompts must not flip the global flag: on|off
+  // as part of a noun phrase, a negated request, or a hyphenated compound.
+  ['the old codecraft off switch was broken', null],
+  ['codecraft on top of the existing setup', null],
+  ['do not turn off codecraft', null],
+  ["don't stop codecraft", null],
+  ['enable codecraft-style linting', null],
 ];
 
 for (const [prompt, expected] of cases) {

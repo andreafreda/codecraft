@@ -17,22 +17,28 @@ const REMINDER =
 // neither. Covers the "/codecraft [on|off]" command and natural language such
 // as "turn off codecraft". The prompt is expected already trimmed and lowercased.
 //
-// The natural-language patterns require the intent word to sit right next to
-// "codecraft" (as a verb before it, or "codecraft [mode] on|off" after it), so
-// a passing mention like "stop, codecraft is fine but..." does not flip the
-// toggle.
+// A toggle flips a persistent, global flag, so the natural-language patterns are
+// deliberately conservative to avoid flipping it on an incidental mention. Three
+// guards: a negator anywhere ("do not turn off codecraft") is a no-op; the
+// "codecraft [mode] on|off" phrasing only counts with on|off at the end, so
+// "codecraft off switch" and "codecraft on top of the setup" do not match; and
+// "codecraft" must not be part of a hyphenated compound ("codecraft-style").
 function requestedMode(prompt) {
-  if (prompt.startsWith('/codecraft')) {
-    const arg = prompt.split(/\s+/)[1] || 'on';
+  const text = prompt.trim();
+
+  if (text.startsWith('/codecraft')) {
+    const arg = text.split(/\s+/)[1] || 'on';
     if (arg === 'off' || arg === 'stop' || arg === 'disable') return 'off';
     if (arg === 'on') return 'on';
     return null;
   }
 
-  const off = /\b(turn off|stop|disable|deactivate)\s+(the\s+)?codecraft\b|\bcodecraft(\s+mode)?\s+(off|stop|disabled?)\b/;
-  const on = /\b(turn on|enable|activate|start)\s+(the\s+)?codecraft\b|\bcodecraft(\s+mode)?\s+(on|enabled?)\b/;
-  if (off.test(prompt)) return 'off';
-  if (on.test(prompt)) return 'on';
+  if (/\b(do not|don'?t|never|without|cannot|can'?t|won'?t)\b/i.test(text)) return null;
+
+  const off = /\b(turn off|stop|disable|deactivate)\s+(the\s+)?codecraft\b(?!-)|\bcodecraft(\s+mode)?\s+(off|stop|disabled?)[.!]?$/i;
+  const on = /\b(turn on|enable|activate|start)\s+(the\s+)?codecraft\b(?!-)|\bcodecraft(\s+mode)?\s+(on|enabled?)[.!]?$/i;
+  if (off.test(text)) return 'off';
+  if (on.test(text)) return 'on';
   return null;
 }
 

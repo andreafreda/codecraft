@@ -27,15 +27,31 @@ function tmpDir() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'ccbench-gate-'));
 }
 
+// A generated solution can loop forever, so every gate run is bounded; a
+// missing runtime is an infrastructure gap, not a wrong answer, so it is
+// reported as 'skipped' rather than a false 'no'. Everything else (a failed
+// assertion, a compile error, a timeout) is a genuine 'no'.
+const GATE_TIMEOUT_MS = 60000;
+const EXEC_OPTS = { stdio: 'ignore', timeout: GATE_TIMEOUT_MS, killSignal: 'SIGKILL' };
+
+function gateError(err) {
+  return err.code === 'ENOENT' ? 'skipped' : 'no';
+}
+
+function nodeSupportsStripTypes() {
+  const [major, minor] = process.versions.node.split('.').map(Number);
+  return major > 22 || (major === 22 && minor >= 6);
+}
+
 function runProgram(source, ext, cmd, args) {
   const dir = tmpDir();
   const file = path.join(dir, `g.${ext}`);
   fs.writeFileSync(file, source);
   try {
-    execFileSync(cmd, [...args, file], { stdio: 'ignore' });
+    execFileSync(cmd, [...args, file], EXEC_OPTS);
     return 'yes';
-  } catch {
-    return 'no';
+  } catch (err) {
+    return gateError(err);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -60,12 +76,10 @@ function runGo(code, tests, prompt) {
   fs.writeFileSync(path.join(dir, 'go.mod'), 'module gate\n\ngo 1.21\n');
   fs.writeFileSync(path.join(dir, 'sol_test.go'), ensureGoImports(`${code}\n${tests}\n`));
   try {
-    execFileSync(go, ['test', './...'], { cwd: dir, stdio: 'ignore' });
+    execFileSync(go, ['test', './...'], { cwd: dir, ...EXEC_OPTS });
     return 'yes';
   } catch (e) {
-    // Distinguish "go not installed" (skip) from "tests failed" (no).
-    if (e.code === 'ENOENT') return 'skipped';
-    return 'no';
+    return gateError(e);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -175,11 +189,10 @@ function runCs(code, tests, prompt) {
   fs.writeFileSync(path.join(dir, 'proj.csproj'), CSPROJ);
   fs.writeFileSync(path.join(dir, 'Program.cs'), program);
   try {
-    execFileSync(dotnet, ['run', '-c', 'Debug'], { cwd: dir, stdio: 'ignore' });
+    execFileSync(dotnet, ['run', '-c', 'Debug'], { cwd: dir, ...EXEC_OPTS });
     return 'yes';
   } catch (e) {
-    if (e.code === 'ENOENT') return 'skipped';
-    return 'no';
+    return gateError(e);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -192,11 +205,11 @@ function runJava(code, tests, prompt) {
   fs.writeFileSync(src, injectMain(code, tests));
   const cp = `.${path.delimiter}${JAVATUPLES}`;
   try {
-    execFileSync('javac', ['-cp', JAVATUPLES, src], { cwd: dir, stdio: 'ignore' });
-    execFileSync('java', ['-ea', '-cp', cp, 'Problem'], { cwd: dir, stdio: 'ignore' });
+    execFileSync('javac', ['-cp', JAVATUPLES, src], { cwd: dir, ...EXEC_OPTS });
+    execFileSync('java', ['-ea', '-cp', cp, 'Problem'], { cwd: dir, ...EXEC_OPTS });
     return 'yes';
-  } catch {
-    return 'no';
+  } catch (e) {
+    return gateError(e);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
@@ -213,6 +226,10 @@ const GATES = {
     return runProgram(`${code}\n${tests}\n`, 'js', 'node', []);
   },
   typescript(code, tests) {
+    // Type stripping (`node --experimental-strip-types`) needs Node >= 22.6;
+    // on older Node the flag is rejected and the cell would look like a failed
+    // solution, so skip rather than record a false 'no'.
+    if (!nodeSupportsStripTypes()) return 'skipped';
     return runProgram(`${code}\n${tests}\n`, 'ts', 'node', ['--experimental-strip-types']);
   },
   java(code, tests, prompt) {

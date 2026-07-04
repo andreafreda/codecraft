@@ -41,7 +41,8 @@ async function armSystem() {
   }
   if (armCfg.systemUrl) {
     const res = await fetch(armCfg.systemUrl);
-    let t = await res.text();
+    if (!res.ok) throw new Error(`fetch ${armCfg.systemUrl}: HTTP ${res.status}`);
+    const t = await res.text();
     return armCfg.stripFrontmatter ? stripFrontmatter(t) : t;
   }
   return armCfg.system || '';

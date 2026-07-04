@@ -1,6 +1,6 @@
 {
   "model": "claude-haiku-4-5-20251001",
-  "note": "Each arm's system prompt is the only difference between runs. baseline has none; codecraft reads the local skill; ponytail and code-simplifier are fetched from their own repositories at run time (not redistributed here). code-simplifier is two-pass: write, then refine.",
+  "note": "Each arm's system prompt is the only difference between runs. baseline has none; codecraft reads the local skill; ponytail and code-simplifier are fetched from their own repositories at run time (not redistributed here). Those systemUrl values track the upstream default branch, so a run reflects that branch as of the run date; pin them to a commit SHA for a byte-reproducible re-run. code-simplifier is two-pass: write, then refine.",
   "arms": {
     "baseline": {
       "system": ""
