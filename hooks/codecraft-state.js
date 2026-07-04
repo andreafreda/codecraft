@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// codecraft — persists the on/off state as a small flag file.
+// codecraft: persists the on/off state as a small flag file.
 //
 // The flag holds a non-secret "on"/"off" string in the user's own ~/.claude
 // dir, so plain best-effort read/write is enough. A missing file means the

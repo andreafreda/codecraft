@@ -249,7 +249,7 @@ export function runGate(target, code, tests, prompt) {
 }
 
 // Exported for unit tests: the pure string transforms and helpers, which carry
-// the trickiest assumptions in the gate (see harness.test.js).
+// the trickiest assumptions in the gate (see harness.test.mjs).
 export {
   gateError,
   nodeSupportsStripTypes,

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// codecraft — UserPromptSubmit hook. Handles the on/off toggle and keeps the
+// codecraft: UserPromptSubmit hook. Handles the on/off toggle and keeps the
 // lens salient each turn with a minimal reminder.
 //
 // The full principles are injected once by the SessionStart hook, and again
@@ -10,7 +10,7 @@
 const { getFlagPath, writeFlag, readFlag } = require('./codecraft-state');
 
 const REMINDER =
-  'CODECRAFT MODE ACTIVE — apply the codecraft readability lens to any code you ' +
+  'CODECRAFT MODE ACTIVE: apply the codecraft readability lens to any code you ' +
   'write or review this turn.';
 
 // Maps a prompt to the mode it explicitly requests, or null if it asks for
@@ -67,7 +67,7 @@ function main() {
         }));
       }
     } catch (e) {
-      // Silent fail — a dropped reminder is harmless.
+      // Silent fail: a dropped reminder is harmless.
     }
   });
 }

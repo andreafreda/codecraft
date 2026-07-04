@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// codecraft — SessionStart hook. Turns the readability lens on by default and
+// codecraft: SessionStart hook. Turns the readability lens on by default and
 // injects the codecraft principles as hidden session context.
 //
 // State lives in ~/.claude/.codecraft-active as "on"/"off". A missing file

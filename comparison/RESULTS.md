@@ -66,9 +66,10 @@ cost context, not a codecraft scorecard.
 SonarQube `26.6` community, one project per model×arm, identical ruleset and
 treatment. Covers python, js, ts, go, java; **C# is excluded** (the CLI scanner
 cannot analyze it) and Java runs in reduced no-bytecode mode. "Controllable"
-strips the ~22 issues every arm shares because the benchmark **imposes** them
+strips the issues every arm shares because the benchmark **imposes** them
 (default package, static-only class, python-derived names Go/Java flag, the
-`ArrayList` signature), no arm can touch those without breaking the fixed
+`ArrayList` signature): about 20 on Haiku and 22 on Sonnet and Opus, varying a
+little with the generated code. No arm can touch those without breaking the fixed
 signature, so they are noise for an arm-to-arm read.
 
 | Model | Arm | Total | Cognitive (S3776) | Controllable |
