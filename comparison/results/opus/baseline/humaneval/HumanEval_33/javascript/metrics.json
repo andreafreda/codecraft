@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_33/javascript/baseline",
+  "arm": "baseline",
+  "model": "claude-opus-4-8",
+  "tokens_in": 28470,
+  "tokens_out": 99,
+  "pass": "yes"
+}
