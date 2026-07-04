@@ -5,9 +5,9 @@
 // dir, so plain best-effort read/write is enough. A missing file means the
 // user never toggled, which the hooks treat as on (active by default).
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+const fs = require('node:fs');
+const path = require('node:path');
+const os = require('node:os');
 
 const VALID_MODES = ['off', 'on'];
 

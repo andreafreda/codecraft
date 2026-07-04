@@ -10,11 +10,11 @@
 // Writes comparison/results/<arm>/<suite>/<task>/<target>/{solution.<ext>,
 // metrics.json} and ticks the cell in comparison/PLAN.md with its numbers.
 
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { execFileSync } from 'child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import { runGate } from './gate.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -95,7 +95,7 @@ function updatePlan(cellId, label, pass, tokens) {
   const seg = ` | [${label}] pass: ${pass}, tokens: ${tokens}`;
   const lines = fs.readFileSync(planPath, 'utf8').split('\n').map((line) => {
     if (!line.includes(marker)) return line;
-    return line.replace('- [ ]', '- [x]').replace(new RegExp(` \\| \\[${label}\\][^|]*`), '') + seg;
+    return line.replace('- [ ]', '- [x]').replace(new RegExp(String.raw` \| \[${label}\][^|]*`), '') + seg;
   });
   fs.writeFileSync(planPath, lines.join('\n'));
 }
@@ -139,4 +139,9 @@ const main = async () => {
   console.log(JSON.stringify(metrics, null, 2));
 };
 
-main().catch((e) => { console.error('cell failed:', e.message); process.exit(1); });
+try {
+  await main();
+} catch (e) {
+  console.error('cell failed:', e.message);
+  process.exit(1);
+}

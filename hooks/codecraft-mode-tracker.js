@@ -34,12 +34,21 @@ function requestedMode(prompt) {
     return null;
   }
 
+  // A negated request never flips the flag ("do not turn off codecraft").
   if (/\b(do not|don'?t|never|without|cannot|can'?t|won'?t)\b/i.test(text)) return null;
 
-  const off = /\b(turn off|stop|disable|deactivate)\s+(the\s+)?codecraft\b(?!-)|\bcodecraft(\s+mode)?\s+(off|stop|disabled?)[.!]?$/i;
-  const on = /\b(turn on|enable|activate|start)\s+(the\s+)?codecraft\b(?!-)|\bcodecraft(\s+mode)?\s+(on|enabled?)[.!]?$/i;
-  if (off.test(text)) return 'off';
-  if (on.test(text)) return 'on';
+  // Two shapes count as a toggle, split out so each pattern stays simple. A verb
+  // directing codecraft ("turn off codecraft", "stop codecraft now"), with
+  // "codecraft" whole so the compound "codecraft-style" does not count; or
+  // "codecraft [mode] on|off" as the trailing command, anchored at the end so
+  // "codecraft off switch" and "codecraft on top of the setup" do not match.
+  const verbOff = /\b(turn off|stop|disable|deactivate)\s+(the\s+)?codecraft\b(?!-)/i;
+  const verbOn = /\b(turn on|enable|activate|start)\s+(the\s+)?codecraft\b(?!-)/i;
+  const tailOff = /\bcodecraft(\s+mode)?\s+(off|stop|disabled?)[.!]?$/i;
+  const tailOn = /\bcodecraft(\s+mode)?\s+(on|enabled?)[.!]?$/i;
+
+  if (verbOff.test(text) || tailOff.test(text)) return 'off';
+  if (verbOn.test(text) || tailOn.test(text)) return 'on';
   return null;
 }
 

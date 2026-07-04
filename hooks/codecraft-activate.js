@@ -6,8 +6,8 @@
 // means the user never toggled, which counts as on. A persisted "off" keeps it
 // off across restarts until the user turns it back on.
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const { getFlagPath, writeFlag, readFlag } = require('./codecraft-state');
 
 const flagPath = getFlagPath();

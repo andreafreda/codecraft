@@ -14,11 +14,11 @@
 //             classpath (harness/lib).
 // A non-zero exit code means a failed assertion or a crash: gate 'no'.
 
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { execFileSync } from 'child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const JAVATUPLES = path.join(HERE, 'lib', 'javatuples-1.2.jar');
@@ -101,8 +101,11 @@ function valueEqualize(tests) {
     while (j >= 0) {
       const c = tests[j];
       if (c === ')') depth++;
-      else if (c === '(') { if (depth === 0) break; depth--; }
-      else if (depth === 0 && !/[A-Za-z0-9_.\[\]<>]/.test(c)) break;
+      else if (c === '(') {
+        if (depth === 0) break;
+        depth--;
+      }
+      else if (depth === 0 && !/[A-Za-z0-9_.[\]<>]/.test(c)) break;
       j--; start = j + 1;
     }
     const A = tests.slice(start, idx);
@@ -157,7 +160,7 @@ function ensureGoImports(src) {
   const need = ['"testing"', '"fmt"'];
   const stdlib = ['strings', 'sort', 'math', 'strconv', 'unicode', 'regexp', 'bytes', 'errors'];
   for (const pkg of stdlib) {
-    if (new RegExp(`\\b${pkg}\\.`).test(src) && !new RegExp(`"${pkg}"`).test(src)) {
+    if (new RegExp(String.raw`\b${pkg}\.`).test(src) && !new RegExp(`"${pkg}"`).test(src)) {
       need.push(`"${pkg}"`);
     }
   }
