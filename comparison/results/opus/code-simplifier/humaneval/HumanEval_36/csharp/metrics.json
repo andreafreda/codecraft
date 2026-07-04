@@ -1,0 +1,8 @@
+{
+  "cell": "humaneval/HumanEval_36/csharp/code-simplifier",
+  "arm": "code-simplifier",
+  "model": "claude-opus-4-8",
+  "tokens_in": 59584,
+  "tokens_out": 682,
+  "pass": "yes"
+}

@@ -117,10 +117,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_1
 
-- [x] `humaneval/HumanEval_1/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31602 — [sonnet] pass: yes, tokens: 40806
-- [x] `humaneval/HumanEval_1/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35788 — [sonnet] pass: yes, tokens: 45318
-- [x] `humaneval/HumanEval_1/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33064 — [sonnet] pass: yes, tokens: 42945
-- [x] `humaneval/HumanEval_1/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 65545 — [sonnet] pass: yes, tokens: 84185
+- [x] `humaneval/HumanEval_1/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31602 — [sonnet] pass: yes, tokens: 40806 — [opus] pass: yes, tokens: 28842
+- [x] `humaneval/HumanEval_1/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35788 — [sonnet] pass: yes, tokens: 45318 — [opus] pass: yes, tokens: 66466
+- [x] `humaneval/HumanEval_1/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33064 — [sonnet] pass: yes, tokens: 42945 — [opus] pass: yes, tokens: 30956
+- [x] `humaneval/HumanEval_1/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 65545 — [sonnet] pass: yes, tokens: 84185 — [opus] pass: yes, tokens: 59927
 - [x] `humaneval/HumanEval_1/go/baseline` (Go) — [haiku] pass: no, tokens: 31971 — [sonnet] pass: yes, tokens: 40634 — [opus] pass: yes, tokens: 28689
 - [x] `humaneval/HumanEval_1/go/codecraft` (Go) — [haiku] pass: no, tokens: 35090 — [sonnet] pass: yes, tokens: 45164 — [opus] pass: yes, tokens: 33199
 - [x] `humaneval/HumanEval_1/go/ponytail` (Go) — [haiku] pass: no, tokens: 38233 — [sonnet] pass: yes, tokens: 42786 — [opus] pass: yes, tokens: 30798
@@ -144,10 +144,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_126
 
-- [x] `humaneval/HumanEval_126/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 33444 — [sonnet] pass: yes, tokens: 42188
-- [x] `humaneval/HumanEval_126/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 36186 — [sonnet] pass: yes, tokens: 94762
-- [x] `humaneval/HumanEval_126/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34950 — [sonnet] pass: yes, tokens: 44149
-- [x] `humaneval/HumanEval_126/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 70869 — [sonnet] pass: yes, tokens: 86271
+- [x] `humaneval/HumanEval_126/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 33444 — [sonnet] pass: yes, tokens: 42188 — [opus] pass: yes, tokens: 59703
+- [x] `humaneval/HumanEval_126/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 36186 — [sonnet] pass: yes, tokens: 94762 — [opus] pass: yes, tokens: 34650
+- [x] `humaneval/HumanEval_126/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34950 — [sonnet] pass: yes, tokens: 44149 — [opus] pass: yes, tokens: 63979
+- [x] `humaneval/HumanEval_126/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 70869 — [sonnet] pass: yes, tokens: 86271 — [opus] pass: yes, tokens: 93234
 - [x] `humaneval/HumanEval_126/go/baseline` (Go) — [haiku] pass: yes, tokens: 32612 — [sonnet] pass: yes, tokens: 41341 — [opus] pass: yes, tokens: 29382
 - [x] `humaneval/HumanEval_126/go/codecraft` (Go) — [haiku] pass: yes, tokens: 37124 — [sonnet] pass: yes, tokens: 46045 — [opus] pass: yes, tokens: 33907
 - [x] `humaneval/HumanEval_126/go/ponytail` (Go) — [haiku] pass: yes, tokens: 34310 — [sonnet] pass: yes, tokens: 43549 — [opus] pass: yes, tokens: 62980
@@ -171,10 +171,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_129
 
-- [x] `humaneval/HumanEval_129/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 38061 — [sonnet] pass: yes, tokens: 43327
-- [x] `humaneval/HumanEval_129/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 43317 — [sonnet] pass: yes, tokens: 47395
-- [x] `humaneval/HumanEval_129/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 41126 — [sonnet] pass: yes, tokens: 45007
-- [x] `humaneval/HumanEval_129/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 74262 — [sonnet] pass: yes, tokens: 134471
+- [x] `humaneval/HumanEval_129/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 38061 — [sonnet] pass: yes, tokens: 43327 — [opus] pass: yes, tokens: 31006
+- [x] `humaneval/HumanEval_129/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 43317 — [sonnet] pass: yes, tokens: 47395 — [opus] pass: yes, tokens: 35658
+- [x] `humaneval/HumanEval_129/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 41126 — [sonnet] pass: yes, tokens: 45007 — [opus] pass: yes, tokens: 64553
+- [x] `humaneval/HumanEval_129/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 74262 — [sonnet] pass: yes, tokens: 134471 — [opus] pass: yes, tokens: 95850
 - [x] `humaneval/HumanEval_129/go/baseline` (Go) — [haiku] pass: yes, tokens: 37597 — [sonnet] pass: yes, tokens: 42528 — [opus] pass: yes, tokens: 30361
 - [x] `humaneval/HumanEval_129/go/codecraft` (Go) — [haiku] pass: yes, tokens: 42233 — [sonnet] pass: yes, tokens: 96238 — [opus] pass: yes, tokens: 34453
 - [x] `humaneval/HumanEval_129/go/ponytail` (Go) — [haiku] pass: yes, tokens: 39398 — [sonnet] pass: yes, tokens: 89334 — [opus] pass: yes, tokens: 63334
@@ -198,10 +198,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_154
 
-- [x] `humaneval/HumanEval_154/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32531 — [sonnet] pass: yes, tokens: 41554
-- [x] `humaneval/HumanEval_154/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37027 — [sonnet] pass: yes, tokens: 46080
-- [x] `humaneval/HumanEval_154/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34628 — [sonnet] pass: yes, tokens: 43673
-- [x] `humaneval/HumanEval_154/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 67262 — [sonnet] pass: yes, tokens: 85348
+- [x] `humaneval/HumanEval_154/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32531 — [sonnet] pass: yes, tokens: 41554 — [opus] pass: yes, tokens: 29713
+- [x] `humaneval/HumanEval_154/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37027 — [sonnet] pass: yes, tokens: 46080 — [opus] pass: yes, tokens: 69310
+- [x] `humaneval/HumanEval_154/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34628 — [sonnet] pass: yes, tokens: 43673 — [opus] pass: yes, tokens: 63398
+- [x] `humaneval/HumanEval_154/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 67262 — [sonnet] pass: yes, tokens: 85348 — [opus] pass: yes, tokens: 61479
 - [x] `humaneval/HumanEval_154/go/baseline` (Go) — [haiku] pass: yes, tokens: 33030 — [sonnet] pass: yes, tokens: 41325 — [opus] pass: no, tokens: 28817
 - [x] `humaneval/HumanEval_154/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36815 — [sonnet] pass: yes, tokens: 45857 — [opus] pass: no, tokens: 66874
 - [x] `humaneval/HumanEval_154/go/ponytail` (Go) — [haiku] pass: no, tokens: 41894 — [sonnet] pass: yes, tokens: 43449 — [opus] pass: no, tokens: 61760
@@ -225,10 +225,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_33
 
-- [x] `humaneval/HumanEval_33/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32210 — [sonnet] pass: yes, tokens: 41137
-- [x] `humaneval/HumanEval_33/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35621 — [sonnet] pass: yes, tokens: 45668
-- [x] `humaneval/HumanEval_33/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34297 — [sonnet] pass: yes, tokens: 43246
-- [x] `humaneval/HumanEval_33/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 69192 — [sonnet] pass: yes, tokens: 84430
+- [x] `humaneval/HumanEval_33/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 32210 — [sonnet] pass: yes, tokens: 41137 — [opus] pass: yes, tokens: 29298
+- [x] `humaneval/HumanEval_33/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 35621 — [sonnet] pass: yes, tokens: 45668 — [opus] pass: yes, tokens: 33835
+- [x] `humaneval/HumanEval_33/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 34297 — [sonnet] pass: yes, tokens: 43246 — [opus] pass: yes, tokens: 62490
+- [x] `humaneval/HumanEval_33/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 69192 — [sonnet] pass: yes, tokens: 84430 — [opus] pass: yes, tokens: 60894
 - [x] `humaneval/HumanEval_33/go/baseline` (Go) — [haiku] pass: yes, tokens: 32429 — [sonnet] pass: yes, tokens: 40767 — [opus] pass: yes, tokens: 28887
 - [x] `humaneval/HumanEval_33/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36598 — [sonnet] pass: yes, tokens: 45313 — [opus] pass: yes, tokens: 33401
 - [x] `humaneval/HumanEval_33/go/ponytail` (Go) — [haiku] pass: yes, tokens: 34388 — [sonnet] pass: yes, tokens: 42942 — [opus] pass: yes, tokens: 61819
@@ -252,10 +252,10 @@ Only the languages a cell touches need their runtime present for that cell.
 
 #### HumanEval_36
 
-- [x] `humaneval/HumanEval_36/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31895 — [sonnet] pass: yes, tokens: 40895
-- [x] `humaneval/HumanEval_36/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37121 — [sonnet] pass: yes, tokens: 45424
-- [x] `humaneval/HumanEval_36/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33664 — [sonnet] pass: yes, tokens: 43023
-- [x] `humaneval/HumanEval_36/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 64322 — [sonnet] pass: yes, tokens: 84014
+- [x] `humaneval/HumanEval_36/csharp/baseline` (C#) — [haiku] pass: yes, tokens: 31895 — [sonnet] pass: yes, tokens: 40895 — [opus] pass: yes, tokens: 57997
+- [x] `humaneval/HumanEval_36/csharp/codecraft` (C#) — [haiku] pass: yes, tokens: 37121 — [sonnet] pass: yes, tokens: 45424 — [opus] pass: yes, tokens: 67036
+- [x] `humaneval/HumanEval_36/csharp/ponytail` (C#) — [haiku] pass: yes, tokens: 33664 — [sonnet] pass: yes, tokens: 43023 — [opus] pass: yes, tokens: 62239
+- [x] `humaneval/HumanEval_36/csharp/code-simplifier` (C#) — [haiku] pass: yes, tokens: 64322 — [sonnet] pass: yes, tokens: 84014 — [opus] pass: yes, tokens: 60266
 - [x] `humaneval/HumanEval_36/go/baseline` (Go) — [haiku] pass: yes, tokens: 32089 — [sonnet] pass: yes, tokens: 40772 — [opus] pass: yes, tokens: 28786
 - [x] `humaneval/HumanEval_36/go/codecraft` (Go) — [haiku] pass: yes, tokens: 36046 — [sonnet] pass: yes, tokens: 45279 — [opus] pass: yes, tokens: 33324
 - [x] `humaneval/HumanEval_36/go/ponytail` (Go) — [haiku] pass: yes, tokens: 33616 — [sonnet] pass: yes, tokens: 42909 — [opus] pass: yes, tokens: 62542

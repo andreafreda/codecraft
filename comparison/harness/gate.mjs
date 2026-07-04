@@ -136,7 +136,17 @@ function ensureGoScaffold(code, prompt) {
 // imports. Guarantee they are in the combined program's import block so the
 // tests compile — this fixes the harness's own unfairness, not the logic.
 function ensureGoImports(src) {
+  // Always needed by the tests; plus any stdlib package the code clearly
+  // references but forgot to import (go forbids unused imports, so the model
+  // sometimes ships the usage without the import). This adds only imports whose
+  // `pkg.` usage is present in the source: reconstruction, not logic change.
   const need = ['"testing"', '"fmt"'];
+  const stdlib = ['strings', 'sort', 'math', 'strconv', 'unicode', 'regexp', 'bytes', 'errors'];
+  for (const pkg of stdlib) {
+    if (new RegExp(`\\b${pkg}\\.`).test(src) && !new RegExp(`"${pkg}"`).test(src)) {
+      need.push(`"${pkg}"`);
+    }
+  }
   const block = src.match(/import\s*\(([\s\S]*?)\)/);
   if (block) {
     let body = block[1];
